@@ -1,8 +1,8 @@
 {
-  "name": "hardhat-solidity",
-  "publisher": "NomicFoundation",
-  "displayName": "Solidity",
-  "description": "Solidity and Hardhat support by the Hardhat team",
+  "name": "hardhat-hyperion",
+  "publisher": "theqrl",
+  "displayName": "Hyperion",
+  "description": "Hyperion and Hardhat support for the QRL/Zond ecosystem",
   "license": "MIT",
   "version": "0.8.29",
   "private": true,
@@ -20,29 +20,28 @@
     "workspace"
   ],
   "keywords": [
-    "solidity",
-    "ethereum",
+    "hyperion",
+    "qrl",
+    "zond",
     "hardhat",
-    "evm",
+    "qrvm",
     "blockchain",
     "compiler"
   ],
-  "homepage": "https://hardhat.org/hardhat-vscode/",
+  "homepage": "https://theqrl.org/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/NomicFoundation/hardhat-vscode"
+    "url": "https://github.com/theqrl/hardhat-vscode"
   },
   "bugs": {
-    "url": "https://github.com/NomicFoundation/hardhat-vscode/issues"
+    "url": "https://github.com/theqrl/hardhat-vscode/issues"
   },
   "engines": {
     "vscode": "^1.99.0"
   },
   "activationEvents": [
-    "workspaceContains:**/hardhat.config.{ts,js}",
-    "workspaceContains:**/foundry.toml",
-    "workspaceContains:**/truffle-config.js",
-    "workspaceContains:**/ape-config.yaml"
+    "onLanguage:hyperion",
+    "workspaceContains:**/hardhat.config.{ts,js}"
   ],
   "scripts": {
     "build": "tsc -b",
@@ -69,11 +68,11 @@
   "contributes": {
     "configuration": {
       "type": "object",
-      "title": "Solidity",
+      "title": "Hyperion",
       "properties": {
-        "solidity-language-server.trace.server.verbosity": {
+        "hyperion-language-server.trace.server.verbosity": {
           "type": "string",
-          "description": "Traces the communication between VS Code and the solidity language server.",
+          "description": "Traces the communication between VS Code and the hyperion language server.",
           "enum": [
             "off",
             "message",
@@ -81,65 +80,64 @@
           ],
           "default": "off"
         },
-        "solidity.telemetry": {
+        "hyperion.telemetry": {
           "type": "boolean",
-          "markdownDescription": "Allow **Solidity** to send extension telemetry. This helps us understand how the extension is used and how it is performing. Read more in our [privacy policy](https://hardhat.org/privacy-policy.html).\n\n&nbsp;\n\n*__Note:__ **Solidity** respects the global **Telemetry Level** setting, and will only send telemetry if enabled at both global and extension level.*",
-          "default": true,
+          "markdownDescription": "Allow **Hyperion** to send extension telemetry.",
+          "default": false,
           "tags": [
             "usesOnlineServices",
             "telemetry"
           ]
         },
-        "solidity.formatter": {
+        "hyperion.formatter": {
           "type": "string",
-          "default": "prettier",
+          "default": "none",
           "enum": [
             "none",
-            "prettier",
-            "forge"
+            "prettier"
           ],
-          "description": "Enables / disables the solidity formatter (prettier solidity default)"
+          "description": "Enables / disables the hyperion formatter"
         }
       }
     },
     "languages": [
       {
-        "id": "solidity",
+        "id": "hyperion",
         "aliases": [
-          "Solidity",
-          "solidity"
+          "Hyperion",
+          "hyperion"
         ],
         "extensions": [
-          ".sol"
+          ".hyp"
         ],
         "configuration": "./language-configuration.json"
       },
       {
-        "id": "solidity-markdown-injection"
+        "id": "hyperion-markdown-injection"
       }
     ],
     "grammars": [
       {
-        "language": "solidity",
-        "scopeName": "source.solidity",
-        "path": "./syntaxes/solidity.json"
+        "language": "hyperion",
+        "scopeName": "source.hyperion",
+        "path": "./syntaxes/hyperion.json"
       },
       {
-        "language": "solidity-markdown-injection",
-        "scopeName": "markdown.solidity.codeblock",
-        "path": "./syntaxes/solidity-markdown-injection.json",
+        "language": "hyperion-markdown-injection",
+        "scopeName": "markdown.hyperion.codeblock",
+        "path": "./syntaxes/hyperion-markdown-injection.json",
         "injectTo": [
           "text.html.markdown"
         ],
         "embeddedLanguages": {
-          "meta.embedded.block.solidity": "solidity"
+          "meta.embedded.block.hyperion": "hyperion"
         }
       }
     ],
     "snippets": [
       {
-        "language": "solidity",
-        "path": "./snippets/solidity.json"
+        "language": "hyperion",
+        "path": "./snippets/hyperion.json"
       }
     ],
     "taskDefinitions": [
@@ -159,32 +157,26 @@
     ],
     "commands": [
       {
-        "command": "solidity.hardhat.compile",
+        "command": "hyperion.hardhat.compile",
         "title": "Hardhat: Compile project"
       },
       {
-        "command": "solidity.hardhat.clean",
+        "command": "hyperion.hardhat.clean",
         "title": "Hardhat: Clear cache and artifacts "
       },
       {
-        "command": "solidity.hardhat.flattenCurrentFile",
+        "command": "hyperion.hardhat.flattenCurrentFile",
         "title": "Hardhat: Flatten this file and its dependencies",
-        "enablement": "editorLangId == 'solidity' && solidity.inHardhatProject"
+        "enablement": "editorLangId == 'hyperion' && hyperion.inHardhatProject"
       }
     ],
     "menus": {
       "editor/context": [
         {
-          "command": "solidity.hardhat.flattenCurrentFile",
-          "when": "editorLangId == 'solidity' && solidity.inHardhatProject"
+          "command": "hyperion.hardhat.flattenCurrentFile",
+          "when": "editorLangId == 'hyperion' && hyperion.inHardhatProject"
         }
       ]
     }
-  },
-  "__metadata": {
-    "id": "dada159b-1dfe-49fc-a369-0e08ecdff9b3",
-    "publisherDisplayName": "Nomic Foundation",
-    "publisherId": "973909a1-f7d7-44c0-9261-c2e7903bf2dd",
-    "isPreReleaseVersion": false
   }
 }

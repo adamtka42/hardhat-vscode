@@ -1,6 +1,6 @@
 {
-  "fileTypes": ["sol"],
-  "name": "Solidity",
+  "fileTypes": ["hyp"],
+  "name": "Hyperion",
   "patterns": [
     {
       "include": "#natspec"
@@ -1245,6 +1245,6 @@
       ]
     }
   },
-  "scopeName": "source.solidity",
+  "scopeName": "source.hyperion",
   "uuid": "4a2eb52d-02e5-46fd-848a-0648e20ef769"
 }

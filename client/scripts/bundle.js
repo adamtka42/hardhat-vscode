@@ -103,16 +103,16 @@ async function main() {
   );
 
   fs.copyFileSync(
-    path.join(".", "snippets", "solidity.json"),
-    path.join(snippets, "solidity.json")
+    path.join(".", "snippets", "hyperion.json"),
+    path.join(snippets, "hyperion.json")
   );
   fs.copyFileSync(
-    path.join(".", "syntaxes", "solidity.json"),
-    path.join(syntaxes, "solidity.json")
+    path.join(".", "syntaxes", "hyperion.json"),
+    path.join(syntaxes, "hyperion.json")
   );
   fs.copyFileSync(
-    path.join(".", "syntaxes", "solidity-markdown-injection.json"),
-    path.join(syntaxes, "solidity-markdown-injection.json")
+    path.join(".", "syntaxes", "hyperion-markdown-injection.json"),
+    path.join(syntaxes, "hyperion-markdown-injection.json")
   );
 
   const { warnings, errors } = await esbuild.build({

@@ -58,7 +58,7 @@ export class SentryClientTelemetry implements Telemetry {
   }
 
   private _processUnhandledError(err: Error) {
-    const extensionName = "nomicfoundation.hardhat-solidity";
+    const extensionName = "theqrl.hardhat-hyperion";
     const client = this.client;
     if ((err.stack ?? "").includes(extensionName)) {
       Sentry.withScope(function (scope) {

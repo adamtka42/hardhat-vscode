@@ -24,7 +24,7 @@ function anonymizeString(str?: string) {
   }
 
   const pathRegex = /\S+[/\\]\S+/g;
-  const internalRegex = /.*nomicfoundation\.hardhat-solidity[^(\\|/)]*/;
+  const internalRegex = /.*theqrl\.hardhat-hyperion[^(\\|/)]*/;
 
   return str.replace(pathRegex, (match) => {
     if (internalRegex.test(match) && match.endsWith(".js")) {

@@ -1,6 +1,4 @@
 import { ExtensionContext } from "vscode";
-import { showSoliditySurveyPopup } from "./popups/showSoliditySurveyPopup";
-import { warnOnOtherSolidityExtensions } from "./popups/warnOnOtherSolidityExtensions";
 import { indexHardhatProjects } from "./setup/indexHardhatProjects";
 import { setupCommands } from "./setup/setupCommands";
 import { setupExtensionState } from "./setup/setupExtensionState";
@@ -20,7 +18,7 @@ export async function activate(context: ExtensionContext) {
   try {
     const { logger } = extensionState;
 
-    logger.info("Solidity by Nomic Foundation Starting ...");
+    logger.info("Hyperion for QRL/Zond Starting ...");
     logger.info(`env: ${extensionState.env}`);
 
     await indexHardhatProjects(extensionState);
@@ -29,12 +27,6 @@ export async function activate(context: ExtensionContext) {
     setupTaskProvider(extensionState);
     await setupCommands(extensionState);
     setupWorkspaceHooks(extensionState);
-
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    showSoliditySurveyPopup(extensionState);
-
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    warnOnOtherSolidityExtensions(extensionState);
 
     return {
       isReady: () => !!extensionState?.client?.initializeResult,

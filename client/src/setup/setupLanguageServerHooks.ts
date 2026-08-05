@@ -44,21 +44,18 @@ const startLanguageServer = async (
 
   // Options to control the language client.
   const clientOptions: LanguageClientOptions = {
-    // Register the server for solidity text documents.
+    // Register the server for hyperion text documents.
     documentSelector: [
-      { scheme: "file", language: "solidity", pattern: `**/*.sol` },
+      { scheme: "file", language: "hyperion", pattern: `**/*.hyp` },
     ],
     synchronize: {
       fileEvents: [
         workspace.createFileSystemWatcher("**/hardhat.config.{ts,js}"),
-        workspace.createFileSystemWatcher("**/{truffle-config,truffle}.js"),
-        workspace.createFileSystemWatcher("**/foundry.toml"),
-        workspace.createFileSystemWatcher("**/ape-config.yaml"),
         workspace.createFileSystemWatcher("**/remappings.txt"),
-        workspace.createFileSystemWatcher("**/*.sol"),
+        workspace.createFileSystemWatcher("**/*.hyp"),
       ],
     },
-    diagnosticCollectionName: "solidity-language-server",
+    diagnosticCollectionName: "hyperion-language-server",
     outputChannel: extensionState.outputChannel,
     initializationOptions: {
       extensionName: extensionState.name,
@@ -66,7 +63,7 @@ const startLanguageServer = async (
       env: extensionState.env,
       telemetryEnabled: extensionState.telemetryEnabled,
       machineId: extensionState.machineId,
-      extensionConfig: workspace.getConfiguration("solidity"),
+      extensionConfig: workspace.getConfiguration("hyperion"),
     },
   };
 
@@ -75,8 +72,8 @@ const startLanguageServer = async (
   // Create the language client and start the client.
   // Start the client. This will also launch the server
   const client = new LanguageClient(
-    "solidity-language-server",
-    "Solidity Language Server",
+    "hyperion-language-server",
+    "Hyperion Language Server",
     serverOptions,
     clientOptions
   );
@@ -107,7 +104,7 @@ const startLanguageServer = async (
 
       void client.sendNotification(
         "custom/didChangeExtensionConfig",
-        workspace.getConfiguration("solidity")
+        workspace.getConfiguration("hyperion")
       );
     })
   );

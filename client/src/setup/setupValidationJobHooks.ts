@@ -40,7 +40,7 @@ export function setupValidationJobHooks(
         if (
           uri !== undefined &&
           version !== undefined &&
-          uri.endsWith(".sol")
+          uri.endsWith(".hyp")
         ) {
           void client.sendNotification("textDocument/didChange", {
             textDocument: { uri, version },
@@ -83,8 +83,8 @@ function updateValidationStatusItem(
     statusItem = languages.createLanguageStatusItem(
       `validation:${notification.projectBasePath}`,
       {
-        language: "solidity",
-        pattern: `${notification.projectBasePath}/**/*.sol`,
+        language: "hyperion",
+        pattern: `${notification.projectBasePath}/**/*.hyp`,
       }
     );
 

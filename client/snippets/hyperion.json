@@ -1,8 +1,8 @@
 {
-	".source.solidity": {
+	".source.hyperion": {
         "pragma": {
 			"prefix": "pragma",
-			"body": "// SPDX-License-Identifier: SEE LICENSE IN LICENSE\npragma solidity ${1};",
+			"body": "// SPDX-License-Identifier: SEE LICENSE IN LICENSE\npragma hyperion ${1};",
 			"description": "Pragma statement."
 		},
     "license": {

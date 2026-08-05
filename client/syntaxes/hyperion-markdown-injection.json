@@ -3,12 +3,12 @@
   "injectionSelector": "L:text.html.markdown",
   "patterns": [
       {
-          "include": "#solidity-code-block"
+          "include": "#hyperion-code-block"
       }
   ],
   "repository": {
-      "solidity-code-block": {
-          "begin": "(^|\\G)(\\s*)(\\`{3,}|~{3,})\\s*(?i:(solidity)(\\s+[^`~]*)?$)",
+      "hyperion-code-block": {
+          "begin": "(^|\\G)(\\s*)(\\`{3,}|~{3,})\\s*(?i:(hyperion)(\\s+[^`~]*)?$)",
           "name": "markup.fenced_code.block.markdown",
           "end": "(^|\\G)(\\2|\\s{0,3})(\\3)\\s*$",
           "beginCaptures": {
@@ -31,15 +31,15 @@
               {
                   "begin": "(^|\\G)(\\s*)(.*)",
                   "while": "(^|\\G)(?!\\s*([`~]{3,})\\s*$)",
-                  "contentName": "meta.embedded.block.solidity",
+                  "contentName": "meta.embedded.block.hyperion",
                   "patterns": [
                       {
-                          "include": "source.solidity"
+                          "include": "source.hyperion"
                       }
                   ]
               }
           ]
       }
   },
-  "scopeName": "markdown.solidity.codeblock"
+  "scopeName": "markdown.hyperion.codeblock"
 }

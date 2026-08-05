@@ -23,9 +23,9 @@ export function setupExtensionState(
       : path.join("./server/out/index.js")
   );
 
-  const outputChannel: OutputChannel = window.createOutputChannel("Solidity");
+  const outputChannel: OutputChannel = window.createOutputChannel("Hyperion");
   const commandsOutputChannel: OutputChannel =
-    window.createOutputChannel("Solidity Commands");
+    window.createOutputChannel("Hyperion Commands");
   const telemetry = new SentryClientTelemetry(sentryDsn);
   const logger = new Logger(outputChannel, telemetry);
 
