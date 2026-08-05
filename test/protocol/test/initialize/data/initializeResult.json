@@ -1,0 +1,37 @@
+{
+  "serverInfo": {
+    "name": "Solidity Language Server"
+  },
+  "capabilities": {
+    "textDocumentSync": 2,
+    "completionProvider": {
+      "triggerCharacters": [".", "/", "\"", "'", "*"]
+    },
+    "signatureHelpProvider": {
+      "triggerCharacters": ["(", ","]
+    },
+    "definitionProvider": true,
+    "documentFormattingProvider": true,
+    "typeDefinitionProvider": true,
+    "referencesProvider": true,
+    "implementationProvider": true,
+    "renameProvider": true,
+    "codeActionProvider": true,
+    "hoverProvider": true,
+    "documentSymbolProvider": true,
+    "semanticTokensProvider": {
+      "full": true,
+      "legend": {
+        "tokenModifiers": [],
+        "tokenTypes": ["keyword", "number", "type", "string", "function"]
+      },
+      "range": false
+    },
+    "workspace": {
+      "workspaceFolders": {
+        "supported": true,
+        "changeNotifications": true
+      }
+    }
+  }
+}

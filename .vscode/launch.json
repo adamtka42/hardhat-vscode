@@ -1,0 +1,65 @@
+// A launch configuration that compiles the extension and then opens it inside a new window
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "extensionHost",
+      "request": "launch",
+      "name": "Launch Client",
+      "runtimeExecutable": "${execPath}",
+      "args": ["--extensionDevelopmentPath=${workspaceRoot}/client"],
+      "outFiles": ["${workspaceRoot}/client/out/**/*.js"],
+      "env": {
+        "VSCODE_NODE_ENV": "development"
+      },
+      "envFile": "${workspaceFolder}/.env",
+      "preLaunchTask": {
+        "type": "npm",
+        "script": "watch"
+      }
+    },
+    {
+      "type": "node",
+      "request": "attach",
+      "name": "Attach to Server",
+      "port": 6009,
+      "restart": true,
+      "outFiles": ["${workspaceRoot}/server/out/**/*.js"]
+    },
+    {
+      "name": "Language Server E2E Test",
+      "type": "extensionHost",
+      "request": "launch",
+      "runtimeExecutable": "${execPath}",
+      "args": [
+        "--extensionDevelopmentPath=${workspaceRoot}",
+        "--extensionTestsPath=${workspaceRoot}/out/test/e2e/index",
+        "${workspaceRoot}/test/e2e"
+      ],
+      "outFiles": ["${workspaceRoot}/out/test/**/*.js"]
+    },
+    {
+      "name": "Debug server tests",
+      "internalConsoleOptions": "openOnSessionStart",
+      "program": "${workspaceFolder}/server/node_modules/mocha/bin/_mocha",
+      "request": "launch",
+      "skipFiles": ["<node_internals>/**"],
+      "type": "pwa-node",
+      "cwd": "${workspaceFolder}/server",
+      "args": [
+        "--no-timeouts",
+        "--colors",
+        "${workspaceFolder}/server/test/**/*.ts"
+      ],
+      "env": {
+        "TS_NODE_FILES": "true"
+      }
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Client + Server",
+      "configurations": ["Launch Client", "Attach to Server"]
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "es2022",
+    "lib": ["es2023"],
+    "module": "node16",
+    "moduleResolution": "node16",
+    "outDir": "out",
+    "allowJs": true,
+    "sourceMap": true,
+    "strict": true,
+    "composite": true,
+    "declaration": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "paths": {
+      "@compilerDiagnostics/*": ["./src/compilerDiagnostics/*"],
+      "@analyzer/*": ["./src/parser/analyzer/*"],
+      "@common/*": ["./src/parser/common/*"],
+      "@services/*": ["./src/services/*"],
+      "@utils/*": ["./src/utils/*"]
+    }
+  },
+  "include": ["src", "test"]
+  // "exclude": ["node_modules", ".vscode-test", ".eslintrc.js"]
+}

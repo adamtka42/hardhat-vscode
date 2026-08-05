@@ -1,0 +1,95 @@
+{
+  "name": "@nomicfoundation/solidity-language-server",
+  "description": "Solidity language server by Nomic Foundation",
+  "license": "MIT",
+  "version": "0.8.29",
+  "author": "Nomic Foundation",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NomicFoundation/hardhat-vscode"
+  },
+  "keywords": [
+    "language server",
+    "solidity",
+    "ethereum",
+    "hardhat"
+  ],
+  "type": "commonjs",
+  "main": "./out/index.js",
+  "types": "./out/index.d.ts",
+  "files": [
+    "out/"
+  ],
+  "bin": {
+    "nomicfoundation-solidity-language-server": "./out/index.js"
+  },
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "scripts": {
+    "build": "tsc -b tsconfig.build.json",
+    "prebundle": "npm run clean",
+    "bundle": "node scripts/bundle.js",
+    "prepack": "npm run bundle",
+    "test": "cross-env TS_NODE_FILES=true mocha",
+    "test:coverage": "cross-env TS_NODE_FILES=true nyc mocha",
+    "lint": "npm run prettier -- --check && npm run eslint",
+    "lint:fix": "npm run prettier -- --write && npm run eslint -- --fix",
+    "prettier": "node scripts/prettier3.js",
+    "eslint": "eslint --max-warnings 0 \"./src/**/*.ts\" \"./test/**/*.ts\"",
+    "clean": "rimraf out .nyc_output coverage *.tsbuildinfo",
+    "test:codecov": "cross-env TS_NODE_FILES=true nyc --reporter=lcov mocha"
+  },
+  "devDependencies": {
+    "@istanbuljs/nyc-config-typescript": "1.0.2",
+    "@nomicfoundation/hardhat3-errors": "npm:@nomicfoundation/hardhat-errors@3.0.0-next.24",
+    "@sentry/core": "9.6.1",
+    "@sentry/node": "9.6.1",
+    "@solidity-parser/parser": "^0.20.2",
+    "@types/chai": "4.3.0",
+    "@types/fs-extra": "^9.0.13",
+    "@types/js-yaml": "^4.0.5",
+    "@types/lodash": "^4.17.16",
+    "@types/mocha": "9.0.0",
+    "@types/module-alias": "^2.0.1",
+    "@types/node": "^22.13.10",
+    "@types/prettier": "2.4.3",
+    "@types/qs": "^6.9.7",
+    "@types/semver": "^7.3.12",
+    "@types/sinon": "10.0.6",
+    "c3-linearization": "0.3.0",
+    "chai": "4.3.4",
+    "cross-env": "7.0.3",
+    "fast-glob": "3.2.11",
+    "fs-extra": "^10.0.0",
+    "got": "^11.8.2",
+    "hardhat": "2.22.3",
+    "hardhat3": "npm:hardhat@3.0.0-next.30",
+    "js-yaml": "^4.1.0",
+    "lodash": "^4.17.21",
+    "mocha": "9.1.3",
+    "module-alias": "^2.2.2",
+    "nyc": "15.1.0",
+    "prettier": "2.5.1",
+    "prettier-plugin-solidity": "1.1.2",
+    "prettier3": "npm:prettier@3.4.2",
+    "qs": "^6.10.1",
+    "rimraf": "3.0.2",
+    "semver": "^7.3.7",
+    "serialize-error": "8.1.0",
+    "sinon": "12.0.1",
+    "ts-node": "10.4.0",
+    "typescript": "5.8.2",
+    "vscode-languageserver": "9.0.1",
+    "vscode-languageserver-protocol": "3.17.5",
+    "vscode-languageserver-textdocument": "1.0.12",
+    "vscode-languageserver-types": "3.17.5",
+    "vscode-uri": "3.1.0",
+    "yaml": "^2.2.1"
+  },
+  "dependencies": {
+    "@nomicfoundation/slang": "1.0.0",
+    "@nomicfoundation/solidity-analyzer": "0.1.1",
+    "es-iterator-helpers": "^1.2.1"
+  }
+}
