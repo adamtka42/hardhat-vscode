@@ -74,7 +74,7 @@ export class PrettyPrinter {
       explicitTypes: "preserve",
       overrides: [
         {
-          files: "*.sol",
+          files: "*.hyp",
           options: {
             printWidth: 80,
             tabWidth: 4,

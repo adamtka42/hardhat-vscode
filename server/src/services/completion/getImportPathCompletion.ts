@@ -99,7 +99,7 @@ function getRelativeImportPathCompletions(
     return [];
   }
 
-  if (currentImport.endsWith(".sol")) {
+  if (currentImport.endsWith(".hyp")) {
     return [];
   }
 
@@ -230,7 +230,7 @@ function convertFileToCompletion(
     const label = `${displayPrefix}${file}`;
     const insertText = `${prefix}${file}`;
 
-    if (fileStat.isFile() && file.slice(-4) === ".sol") {
+    if (fileStat.isFile() && path.extname(file) === ".hyp") {
       // Don't suggest the current import
       if (partial === insertText) {
         return null;

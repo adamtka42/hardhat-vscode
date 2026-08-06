@@ -12,10 +12,7 @@ import { ProjectlessProject } from "../../frameworks/Projectless/ProjectlessProj
 import { Logger } from "../../utils/Logger";
 import { analyzeSolFile } from "../../parser/analyzer/analyzeSolFile";
 import { getOrInitialiseSolFileEntry } from "../../utils/getOrInitialiseSolFileEntry";
-import { FoundryIndexer } from "../../frameworks/Foundry/FoundryIndexer";
 import { frameworkTag } from "../../telemetry/tags";
-import { TruffleIndexer } from "../../frameworks/Truffle/TruffleIndexer";
-import { ApeIndexer } from "../../frameworks/Ape/ApeIndexer";
 import { normalizeAbsolutePath } from "../../utils/paths";
 import { resolveTopLevelWorkspaceFolders } from "./resolveTopLevelWorkspaceFolders";
 
@@ -45,12 +42,7 @@ export async function indexWorkspaceFolders(
   }
 
   // Scan for projects
-  const indexers = [
-    new HardhatIndexer(serverState, workspaceFileRetriever),
-    new FoundryIndexer(serverState, workspaceFileRetriever),
-    new TruffleIndexer(serverState, workspaceFileRetriever),
-    new ApeIndexer(serverState, workspaceFileRetriever),
-  ];
+  const indexers = [new HardhatIndexer(serverState, workspaceFileRetriever)];
   const foundProjects: Project[] = [];
   await logger.trackTime("Indexing projects", async () => {
     for (const indexer of indexers) {
@@ -93,7 +85,7 @@ export async function indexWorkspaceFolders(
   let solFileUris: string[];
   await logger.trackTime("Indexing solidity files", async () => {
     await startSpan({ name: "findSolidityFiles" }, async () => {
-      solFileUris = await scanForSolFiles(
+      solFileUris = await scanForHypFiles(
         logger,
         workspaceFileRetriever,
         topLevelWorkspaceFolders
@@ -122,12 +114,12 @@ export async function indexWorkspaceFolders(
   });
 }
 
-async function scanForSolFiles(
+async function scanForHypFiles(
   logger: Logger,
   workspaceFileRetriever: WorkspaceFileRetriever,
   workspaceFolders: WorkspaceFolder[]
 ): Promise<string[]> {
-  logger.info(`Scanning workspace folders for sol files`);
+  logger.info(`Scanning workspace folders for hyp files`);
 
   const batches: string[][] = [];
 
@@ -139,7 +131,7 @@ async function scanForSolFiles(
 
       const documentsUri: string[] = await workspaceFileRetriever.findFiles(
         workspaceFolderPath,
-        "**/*.sol"
+        "**/*.hyp"
       );
 
       batches.push(documentsUri.map(toUnixStyle));
@@ -150,7 +142,7 @@ async function scanForSolFiles(
 
   const solFileUris = batches.reduce((acc, batch) => acc.concat(batch), []);
 
-  logger.info(`Scan complete, ${solFileUris.length} sol files found`);
+  logger.info(`Scan complete, ${solFileUris.length} hyp files found`);
 
   return solFileUris;
 }

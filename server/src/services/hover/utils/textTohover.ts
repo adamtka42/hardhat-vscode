@@ -8,7 +8,7 @@ export function textToHover(hoverText: string | null) {
   return {
     contents: {
       kind: MarkupKind.Markdown,
-      value: ["```solidity", hoverText, "```"].join("\n"),
+      value: ["```hyperion", hoverText, "```"].join("\n"),
     },
   };
 }

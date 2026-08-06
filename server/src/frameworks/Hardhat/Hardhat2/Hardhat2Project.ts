@@ -188,7 +188,7 @@ export class Hardhat2Project extends Project {
     changes,
   }: DidChangeWatchedFilesParams): Promise<void> {
     for (const change of changes) {
-      if (change.uri.endsWith(".sol")) {
+      if (change.uri.endsWith(".hyp")) {
         if (this._isWorkerRunning()) {
           this._sendToChild(new InvalidateBuildCacheMessage());
         }

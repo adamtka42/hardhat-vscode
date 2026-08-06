@@ -43,7 +43,7 @@ export function onDidChangeContent(serverState: ServerState) {
   return (change: TextDocumentChangeEvent<TextDocument>) => {
     const { logger } = serverState;
     try {
-      if (change.document.languageId !== "solidity") {
+      if (change.document.languageId !== "hyperion") {
         return;
       }
 
