@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { AnalysisResult, analyze } from "@nomicfoundation/solidity-analyzer";
 import {
   ActionType,
   CompilationJob,
@@ -19,6 +18,7 @@ import {
 import { SolidityFilesCache } from "hardhat/builtin-tasks/utils/solidity-files-cache";
 import { HardhatError } from "hardhat/internal/core/errors";
 import { realpathSync } from "fs";
+import { AnalysisResult, analyze } from "../../../../utils/analyzeHyp";
 import { CompilationDetails } from "../../../base/CompilationDetails";
 import { toUnixStyle, uriEquals } from "../../../../utils";
 import { directoryContains } from "../../../../utils/directoryContains";

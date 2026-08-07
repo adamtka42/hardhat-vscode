@@ -6,8 +6,8 @@ import {
   SemanticTokensParams,
 } from "vscode-languageserver-protocol";
 import _ from "lodash";
-import { analyze } from "@nomicfoundation/solidity-analyzer";
 import { startSpan } from "@sentry/core";
+import { analyze } from "../../utils/analyzeHyp";
 import { ServerState } from "../../types";
 import { resolveVersion } from "../../parser/slangHelpers";
 import { INTERNAL_ERROR, OK } from "../../telemetry/TelemetryStatus";
@@ -71,9 +71,8 @@ export function onSemanticTokensFull(serverState: ServerState) {
         const text = document.getText();
 
         // Get the document's solidity version
-        const { versionPragmas } = startSpan(
-          { name: "solidity-analyzer" },
-          () => analyze(text)
+        const { versionPragmas } = startSpan({ name: "analyzeHyp" }, () =>
+          analyze(text)
         );
 
         const resolvedVersion = await resolveVersion(logger, versionPragmas);

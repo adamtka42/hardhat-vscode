@@ -14,10 +14,10 @@ import { createRequire } from "module";
 import type { HardhatRuntimeEnvironment } from "hardhat3/types/hre" with { "resolution-mode": "import" };
 import type { HardhatUserConfig } from "hardhat3/types/config" with { "resolution-mode": "import" };
 import type { HookContext } from "hardhat3/types/hooks" with { "resolution-mode": "import" };
-import { analyze } from "@nomicfoundation/solidity-analyzer";
 import { cpSync } from "fs";
 import { removeSync } from "fs-extra";
 import { lstat } from "fs/promises";
+import { analyze } from "../../../utils/analyzeHyp";
 import {
   BuildInputError,
   FileSpecificError,
@@ -211,9 +211,10 @@ export class Hardhat3Project extends Project {
     }
 
     try {
-      const compilationJobsResult = await this.hre.solidity.getCompilationJobs([
-        absolutePath,
-      ], {force: true});
+      const compilationJobsResult = await this.hre.solidity.getCompilationJobs(
+        [absolutePath],
+        { force: true }
+      );
 
       if ("reason" in compilationJobsResult) {
         throw new Error(

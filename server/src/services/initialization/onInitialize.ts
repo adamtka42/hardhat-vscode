@@ -5,7 +5,6 @@ import {
   WorkspaceFolder,
 } from "vscode-languageserver/node";
 import { ServerState } from "../../types";
-import { tokensTypes } from "../semanticHighlight/tokenTypes";
 import { OK } from "../../telemetry/TelemetryStatus";
 import { indexWorkspaceFolders } from "./indexWorkspaceFolders";
 import { updateAvailableSolcVersions } from "./updateAvailableSolcVersions";
@@ -83,15 +82,10 @@ export const onInitialize = (serverState: ServerState) => {
         codeActionProvider: true,
         hoverProvider: true,
         documentFormattingProvider: true,
-        semanticTokensProvider: {
-          legend: {
-            tokenTypes: tokensTypes,
-            tokenModifiers: [],
-          },
-          range: false,
-          full: true,
-        },
-        documentSymbolProvider: true,
+        // semanticTokensProvider and documentSymbolProvider are not
+        // advertised: both are implemented on top of @nomicfoundation/slang,
+        // which only understands the Solidity grammar and version list, so
+        // they are disabled until a hyperion-aware replacement exists.
         workspace: {
           workspaceFolders: {
             supported: false,

@@ -19,8 +19,6 @@ import { Telemetry } from "./telemetry/types";
 import { attachDocumentHooks } from "./services/documents/attachDocumentHooks";
 import { availableVersions } from "./services/initialization/updateAvailableSolcVersions";
 import { onDocumentFormatting } from "./services/formatting/onDocumentFormatting";
-import { onSemanticTokensFull } from "./services/semanticHighlight/onSemanticTokensFull";
-import { onDocumentSymbol } from "./services/documentSymbol/onDocumentSymbol";
 
 export default function setupServer(
   connection: Connection,
@@ -100,8 +98,9 @@ function attachLanguageServerCommandHooks(serverState: ServerState) {
   connection.onCodeAction(onCodeAction(serverState));
   connection.onHover(onHover(serverState));
   connection.onDocumentFormatting(onDocumentFormatting(serverState));
-  connection.onDocumentSymbol(onDocumentSymbol(serverState));
-  connection.languages.semanticTokens.on(onSemanticTokensFull(serverState));
+  // documentSymbol and semanticTokens handlers are not registered — they
+  // depend on @nomicfoundation/slang (Solidity-only grammar) and their
+  // capabilities are not advertised in onInitialize.
 }
 
 function attachCustomHooks(serverState: ServerState) {

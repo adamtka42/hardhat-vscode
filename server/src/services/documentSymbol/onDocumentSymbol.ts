@@ -4,9 +4,9 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import { DocumentSymbolParams } from "vscode-languageserver/node";
 import { DocumentSymbol, SymbolInformation } from "vscode-languageserver-types";
-import { analyze } from "@nomicfoundation/solidity-analyzer";
 import _ from "lodash";
 import * as Sentry from "@sentry/node";
+import { analyze } from "../../utils/analyzeHyp";
 import { ServerState } from "../../types";
 import { resolveVersion, slangToVSCodeRange } from "../../parser/slangHelpers";
 import { INTERNAL_ERROR, OK } from "../../telemetry/TelemetryStatus";
@@ -80,9 +80,8 @@ export function onDocumentSymbol(serverState: ServerState) {
       const text = document.getText();
 
       // Get the document's solidity version
-      const { versionPragmas } = Sentry.startSpan(
-        { name: "solidity-analyzer" },
-        () => analyze(text)
+      const { versionPragmas } = Sentry.startSpan({ name: "analyzeHyp" }, () =>
+        analyze(text)
       );
 
       const resolvedVersion = await resolveVersion(logger, versionPragmas);

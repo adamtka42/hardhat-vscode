@@ -133,7 +133,6 @@ async function main() {
     minifySyntax: false,
     external: [
       "vscode",
-      "@nomicfoundation/solidity-analyzer",
       "@nomicfoundation/slang",
       "fsevents",
       "mocha",
@@ -174,8 +173,6 @@ async function main() {
     console.error("Error: Could not find server dependencies");
     process.exit(1);
   }
-  const solidityAnalyzerVersion =
-    serverDeps["@nomicfoundation/solidity-analyzer"];
   const slangVersion = serverDeps["@nomicfoundation/slang"];
 
   fs.writeFileSync(
@@ -184,28 +181,6 @@ async function main() {
       name: "tmp",
       version: "0.0.1",
       dependencies: {
-        "@nomicfoundation/solidity-analyzer": solidityAnalyzerVersion,
-        "@nomicfoundation/solidity-analyzer-darwin-arm64":
-          solidityAnalyzerVersion,
-        "@nomicfoundation/solidity-analyzer-win32-arm64-msvc":
-          solidityAnalyzerVersion,
-        "@nomicfoundation/solidity-analyzer-linux-arm64-gnu":
-          solidityAnalyzerVersion,
-        "@nomicfoundation/solidity-analyzer-linux-arm64-musl":
-          solidityAnalyzerVersion,
-        "@nomicfoundation/solidity-analyzer-win32-ia32-msvc":
-          solidityAnalyzerVersion,
-        "@nomicfoundation/solidity-analyzer-darwin-x64":
-          solidityAnalyzerVersion,
-        "@nomicfoundation/solidity-analyzer-win32-x64-msvc":
-          solidityAnalyzerVersion,
-        "@nomicfoundation/solidity-analyzer-linux-x64-gnu":
-          solidityAnalyzerVersion,
-        "@nomicfoundation/solidity-analyzer-linux-x64-musl":
-          solidityAnalyzerVersion,
-        "@nomicfoundation/solidity-analyzer-freebsd-x64":
-          solidityAnalyzerVersion,
-
         "@nomicfoundation/slang": slangVersion,
       },
     })
