@@ -23,11 +23,11 @@ describe("Parser", () => {
   );
 
   const importsUri = forceToUnixStyle(
-    path.join(__dirname, "testData", "imports", "Imports.sol")
+    path.join(__dirname, "testData", "imports", "Imports.hyp")
   );
 
   const importsSubUri = forceToUnixStyle(
-    path.join(__dirname, "testData", "imports", "sub", "SubImport.sol")
+    path.join(__dirname, "testData", "imports", "sub", "SubImport.hyp")
   );
 
   const importsSubSubUri = forceToUnixStyle(
@@ -37,7 +37,7 @@ describe("Parser", () => {
       "imports",
       "sub",
       "subsub",
-      "SubSubImport.sol"
+      "SubSubImport.hyp"
     )
   );
 
@@ -70,12 +70,12 @@ describe("Parser", () => {
           const openzepplinUri = forceToUnixStyle(
             path.join(
               __dirname,
-              "../../../test/node_modules/@openzeppelin/contracts/token/ERC1155/presets/ERC1155PresetMinterPauser.sol"
+              "../../../test/node_modules/@openzeppelin/contracts/token/ERC1155/presets/ERC1155PresetMinterPauser.hyp"
             )
           );
 
           const ensUri = forceToUnixStyle(
-            path.join(__dirname, "../../../node_modules/@ens/contracts/ENS.sol")
+            path.join(__dirname, "../../../node_modules/@ens/contracts/ENS.hyp")
           );
 
           ({
@@ -111,8 +111,8 @@ describe("Parser", () => {
               { line: 3, character: 8 },
               [
                 {
-                  label: "./Second.sol",
-                  insertText: "./Second.sol",
+                  label: "./Second.hyp",
+                  insertText: "./Second.hyp",
                   kind: CompletionItemKind.File,
                   additionalTextEdits: [
                     {
@@ -131,8 +131,8 @@ describe("Parser", () => {
                   ],
                 },
                 {
-                  label: "./Third.sol",
-                  insertText: "./Third.sol",
+                  label: "./Third.hyp",
+                  insertText: "./Third.hyp",
                   kind: CompletionItemKind.File,
                   additionalTextEdits: [
                     {
@@ -184,8 +184,8 @@ describe("Parser", () => {
               { line: 4, character: 9 },
               [
                 {
-                  label: "./Second.sol",
-                  insertText: "/Second.sol",
+                  label: "./Second.hyp",
+                  insertText: "/Second.hyp",
                   kind: CompletionItemKind.File,
                   additionalTextEdits: [
                     {
@@ -204,8 +204,8 @@ describe("Parser", () => {
                   ],
                 },
                 {
-                  label: "./Third.sol",
-                  insertText: "/Third.sol",
+                  label: "./Third.hyp",
+                  insertText: "/Third.hyp",
                   kind: CompletionItemKind.File,
                   additionalTextEdits: [
                     {
@@ -257,8 +257,8 @@ describe("Parser", () => {
               { line: 5, character: 10 },
               [
                 {
-                  label: "./Second.sol",
-                  insertText: "Second.sol",
+                  label: "./Second.hyp",
+                  insertText: "Second.hyp",
                   kind: CompletionItemKind.File,
                   additionalTextEdits: [
                     {
@@ -277,8 +277,8 @@ describe("Parser", () => {
                   ],
                 },
                 {
-                  label: "./Third.sol",
-                  insertText: "Third.sol",
+                  label: "./Third.hyp",
+                  insertText: "Third.hyp",
                   kind: CompletionItemKind.File,
                   additionalTextEdits: [
                     {
@@ -330,8 +330,8 @@ describe("Parser", () => {
               { line: 6, character: 14 },
               [
                 {
-                  label: "Fifth.sol",
-                  insertText: "Fifth.sol",
+                  label: "Fifth.hyp",
+                  insertText: "Fifth.hyp",
                   kind: CompletionItemKind.File,
                   additionalTextEdits: [
                     {
@@ -350,8 +350,8 @@ describe("Parser", () => {
                   ],
                 },
                 {
-                  label: "Fourth.sol",
-                  insertText: "Fourth.sol",
+                  label: "Fourth.hyp",
+                  insertText: "Fourth.hyp",
                   kind: CompletionItemKind.File,
                   additionalTextEdits: [
                     {
@@ -370,8 +370,8 @@ describe("Parser", () => {
                   ],
                 },
                 {
-                  label: "SubImport.sol",
-                  insertText: "SubImport.sol",
+                  label: "SubImport.hyp",
+                  insertText: "SubImport.hyp",
                   kind: CompletionItemKind.File,
                   additionalTextEdits: [
                     {
@@ -423,8 +423,8 @@ describe("Parser", () => {
               { line: 7, character: 21 },
               [
                 {
-                  label: "Seventh.sol",
-                  insertText: "Seventh.sol",
+                  label: "Seventh.hyp",
+                  insertText: "Seventh.hyp",
                   kind: CompletionItemKind.File,
                   additionalTextEdits: [
                     {
@@ -443,8 +443,8 @@ describe("Parser", () => {
                   ],
                 },
                 {
-                  label: "Sixth.sol",
-                  insertText: "Sixth.sol",
+                  label: "Sixth.hyp",
+                  insertText: "Sixth.hyp",
                   kind: CompletionItemKind.File,
                   additionalTextEdits: [
                     {
@@ -463,8 +463,8 @@ describe("Parser", () => {
                   ],
                 },
                 {
-                  label: "SubSubImport.sol",
-                  insertText: "SubSubImport.sol",
+                  label: "SubSubImport.hyp",
+                  insertText: "SubSubImport.hyp",
                   kind: CompletionItemKind.File,
                   additionalTextEdits: [
                     {
@@ -508,7 +508,7 @@ describe("Parser", () => {
               { line: 9, character: 13 },
               [
                 {
-                  label: "Second.sol",
+                  label: "Second.hyp",
                   kind: CompletionItemKind.File,
                   additionalTextEdits: [
                     {
@@ -526,7 +526,7 @@ describe("Parser", () => {
                     },
                   ],
                   textEdit: {
-                    newText: "Second.sol",
+                    newText: "Second.hyp",
                     range: {
                       start: {
                         line: 9,
@@ -552,7 +552,7 @@ describe("Parser", () => {
               { line: 10, character: 19 },
               [
                 {
-                  label: "Second.sol",
+                  label: "Second.hyp",
                   kind: CompletionItemKind.File,
                   additionalTextEdits: [
                     {
@@ -570,7 +570,7 @@ describe("Parser", () => {
                     },
                   ],
                   textEdit: {
-                    newText: "Second.sol",
+                    newText: "Second.hyp",
                     range: {
                       start: {
                         line: 10,
@@ -650,8 +650,8 @@ describe("Parser", () => {
               { line: 3, character: 8 },
               [
                 {
-                  label: "./Fifth.sol",
-                  insertText: "./Fifth.sol",
+                  label: "./Fifth.hyp",
+                  insertText: "./Fifth.hyp",
                   kind: CompletionItemKind.File,
                   additionalTextEdits: [
                     {
@@ -670,8 +670,8 @@ describe("Parser", () => {
                   ],
                 },
                 {
-                  label: "./Fourth.sol",
-                  insertText: "./Fourth.sol",
+                  label: "./Fourth.hyp",
+                  insertText: "./Fourth.hyp",
                   kind: CompletionItemKind.File,
                   additionalTextEdits: [
                     {
@@ -723,8 +723,8 @@ describe("Parser", () => {
               { line: 4, character: 10 },
               [
                 {
-                  label: "../Imports.sol",
-                  insertText: "/Imports.sol",
+                  label: "../Imports.hyp",
+                  insertText: "/Imports.hyp",
                   kind: CompletionItemKind.File,
                   additionalTextEdits: [
                     {
@@ -743,8 +743,8 @@ describe("Parser", () => {
                   ],
                 },
                 {
-                  label: "../Second.sol",
-                  insertText: "/Second.sol",
+                  label: "../Second.hyp",
+                  insertText: "/Second.hyp",
                   kind: CompletionItemKind.File,
                   additionalTextEdits: [
                     {
@@ -763,8 +763,8 @@ describe("Parser", () => {
                   ],
                 },
                 {
-                  label: "../Third.sol",
-                  insertText: "/Third.sol",
+                  label: "../Third.hyp",
+                  insertText: "/Third.hyp",
                   kind: CompletionItemKind.File,
                   additionalTextEdits: [
                     {
@@ -816,8 +816,8 @@ describe("Parser", () => {
               { line: 4, character: 10 },
               [
                 {
-                  label: "../Imports.sol",
-                  insertText: "/Imports.sol",
+                  label: "../Imports.hyp",
+                  insertText: "/Imports.hyp",
                   kind: CompletionItemKind.File,
                   additionalTextEdits: [
                     {
@@ -836,8 +836,8 @@ describe("Parser", () => {
                   ],
                 },
                 {
-                  label: "../Second.sol",
-                  insertText: "/Second.sol",
+                  label: "../Second.hyp",
+                  insertText: "/Second.hyp",
                   kind: CompletionItemKind.File,
                   additionalTextEdits: [
                     {
@@ -856,8 +856,8 @@ describe("Parser", () => {
                   ],
                 },
                 {
-                  label: "../Third.sol",
-                  insertText: "/Third.sol",
+                  label: "../Third.hyp",
+                  insertText: "/Third.hyp",
                   kind: CompletionItemKind.File,
                   additionalTextEdits: [
                     {
@@ -920,8 +920,8 @@ describe("Parser", () => {
               { line: 3, character: 8 },
               [
                 {
-                  label: "./Seventh.sol",
-                  insertText: "./Seventh.sol",
+                  label: "./Seventh.hyp",
+                  insertText: "./Seventh.hyp",
                   kind: CompletionItemKind.File,
                   additionalTextEdits: [
                     {
@@ -940,8 +940,8 @@ describe("Parser", () => {
                   ],
                 },
                 {
-                  label: "./Sixth.sol",
-                  insertText: "./Sixth.sol",
+                  label: "./Sixth.hyp",
+                  insertText: "./Sixth.hyp",
                   kind: CompletionItemKind.File,
                   additionalTextEdits: [
                     {
@@ -973,8 +973,8 @@ describe("Parser", () => {
               { line: 4, character: 13 },
               [
                 {
-                  label: "Imports.sol",
-                  insertText: "/Imports.sol",
+                  label: "Imports.hyp",
+                  insertText: "/Imports.hyp",
                   kind: CompletionItemKind.File,
                   additionalTextEdits: [
                     {
@@ -993,8 +993,8 @@ describe("Parser", () => {
                   ],
                 },
                 {
-                  label: "Second.sol",
-                  insertText: "/Second.sol",
+                  label: "Second.hyp",
+                  insertText: "/Second.hyp",
                   kind: CompletionItemKind.File,
                   additionalTextEdits: [
                     {
@@ -1013,8 +1013,8 @@ describe("Parser", () => {
                   ],
                 },
                 {
-                  label: "Third.sol",
-                  insertText: "/Third.sol",
+                  label: "Third.hyp",
+                  insertText: "/Third.hyp",
                   kind: CompletionItemKind.File,
                   additionalTextEdits: [
                     {
@@ -1066,8 +1066,8 @@ describe("Parser", () => {
               { line: 5, character: 14 },
               [
                 {
-                  label: "Imports.sol",
-                  insertText: "Imports.sol",
+                  label: "Imports.hyp",
+                  insertText: "Imports.hyp",
                   kind: CompletionItemKind.File,
                   additionalTextEdits: [
                     {
@@ -1086,8 +1086,8 @@ describe("Parser", () => {
                   ],
                 },
                 {
-                  label: "Second.sol",
-                  insertText: "Second.sol",
+                  label: "Second.hyp",
+                  insertText: "Second.hyp",
                   kind: CompletionItemKind.File,
                   additionalTextEdits: [
                     {
@@ -1106,8 +1106,8 @@ describe("Parser", () => {
                   ],
                 },
                 {
-                  label: "Third.sol",
-                  insertText: "Third.sol",
+                  label: "Third.hyp",
+                  insertText: "Third.hyp",
                   kind: CompletionItemKind.File,
                   additionalTextEdits: [
                     {
@@ -1159,13 +1159,13 @@ describe("Parser", () => {
           const openzepplinUri1 = forceToUnixStyle(
             path.join(
               __dirname,
-              "../../../test/node_modules/@openzeppelin/contracts/token/ERC1155/presets/ERC1155PresetMinterPauser.sol"
+              "../../../test/node_modules/@openzeppelin/contracts/token/ERC1155/presets/ERC1155PresetMinterPauser.hyp"
             )
           );
           const openzepplinUri2 = forceToUnixStyle(
             path.join(
               __dirname,
-              "../../../test/node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol"
+              "../../../test/node_modules/@openzeppelin/contracts/token/ERC20/IERC20.hyp"
             )
           );
 

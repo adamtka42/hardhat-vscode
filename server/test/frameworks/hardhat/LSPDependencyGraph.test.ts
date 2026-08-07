@@ -23,7 +23,7 @@ describe("LSPDependencyGraph", () => {
 
   const projectPath = path.join(__dirname, "lsp_dg_project");
   const contractPath = (contractName: string) =>
-    path.join(projectPath, `${contractName}.sol`);
+    path.join(projectPath, `${contractName}.hyp`);
 
   describe("#walkFile", function () {
     it("walking a file with no dependencies", async () => {
@@ -48,7 +48,7 @@ describe("LSPDependencyGraph", () => {
       expect(dg.unresolvedImports.size).to.eq(1);
       expect(
         Array.from(dg.unresolvedImports.get(contractPath("H"))!)
-      ).to.deep.eq(["./nonexistent2.sol"]);
+      ).to.deep.eq(["./nonexistent2.hyp"]);
     });
 
     it("walking a file with one dependency and some unresolved", async () => {
@@ -60,24 +60,24 @@ describe("LSPDependencyGraph", () => {
       ]);
 
       expect(Array.from(dg.dependencies.get(contractPath("C"))!)).to.deep.eq([
-        { fileAbsPath: contractPath("H"), importPath: "./H.sol" },
+        { fileAbsPath: contractPath("H"), importPath: "./H.hyp" },
       ]);
       expect(Array.from(dg.dependencies.get(contractPath("H"))!)).to.deep.eq(
         []
       );
 
       expect(Array.from(dg.dependants.get(contractPath("H"))!)).to.deep.eq([
-        { fileAbsPath: contractPath("C"), importPath: "./H.sol" },
+        { fileAbsPath: contractPath("C"), importPath: "./H.hyp" },
       ]);
       expect(Array.from(dg.dependants.get(contractPath("C"))!)).to.deep.eq([]);
 
       expect(dg.unresolvedImports.size).to.eq(2);
       expect(
         Array.from(dg.unresolvedImports.get(contractPath("C"))!)
-      ).to.deep.eq(["./nonexistent1.sol"]);
+      ).to.deep.eq(["./nonexistent1.hyp"]);
       expect(
         Array.from(dg.unresolvedImports.get(contractPath("H"))!)
-      ).to.deep.eq(["./nonexistent2.sol"]);
+      ).to.deep.eq(["./nonexistent2.hyp"]);
     });
 
     it("walking subpaths several times starting from leaves will not duplicate files or links", async () => {
@@ -97,35 +97,35 @@ describe("LSPDependencyGraph", () => {
         []
       );
       expect(Array.from(dg.dependencies.get(contractPath("C"))!)).to.deep.eq([
-        { fileAbsPath: contractPath("H"), importPath: "./H.sol" },
+        { fileAbsPath: contractPath("H"), importPath: "./H.hyp" },
       ]);
       expect(Array.from(dg.dependencies.get(contractPath("B"))!)).to.deep.eq([
-        { fileAbsPath: contractPath("C"), importPath: "./C.sol" },
-        { fileAbsPath: contractPath("D"), importPath: "./D.sol" },
+        { fileAbsPath: contractPath("C"), importPath: "./C.hyp" },
+        { fileAbsPath: contractPath("D"), importPath: "./D.hyp" },
       ]);
       expect(Array.from(dg.dependencies.get(contractPath("D"))!)).to.deep.eq([
-        { fileAbsPath: contractPath("C"), importPath: "./C.sol" },
+        { fileAbsPath: contractPath("C"), importPath: "./C.hyp" },
       ]);
 
       expect(Array.from(dg.dependants.get(contractPath("H"))!)).to.deep.eq([
-        { fileAbsPath: contractPath("C"), importPath: "./H.sol" },
+        { fileAbsPath: contractPath("C"), importPath: "./H.hyp" },
       ]);
       expect(Array.from(dg.dependants.get(contractPath("C"))!)).to.deep.eq([
-        { fileAbsPath: contractPath("B"), importPath: "./C.sol" },
-        { fileAbsPath: contractPath("D"), importPath: "./C.sol" },
+        { fileAbsPath: contractPath("B"), importPath: "./C.hyp" },
+        { fileAbsPath: contractPath("D"), importPath: "./C.hyp" },
       ]);
       expect(Array.from(dg.dependants.get(contractPath("B"))!)).to.deep.eq([]);
       expect(Array.from(dg.dependants.get(contractPath("D"))!)).to.deep.eq([
-        { fileAbsPath: contractPath("B"), importPath: "./D.sol" },
+        { fileAbsPath: contractPath("B"), importPath: "./D.hyp" },
       ]);
 
       expect(dg.unresolvedImports.size).to.eq(2);
       expect(
         Array.from(dg.unresolvedImports.get(contractPath("C"))!)
-      ).to.deep.eq(["./nonexistent1.sol"]);
+      ).to.deep.eq(["./nonexistent1.hyp"]);
       expect(
         Array.from(dg.unresolvedImports.get(contractPath("H"))!)
-      ).to.deep.eq(["./nonexistent2.sol"]);
+      ).to.deep.eq(["./nonexistent2.hyp"]);
     });
 
     it("walking subpaths several times starting from roots will not duplicate files or links", async () => {
@@ -152,31 +152,31 @@ describe("LSPDependencyGraph", () => {
       ]);
 
       expect(Array.from(dg.dependencies.get(contractPath("A"))!)).to.deep.eq([
-        { fileAbsPath: contractPath("B"), importPath: "./B.sol" },
-        { fileAbsPath: contractPath("D"), importPath: "./D.sol" },
-        { fileAbsPath: contractPath("E"), importPath: "./E.sol" },
+        { fileAbsPath: contractPath("B"), importPath: "./B.hyp" },
+        { fileAbsPath: contractPath("D"), importPath: "./D.hyp" },
+        { fileAbsPath: contractPath("E"), importPath: "./E.hyp" },
       ]);
       expect(Array.from(dg.dependencies.get(contractPath("B"))!)).to.deep.eq([
-        { fileAbsPath: contractPath("C"), importPath: "./C.sol" },
-        { fileAbsPath: contractPath("D"), importPath: "./D.sol" },
+        { fileAbsPath: contractPath("C"), importPath: "./C.hyp" },
+        { fileAbsPath: contractPath("D"), importPath: "./D.hyp" },
       ]);
       expect(Array.from(dg.dependencies.get(contractPath("C"))!)).to.deep.eq([
-        { fileAbsPath: contractPath("H"), importPath: "./H.sol" },
+        { fileAbsPath: contractPath("H"), importPath: "./H.hyp" },
       ]);
       expect(Array.from(dg.dependencies.get(contractPath("D"))!)).to.deep.eq([
-        { fileAbsPath: contractPath("C"), importPath: "./C.sol" },
+        { fileAbsPath: contractPath("C"), importPath: "./C.hyp" },
       ]);
       expect(Array.from(dg.dependencies.get(contractPath("E"))!)).to.deep.eq([
-        { fileAbsPath: contractPath("G"), importPath: "./G.sol" },
+        { fileAbsPath: contractPath("G"), importPath: "./G.hyp" },
       ]);
       expect(Array.from(dg.dependencies.get(contractPath("F"))!)).to.deep.eq([
-        { fileAbsPath: contractPath("E"), importPath: "./E.sol" },
-        { fileAbsPath: contractPath("G"), importPath: "./G.sol" },
-        { fileAbsPath: contractPath("I"), importPath: "./I.sol" },
+        { fileAbsPath: contractPath("E"), importPath: "./E.hyp" },
+        { fileAbsPath: contractPath("G"), importPath: "./G.hyp" },
+        { fileAbsPath: contractPath("I"), importPath: "./I.hyp" },
       ]);
       expect(Array.from(dg.dependencies.get(contractPath("G"))!)).to.deep.eq([
-        { fileAbsPath: contractPath("H"), importPath: "./H.sol" },
-        { fileAbsPath: contractPath("D"), importPath: "./D.sol" },
+        { fileAbsPath: contractPath("H"), importPath: "./H.hyp" },
+        { fileAbsPath: contractPath("D"), importPath: "./D.hyp" },
       ]);
       expect(Array.from(dg.dependencies.get(contractPath("H"))!)).to.deep.eq(
         []
@@ -187,41 +187,41 @@ describe("LSPDependencyGraph", () => {
 
       expect(Array.from(dg.dependants.get(contractPath("A"))!)).to.deep.eq([]);
       expect(Array.from(dg.dependants.get(contractPath("B"))!)).to.deep.eq([
-        { fileAbsPath: contractPath("A"), importPath: "./B.sol" },
+        { fileAbsPath: contractPath("A"), importPath: "./B.hyp" },
       ]);
       expect(Array.from(dg.dependants.get(contractPath("C"))!)).to.deep.eq([
-        { fileAbsPath: contractPath("D"), importPath: "./C.sol" },
-        { fileAbsPath: contractPath("B"), importPath: "./C.sol" },
+        { fileAbsPath: contractPath("D"), importPath: "./C.hyp" },
+        { fileAbsPath: contractPath("B"), importPath: "./C.hyp" },
       ]);
       expect(Array.from(dg.dependants.get(contractPath("D"))!)).to.deep.eq([
-        { fileAbsPath: contractPath("A"), importPath: "./D.sol" },
-        { fileAbsPath: contractPath("G"), importPath: "./D.sol" },
-        { fileAbsPath: contractPath("B"), importPath: "./D.sol" },
+        { fileAbsPath: contractPath("A"), importPath: "./D.hyp" },
+        { fileAbsPath: contractPath("G"), importPath: "./D.hyp" },
+        { fileAbsPath: contractPath("B"), importPath: "./D.hyp" },
       ]);
       expect(Array.from(dg.dependants.get(contractPath("E"))!)).to.deep.eq([
-        { fileAbsPath: contractPath("A"), importPath: "./E.sol" },
-        { fileAbsPath: contractPath("F"), importPath: "./E.sol" },
+        { fileAbsPath: contractPath("A"), importPath: "./E.hyp" },
+        { fileAbsPath: contractPath("F"), importPath: "./E.hyp" },
       ]);
       expect(Array.from(dg.dependants.get(contractPath("F"))!)).to.deep.eq([]);
       expect(Array.from(dg.dependants.get(contractPath("G"))!)).to.deep.eq([
-        { fileAbsPath: contractPath("E"), importPath: "./G.sol" },
-        { fileAbsPath: contractPath("F"), importPath: "./G.sol" },
+        { fileAbsPath: contractPath("E"), importPath: "./G.hyp" },
+        { fileAbsPath: contractPath("F"), importPath: "./G.hyp" },
       ]);
       expect(Array.from(dg.dependants.get(contractPath("H"))!)).to.deep.eq([
-        { fileAbsPath: contractPath("G"), importPath: "./H.sol" },
-        { fileAbsPath: contractPath("C"), importPath: "./H.sol" },
+        { fileAbsPath: contractPath("G"), importPath: "./H.hyp" },
+        { fileAbsPath: contractPath("C"), importPath: "./H.hyp" },
       ]);
       expect(Array.from(dg.dependants.get(contractPath("I"))!)).to.deep.eq([
-        { fileAbsPath: contractPath("F"), importPath: "./I.sol" },
+        { fileAbsPath: contractPath("F"), importPath: "./I.hyp" },
       ]);
 
       expect(dg.unresolvedImports.size).to.eq(2);
       expect(
         Array.from(dg.unresolvedImports.get(contractPath("C"))!)
-      ).to.deep.eq(["./nonexistent1.sol"]);
+      ).to.deep.eq(["./nonexistent1.hyp"]);
       expect(
         Array.from(dg.unresolvedImports.get(contractPath("H"))!)
-      ).to.deep.eq(["./nonexistent2.sol"]);
+      ).to.deep.eq(["./nonexistent2.hyp"]);
     });
   });
 
@@ -230,7 +230,7 @@ describe("LSPDependencyGraph", () => {
       await dg.walkFile(contractPath("C"));
 
       expect(Array.from(dg.dependencies.get(contractPath("C"))!)).to.deep.eq([
-        { fileAbsPath: contractPath("H"), importPath: "./H.sol" },
+        { fileAbsPath: contractPath("H"), importPath: "./H.hyp" },
       ]);
 
       await dg.deleteFile(contractPath("H"));
@@ -244,7 +244,7 @@ describe("LSPDependencyGraph", () => {
       await dg.walkFile(contractPath("C"));
 
       expect(Array.from(dg.dependants.get(contractPath("H"))!)).to.deep.eq([
-        { fileAbsPath: contractPath("C"), importPath: "./H.sol" },
+        { fileAbsPath: contractPath("C"), importPath: "./H.hyp" },
       ]);
 
       await dg.deleteFile(contractPath("C"));
@@ -257,13 +257,13 @@ describe("LSPDependencyGraph", () => {
 
       expect(
         Array.from(dg.unresolvedImports.get(contractPath("C"))!)
-      ).to.deep.eq(["./nonexistent1.sol"]);
+      ).to.deep.eq(["./nonexistent1.hyp"]);
 
       await dg.deleteFile(contractPath("H"));
 
       expect(
         Array.from(dg.unresolvedImports.get(contractPath("C"))!)
-      ).to.deep.eq(["./nonexistent1.sol", "./H.sol"]);
+      ).to.deep.eq(["./nonexistent1.hyp", "./H.hyp"]);
     });
 
     it("removes this file's entry, dependencies and dependants", async () => {
@@ -275,11 +275,11 @@ describe("LSPDependencyGraph", () => {
       ]);
       expect(dg.dependencies.size).to.eq(2);
       expect(Array.from(dg.dependencies.get(contractPath("C"))!)).to.deep.eq([
-        { fileAbsPath: contractPath("H"), importPath: "./H.sol" },
+        { fileAbsPath: contractPath("H"), importPath: "./H.hyp" },
       ]);
       expect(dg.dependants.size).to.eq(2);
       expect(Array.from(dg.dependants.get(contractPath("H"))!)).to.deep.eq([
-        { fileAbsPath: contractPath("C"), importPath: "./H.sol" },
+        { fileAbsPath: contractPath("C"), importPath: "./H.hyp" },
       ]);
 
       await dg.deleteFile(contractPath("C"));
@@ -301,7 +301,7 @@ describe("LSPDependencyGraph", () => {
 
       expect(
         Array.from(dg.unresolvedImports.get(contractPath("C"))!)
-      ).to.deep.eq(["./nonexistent1.sol"]);
+      ).to.deep.eq(["./nonexistent1.hyp"]);
 
       await dg.deleteFile(contractPath("C"));
 
@@ -327,7 +327,7 @@ describe("LSPDependencyGraph", () => {
 
       expect(dg.dependencies.size).to.eq(2);
       expect(Array.from(dg.dependencies.get(contractPath("C"))!)).to.deep.eq([
-        { fileAbsPath: contractPath("H"), importPath: "./H.sol" },
+        { fileAbsPath: contractPath("H"), importPath: "./H.hyp" },
       ]);
       expect(Array.from(dg.dependencies.get(contractPath("H"))!)).to.deep.eq(
         []
@@ -335,17 +335,17 @@ describe("LSPDependencyGraph", () => {
 
       expect(dg.dependants.size).to.eq(2);
       expect(Array.from(dg.dependants.get(contractPath("H"))!)).to.deep.eq([
-        { fileAbsPath: contractPath("C"), importPath: "./H.sol" },
+        { fileAbsPath: contractPath("C"), importPath: "./H.hyp" },
       ]);
       expect(Array.from(dg.dependants.get(contractPath("C"))!)).to.deep.eq([]);
 
       expect(dg.unresolvedImports.size).to.eq(2);
       expect(
         Array.from(dg.unresolvedImports.get(contractPath("C"))!)
-      ).to.deep.eq(["./nonexistent1.sol"]);
+      ).to.deep.eq(["./nonexistent1.hyp"]);
       expect(
         Array.from(dg.unresolvedImports.get(contractPath("H"))!)
-      ).to.deep.eq(["./nonexistent2.sol"]);
+      ).to.deep.eq(["./nonexistent2.hyp"]);
     });
 
     it("resolves a previously unresolved link", async () => {
@@ -358,7 +358,7 @@ describe("LSPDependencyGraph", () => {
       expect(dg.unresolvedImports.size).to.eq(1);
       expect(
         Array.from(dg.unresolvedImports.get(contractPath("H"))!)
-      ).to.deep.eq(["./nonexistent2.sol"]);
+      ).to.deep.eq(["./nonexistent2.hyp"]);
 
       writeFileSync(contractPath("nonexistent2"), "");
       await dg.addNewFile(contractPath("nonexistent2"));
@@ -370,14 +370,14 @@ describe("LSPDependencyGraph", () => {
       expect(Array.from(dg.dependencies.get(contractPath("H"))!)).to.deep.eq([
         {
           fileAbsPath: contractPath("nonexistent2"),
-          importPath: "./nonexistent2.sol",
+          importPath: "./nonexistent2.hyp",
         },
       ]);
 
       expect(
         Array.from(dg.dependants.get(contractPath("nonexistent2"))!)
       ).to.deep.eq([
-        { fileAbsPath: contractPath("H"), importPath: "./nonexistent2.sol" },
+        { fileAbsPath: contractPath("H"), importPath: "./nonexistent2.hyp" },
       ]);
     });
   });
@@ -386,7 +386,7 @@ describe("LSPDependencyGraph", () => {
     it("returns the absolute path of the resolved import if its present in the graph", async () => {
       await dg.walkFile(contractPath("C"));
 
-      expect(dg.resolveImport(contractPath("C"), "./H.sol")).to.eq(
+      expect(dg.resolveImport(contractPath("C"), "./H.hyp")).to.eq(
         contractPath("H")
       );
     });
@@ -394,7 +394,7 @@ describe("LSPDependencyGraph", () => {
     it("returns undefined if the import is not present in the graph", async () => {
       await dg.walkFile(contractPath("C"));
 
-      expect(dg.resolveImport(contractPath("C"), "./nonexistent1.sol")).to.eq(
+      expect(dg.resolveImport(contractPath("C"), "./nonexistent1.hyp")).to.eq(
         undefined
       );
     });

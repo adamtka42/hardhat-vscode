@@ -10,19 +10,19 @@ import { forceToUnixStyle } from "../../helpers/forceToUnixStyle";
 
 describe("Parser", () => {
   const globalVariablesUri = forceToUnixStyle(
-    path.join(__dirname, "testData", "GlobalVariables.sol")
+    path.join(__dirname, "testData", "GlobalVariables.hyp")
   );
 
   const memberAccessStructUri = forceToUnixStyle(
-    path.join(__dirname, "testData", "MemberAccessStruct.sol")
+    path.join(__dirname, "testData", "MemberAccessStruct.hyp")
   );
 
   const memberAccessNestedStructUri = forceToUnixStyle(
-    path.join(__dirname, "testData", "MemberAccessNestedStruct.sol")
+    path.join(__dirname, "testData", "MemberAccessNestedStruct.hyp")
   );
 
   const memberAccessArraysUri = forceToUnixStyle(
-    path.join(__dirname, "testData", "MemberAccessArrays.sol")
+    path.join(__dirname, "testData", "MemberAccessArrays.hyp")
   );
 
   let completion: OnCompletion;

@@ -12,10 +12,10 @@ describe("Parser", () => {
   describe("Navigation", () => {
     describe("References", () => {
       const basicUri = forceToUnixStyle(
-        path.join(__dirname, "testData", "References.sol")
+        path.join(__dirname, "testData", "References.hyp")
       );
       const twoContractUri = forceToUnixStyle(
-        path.join(__dirname, "testData", "TwoContracts.sol")
+        path.join(__dirname, "testData", "TwoContracts.hyp")
       );
       let references: OnReferences;
 

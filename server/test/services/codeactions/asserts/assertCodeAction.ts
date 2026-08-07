@@ -25,7 +25,7 @@ export async function assertCodeAction(
 ) {
   const exampleUri = "/example";
 
-  const document = TextDocument.create(exampleUri, "solidity", 0, docText);
+  const document = TextDocument.create(exampleUri, "hyperion", 0, docText);
 
   const mockLogger = setupMockLogger();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

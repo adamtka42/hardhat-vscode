@@ -11,7 +11,7 @@ describe("Code Actions", () => {
     before(async () => {
       addOverrideSpecifierText = (
         await fs.promises.readFile(
-          path.join(__dirname, "testData", "AddOverrideSpecifier.sol")
+          path.join(__dirname, "testData", "AddOverrideSpecifier.hyp")
         )
       ).toString();
     });

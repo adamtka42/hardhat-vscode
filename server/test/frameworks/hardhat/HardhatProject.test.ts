@@ -38,7 +38,7 @@ describe("HardhatProject", function () {
     const fakedCompilationResponse: CompilationDetails = {
       solcVersion: "0.8.20",
       input: {
-        language: "solidity",
+        language: "hyperion",
         sources: {},
         settings: { optimizer: {}, outputSelection: {} },
       },
@@ -70,7 +70,7 @@ describe("HardhatProject", function () {
 
     describe("when initialization was correct and the worker is operative", function () {
       it("sends a BuildCompilationRequest to the worker", async () => {
-        await project.buildCompilation("./contracts/examples.sol", []);
+        await project.buildCompilation("./contracts/examples.hyp", []);
 
         if (sendRequest === null) {
           assert.fail("Sent request should be defined");
@@ -80,7 +80,7 @@ describe("HardhatProject", function () {
 
         assert.equal(
           buildCompilationRequest.sourceUri,
-          "./contracts/examples.sol"
+          "./contracts/examples.hyp"
         );
 
         assertResponseAndErrorHandlersHaveBeenCleanedUp(project);
@@ -94,7 +94,7 @@ describe("HardhatProject", function () {
 
         let caughtException = false;
         try {
-          await project.buildCompilation("./contracts/examples.sol", []);
+          await project.buildCompilation("./contracts/examples.hyp", []);
 
           assert.fail(
             "The build compilation should be blocked because the underlying worker never started"
@@ -126,7 +126,7 @@ describe("HardhatProject", function () {
 
         let caughtException = false;
         try {
-          await project.buildCompilation("./contracts/examples.sol", []);
+          await project.buildCompilation("./contracts/examples.hyp", []);
 
           assert.fail(
             "The build compilation should be blocked because the underlying worker is blocked"
@@ -155,7 +155,7 @@ describe("HardhatProject", function () {
 
         let caughtException = false;
         try {
-          await project.buildCompilation("./contracts/examples.sol", []);
+          await project.buildCompilation("./contracts/examples.hyp", []);
 
           assert.fail(
             "The build compilation should be blocked because the underlying worker is blocked"
@@ -201,7 +201,7 @@ describe("HardhatProject", function () {
 
         let caughtException = false;
         try {
-          await project.buildCompilation("./contracts/examples.sol", []);
+          await project.buildCompilation("./contracts/examples.hyp", []);
 
           assert.fail(
             "The build compilation should be blocked because the underlying worker could not be sent to"
@@ -235,7 +235,7 @@ describe("HardhatProject", function () {
 
         assert.isTrue(
           await project.fileBelongs(
-            `/my_hardhat_project/any_folder/contract.sol`
+            `/my_hardhat_project/any_folder/contract.hyp`
           )
         );
 
@@ -246,7 +246,7 @@ describe("HardhatProject", function () {
 
         assert.isFalse(
           await project.fileBelongs(
-            `/my_hardhat_project/any_folder/contract.sol`
+            `/my_hardhat_project/any_folder/contract.hyp`
           )
         );
       });
@@ -260,13 +260,13 @@ describe("HardhatProject", function () {
       it("claims every contract under project basePath, to avoid it being assigned other project", async () => {
         assert.deepEqual(
           await project.fileBelongs(
-            `/my_hardhat_project/any_folder/contract.sol`
+            `/my_hardhat_project/any_folder/contract.hyp`
           ),
           { belongs: true, isLocal: false }
         );
 
         assert.include(
-          await project.fileBelongs("/other_project/any_folder/contract.sol"),
+          await project.fileBelongs("/other_project/any_folder/contract.hyp"),
           {
             belongs: false,
           }

@@ -24,45 +24,45 @@ describe("FoundryProject", function () {
   describe("resolveImportPath", function () {
     it("resolves relative imports", async () => {
       const foundImport = await project.resolveImportPath(
-        path.join(project.basePath, "src", "A.sol"),
-        "./B.sol"
+        path.join(project.basePath, "src", "A.hyp"),
+        "./B.hyp"
       );
       const notFoundImport = await project.resolveImportPath(
-        path.join(project.basePath, "src", "A.sol"),
-        "./C.sol"
+        path.join(project.basePath, "src", "A.hyp"),
+        "./C.hyp"
       );
       expect(foundImport).to.eq(
-        toUnixStyle(path.join(project.basePath, "src", "B.sol"))
+        toUnixStyle(path.join(project.basePath, "src", "B.hyp"))
       );
       expect(notFoundImport).to.eq(undefined);
     });
 
     it("resolves root imports", async () => {
       const importFromSameLevel = await project.resolveImportPath(
-        path.join(project.basePath, "src", "nested", "D.sol"),
-        "nested/E.sol"
+        path.join(project.basePath, "src", "nested", "D.hyp"),
+        "nested/E.hyp"
       );
       const importFromParent = await project.resolveImportPath(
-        path.join(project.basePath, "src", "nested", "D.sol"),
-        "src/A.sol"
+        path.join(project.basePath, "src", "nested", "D.hyp"),
+        "src/A.hyp"
       );
       const importFromLib = await project.resolveImportPath(
-        path.join(project.basePath, "src", "nested", "D.sol"),
-        "lib/C.sol"
+        path.join(project.basePath, "src", "nested", "D.hyp"),
+        "lib/C.hyp"
       );
       const illegalImport = await project.resolveImportPath(
-        path.join(project.basePath, "src", "A.sol"),
-        "foundry/Illegal.sol"
+        path.join(project.basePath, "src", "A.hyp"),
+        "foundry/Illegal.hyp"
       );
 
       expect(importFromSameLevel).to.eq(
-        toUnixStyle(path.join(project.basePath, "src", "nested", "E.sol"))
+        toUnixStyle(path.join(project.basePath, "src", "nested", "E.hyp"))
       );
       expect(importFromParent).to.eq(
-        toUnixStyle(path.join(project.basePath, "src", "A.sol"))
+        toUnixStyle(path.join(project.basePath, "src", "A.hyp"))
       );
       expect(importFromLib).to.eq(
-        toUnixStyle(path.join(project.basePath, "lib", "C.sol"))
+        toUnixStyle(path.join(project.basePath, "lib", "C.hyp"))
       );
       expect(illegalImport).to.eq(undefined);
     });
@@ -70,7 +70,7 @@ describe("FoundryProject", function () {
 
   describe("buildCompilation", function () {
     it("replaces absolute paths provided by buildBasicCompilation with root-relative paths", async () => {
-      const sourceUri = path.join(project.basePath, "src", "A.sol");
+      const sourceUri = path.join(project.basePath, "src", "A.hyp");
 
       stub(basicCompilation, "buildBasicCompilation").resolves({
         input: {
@@ -83,7 +83,7 @@ describe("FoundryProject", function () {
 
       const compilation = await project.buildCompilation(sourceUri, []);
       expect(compilation.input.sources).to.deep.eq({
-        [path.join("src", "A.sol")]: { content: "" },
+        [path.join("src", "A.hyp")]: { content: "" },
       });
     });
   });

@@ -12,7 +12,7 @@ describe("Parser", () => {
   describe("Rename", () => {
     describe("Contract", () => {
       const contractRenameUri = forceToUnixStyle(
-        path.join(__dirname, "testData", "ContractRename.sol")
+        path.join(__dirname, "testData", "ContractRename.hyp")
       );
       let renameRequest: OnRenameRequest;
       const expectRenameEdits = [
@@ -141,7 +141,7 @@ describe("Parser", () => {
 
     describe("Modifiers", () => {
       const modifierRenameUri = forceToUnixStyle(
-        path.join(__dirname, "testData", "ModifierRename.sol")
+        path.join(__dirname, "testData", "ModifierRename.hyp")
       );
       let renameRequest: OnRenameRequest;
       const expectedModifierEdits = [

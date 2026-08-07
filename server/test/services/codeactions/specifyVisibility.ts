@@ -151,7 +151,7 @@ describe("Code Actions", () => {
 
       const exampleUri = "/example";
 
-      const document = TextDocument.create(exampleUri, "solidity", 0, fileText);
+      const document = TextDocument.create(exampleUri, "hyperion", 0, fileText);
 
       const mockLogger = setupMockLogger();
       const serverState = {

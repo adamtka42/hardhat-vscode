@@ -27,7 +27,7 @@
 //             "/data/example": ["/data/example/hardhat.config.ts"],
 //           },
 //           {
-//             "/data/example": ["/data/example/contracts/one.sol"],
+//             "/data/example": ["/data/example/contracts/one.hyp"],
 //           }
 //         );
 
@@ -63,7 +63,7 @@
 //       });
 
 //       it("should add solidity files", () => {
-//         assert("/data/example/contracts/one.sol" in serverState.solFileIndex);
+//         assert("/data/example/contracts/one.hyp" in serverState.solFileIndex);
 //       });
 
 //       it("should notify the client of indexing starting", () => {
@@ -85,7 +85,7 @@
 //           "custom/indexing-file",
 //           {
 //             jobId: 1,
-//             path: "/data/example/contracts/one.sol",
+//             path: "/data/example/contracts/one.hyp",
 //             current: 1,
 //             total: 1,
 //           }
@@ -114,10 +114,10 @@
 //           },
 //           {
 //             "/data/example": [
-//               "/data/example/packages/first/contracts/A.sol",
-//               "/data/example/packages/first/contracts/B.sol",
-//               "/data/example/packages/second/contracts/C.sol",
-//               "/data/example/packages/second/contracts/D.sol",
+//               "/data/example/packages/first/contracts/A.hyp",
+//               "/data/example/packages/first/contracts/B.hyp",
+//               "/data/example/packages/second/contracts/C.hyp",
+//               "/data/example/packages/second/contracts/D.hyp",
 //             ],
 //           }
 //         );
@@ -165,19 +165,19 @@
 
 //       it("should add solidity files", () => {
 //         assert(
-//           "/data/example/packages/first/contracts/A.sol" in
+//           "/data/example/packages/first/contracts/A.hyp" in
 //             serverState.solFileIndex
 //         );
 //         assert(
-//           "/data/example/packages/first/contracts/B.sol" in
+//           "/data/example/packages/first/contracts/B.hyp" in
 //             serverState.solFileIndex
 //         );
 //         assert(
-//           "/data/example/packages/second/contracts/C.sol" in
+//           "/data/example/packages/second/contracts/C.hyp" in
 //             serverState.solFileIndex
 //         );
 //         assert(
-//           "/data/example/packages/second/contracts/D.sol" in
+//           "/data/example/packages/second/contracts/D.hyp" in
 //             serverState.solFileIndex
 //         );
 //       });
@@ -201,7 +201,7 @@
 //           "custom/indexing-file",
 //           {
 //             jobId: 1,
-//             path: "/data/example/packages/second/contracts/D.sol",
+//             path: "/data/example/packages/second/contracts/D.hyp",
 //             current: 4,
 //             total: 4,
 //           }
@@ -243,16 +243,16 @@
 //           },
 //           {
 //             "/data/example/packages/first": [
-//               "/data/example/packages/first/contracts/A.sol",
-//               "/data/example/packages/first/contracts/B.sol",
+//               "/data/example/packages/first/contracts/A.hyp",
+//               "/data/example/packages/first/contracts/B.hyp",
 //             ],
 //             "/data/example/packages/second": [
-//               "/data/example/packages/second/contracts/C.sol",
-//               "/data/example/packages/second/contracts/D.sol",
+//               "/data/example/packages/second/contracts/C.hyp",
+//               "/data/example/packages/second/contracts/D.hyp",
 //             ],
 //             "/data/example/packages/third": [
-//               "/data/example/packages/third/contracts/E.sol",
-//               "/data/example/packages/third/contracts/F.sol",
+//               "/data/example/packages/third/contracts/E.hyp",
+//               "/data/example/packages/third/contracts/F.hyp",
 //             ],
 //           }
 //         );
@@ -310,27 +310,27 @@
 
 //       it("should add solidity files", () => {
 //         assert(
-//           "/data/example/packages/first/contracts/A.sol" in
+//           "/data/example/packages/first/contracts/A.hyp" in
 //             serverState.solFileIndex
 //         );
 //         assert(
-//           "/data/example/packages/first/contracts/B.sol" in
+//           "/data/example/packages/first/contracts/B.hyp" in
 //             serverState.solFileIndex
 //         );
 //         assert(
-//           "/data/example/packages/second/contracts/C.sol" in
+//           "/data/example/packages/second/contracts/C.hyp" in
 //             serverState.solFileIndex
 //         );
 //         assert(
-//           "/data/example/packages/second/contracts/D.sol" in
+//           "/data/example/packages/second/contracts/D.hyp" in
 //             serverState.solFileIndex
 //         );
 //         assert(
-//           "/data/example/packages/third/contracts/E.sol" in
+//           "/data/example/packages/third/contracts/E.hyp" in
 //             serverState.solFileIndex
 //         );
 //         assert(
-//           "/data/example/packages/third/contracts/F.sol" in
+//           "/data/example/packages/third/contracts/F.hyp" in
 //             serverState.solFileIndex
 //         );
 //       });
@@ -354,7 +354,7 @@
 //           "custom/indexing-file",
 //           {
 //             jobId: 1,
-//             path: "/data/example/packages/third/contracts/F.sol",
+//             path: "/data/example/packages/third/contracts/F.hyp",
 //             current: 6,
 //             total: 6,
 //           }
@@ -511,7 +511,7 @@
 //             "/data/example": ["/data/example/hardhat.config.ts"],
 //           },
 //           {
-//             "/data/example": ["/data/example/contracts/one.sol"],
+//             "/data/example": ["/data/example/contracts/one.hyp"],
 //           }
 //         );
 
@@ -566,7 +566,7 @@
 //           "custom/indexing-file",
 //           {
 //             jobId: 1,
-//             path: "/data/example/contracts/one.sol",
+//             path: "/data/example/contracts/one.hyp",
 //             current: 1,
 //             total: 1,
 //           }
@@ -599,7 +599,7 @@
 //             "/data/example": ["/data/example/hardhat.config.ts"],
 //           },
 //           {
-//             "/data/example": ["/data/example/contracts/one.sol"],
+//             "/data/example": ["/data/example/contracts/one.hyp"],
 //           }
 //         );
 
