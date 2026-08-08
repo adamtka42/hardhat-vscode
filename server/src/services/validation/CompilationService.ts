@@ -1,32 +1,29 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-var-requires */
 
-import { existsSync } from "fs";
-import { HardhatRuntimeEnvironment } from "hardhat/types";
-import path from "path";
 import { CompilationDetails } from "../../frameworks/base/CompilationDetails";
 import { Logger } from "../../utils/Logger";
 
+// hypc-js exposes the same wrapper API as solc-js
+interface HypcWrapper {
+  version(): string;
+  compile(input: string): string;
+}
+
 export class CompilationService {
+  private static _hypc: HypcWrapper | undefined;
+
   public static async compile(
-    {
-      cachedCompilerInfo,
-      logger,
-    }: {
-      cachedCompilerInfo: {
-        [solcVersion: string]: { isSolcJs: boolean; compilerPath: string };
-      };
-      logger: Logger;
-    },
+    { logger }: { logger: Logger },
     compilationDetails: CompilationDetails
   ): Promise<any> {
-    const hre = this._getHRE();
     const { input, solcVersion } = compilationDetails;
 
     // Empty outputSelection for faster compilation
     delete (input.settings as any).outputSelection;
 
     logger.trace(
-      `Solc Input: ${JSON.stringify(
+      `Hypc Input: ${JSON.stringify(
         {
           ...compilationDetails.input,
           sources: Object.keys(compilationDetails.input.sources),
@@ -36,37 +33,14 @@ export class CompilationService {
       )}`
     );
 
-    // Find or download solc compiler
-    let compilerPath: string;
-    let isSolcJs: boolean;
+    const hypc = this._getHypc();
 
-    if (cachedCompilerInfo[solcVersion] !== undefined) {
-      compilerPath = cachedCompilerInfo[solcVersion].compilerPath;
-      isSolcJs = cachedCompilerInfo[solcVersion].isSolcJs;
-    } else {
-      const solcBuild = await hre.run("compile:solidity:solc:get-build", {
-        solcVersion,
-        quiet: true,
-      });
-      compilerPath = solcBuild.compilerPath;
-      isSolcJs = solcBuild.isSolcJs;
+    logger.trace(
+      `Compiling with bundled hypc ${hypc.version()} (requested: ${solcVersion})`
+    );
 
-      cachedCompilerInfo[solcVersion] = { compilerPath, isSolcJs };
-    }
+    const output = JSON.parse(hypc.compile(JSON.stringify(input)));
 
-    // Compile
-    let output;
-    if (isSolcJs) {
-      output = await hre.run("compile:solidity:solcjs:run", {
-        input,
-        solcJsPath: compilerPath,
-      });
-    } else {
-      output = await hre.run("compile:solidity:solc:run", {
-        input,
-        solcPath: compilerPath,
-      });
-    }
     // Normalize errors' sourceLocation to use utf-8 offsets instead of byte offsets
     for (const error of output.errors || []) {
       const source = input.sources[error.sourceLocation?.file];
@@ -88,22 +62,13 @@ export class CompilationService {
     return output;
   }
 
-  // Workaround to load hardhat, since it requires a hardhat.config file to exist
-  private static _getHRE(): HardhatRuntimeEnvironment {
-    let directory = __dirname;
-    while (directory !== "/") {
-      const potentialConfigFiles = ["ts", "js"].map((ext) =>
-        path.join(directory, `hardhat.config.${ext}`)
-      );
-      for (const potentialConfigFile of potentialConfigFiles) {
-        if (existsSync(potentialConfigFile)) {
-          process.env.HARDHAT_CONFIG = potentialConfigFile;
-          return require("hardhat");
-        }
-      }
-      directory = path.dirname(directory);
+  // Lazy-load the WASM compiler: it is large and takes noticeable time to
+  // instantiate, so don't pay that cost on server startup.
+  private static _getHypc(): HypcWrapper {
+    if (this._hypc === undefined) {
+      this._hypc = require("@theqrl/hypc") as HypcWrapper;
     }
-    throw new Error(`Couldn't load bundled hardhat library`);
+    return this._hypc;
   }
 
   private static _normalizeOffset(text: string, offset: number) {
