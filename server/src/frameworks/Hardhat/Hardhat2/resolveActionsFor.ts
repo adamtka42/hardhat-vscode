@@ -31,7 +31,7 @@ export function resolveActionsFor(
     if (ast !== undefined) {
       const insertPosition = getImportInsertPosition(ast);
       codeActions.push({
-        title: "Add import from 'hardhat'",
+        title: "Add import from '@theqrl/hardhat'",
         kind: "quickfix",
         isPreferred: true,
         edit: {
@@ -39,7 +39,7 @@ export function resolveActionsFor(
             [uri]: [
               TextEdit.insert(
                 insertPosition,
-                'import "hardhat/console.sol";\n\n'
+                'import "@theqrl/hardhat/console.hyp";\n\n'
               ),
             ],
           },
