@@ -8,14 +8,22 @@ export class OutputConverter {
     solcOutput: any,
     projectBasePath: string
   ): ValidationResult {
-    if (solcOutput.errors?.length > 0) {
+    // Drop warning 3805 ("This is a pre-release compiler version") — the
+    // bundled hypc is a nightly build, so it would flag every single file.
+    const errors = (solcOutput.errors ?? []).filter(
+      (solcError: any) => solcError.errorCode !== "3805"
+    );
+
+    if (errors.length > 0) {
       const validationFailMessage: ValidationFail = {
         status: "VALIDATION_FAIL",
         projectBasePath,
         version: compilationDetails.solcVersion,
-        errors: solcOutput.errors.map((solcError: any) => ({
+        // Errors without a sourceLocation (e.g. standard JSON input errors)
+        // are passed through untouched
+        errors: errors.map((solcError: any) => ({
           ...solcError,
-          sourceLocation: {
+          sourceLocation: solcError.sourceLocation && {
             ...solcError.sourceLocation,
             file: normalizeSourceName(solcError.sourceLocation.file),
           },
