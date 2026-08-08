@@ -120,8 +120,6 @@ async function main() {
       "./tmp/out/extension": "./src/extension.ts",
       "./tmp/server/out/index":
         "../node_modules/@nomicfoundation/solidity-language-server/src/index.ts",
-      "./tmp/server/out/hardhat.config":
-        "../node_modules/@nomicfoundation/solidity-language-server/src/hardhat.config.ts",
       "./tmp/server/out/worker/WorkerProcess":
         "../node_modules/@nomicfoundation/solidity-language-server/src/frameworks/Hardhat/Hardhat2/worker/WorkerProcess.ts",
       "./tmp/server/out/ConfigLoader":
@@ -134,6 +132,7 @@ async function main() {
     external: [
       "vscode",
       "@nomicfoundation/slang",
+      "@theqrl/hypc",
       "fsevents",
       "mocha",
     ],
@@ -175,6 +174,16 @@ async function main() {
   }
   const slangVersion = serverDeps["@nomicfoundation/slang"];
 
+  // The bundled hypc compiler ships as a vendored tarball (see server/vendor)
+  // and is marked external for esbuild, so install it next to slang
+  const hypcSpec = serverDeps["@theqrl/hypc"];
+  const hypcTarballPath = path.resolve(
+    path.dirname(serverPackageFile),
+    hypcSpec.replace(/^file:/, "")
+  );
+  const hypcTarballName = path.basename(hypcTarballPath);
+  fs.copyFileSync(hypcTarballPath, path.join(serverDir, hypcTarballName));
+
   fs.writeFileSync(
     path.join(serverDir, "package.json"),
     JSON.stringify({
@@ -182,6 +191,7 @@ async function main() {
       version: "0.0.1",
       dependencies: {
         "@nomicfoundation/slang": slangVersion,
+        "@theqrl/hypc": `file:./${hypcTarballName}`,
       },
     })
   );
@@ -208,6 +218,7 @@ async function main() {
   });
 
   fs.unlinkSync(path.join(serverDir, "package.json"));
+  fs.unlinkSync(path.join(serverDir, hypcTarballName));
 }
 
 main();
