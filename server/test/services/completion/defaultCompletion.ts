@@ -22,4 +22,11 @@ describe("defaultCompletion", () => {
       assert.notInclude(labels, label);
     }
   });
+
+  it("includes hyperion globals and drops removed solidity ones", () => {
+    assert.include(labels, "depositroot");
+    for (const label of ["ecrecover", "ripemd160", "selfdestruct"]) {
+      assert.notInclude(labels, label);
+    }
+  });
 });

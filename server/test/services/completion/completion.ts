@@ -126,7 +126,7 @@ describe("Parser", () => {
           completion,
           globalVariablesUri,
           { line: 5, character: 19 },
-          ["data", "sender", "sig", "value"]
+          ["data", "gas", "sender", "sig", "value"]
         ));
 
       it("should provide block completions", () =>
@@ -135,11 +135,13 @@ describe("Parser", () => {
           globalVariablesUri,
           { line: 9, character: 21 },
           [
+            "basefee",
+            "blockhash",
             "chainid",
             "coinbase",
-            "difficulty",
             "gaslimit",
             "number",
+            "prevrandao",
             "timestamp",
           ]
         ));

@@ -66,16 +66,16 @@ const reservedKeywords = [
 ];
 const statements = ["assert", "revert", "require"];
 
+// Globals as defined by the hyperion compiler (GlobalContext.cpp): no
+// ecrecover/ripemd160/selfdestruct in QRL, depositroot added.
 const globalFunctions = [
   "gasleft",
   "blockhash",
   "keccak256",
   "sha256",
-  "ripemd160",
-  "ecrecover",
+  "depositroot",
   "addmod",
   "mulmod",
-  "selfdestruct",
 ];
 
 interface GlobalVariablesType {
@@ -92,11 +92,13 @@ export const globalVariables: GlobalVariablesType = {
   ],
   bytes: ["concat"],
   block: [
+    "basefee",
+    "blockhash",
     "chainid",
     "coinbase",
-    "difficulty",
     "gaslimit",
     "number",
+    "prevrandao",
     "timestamp",
   ],
   // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -108,7 +110,7 @@ export const globalVariables: GlobalVariablesType = {
     "delegatecall",
     "staticcall",
   ],
-  msg: ["data", "sender", "sig", "value"],
+  msg: ["data", "gas", "sender", "sig", "value"],
   tx: ["gasprice", "origin"],
 };
 
