@@ -16,7 +16,6 @@ const tmpDir = "./tmp";
 const serverDir = path.join(tmpDir, "./server");
 const serverOutDir = path.join(tmpDir, "./server/out");
 const serverAntlrDir = path.join(serverOutDir, "antlr");
-const serverWorkerDir = path.join(serverOutDir, "worker");
 
 const clientDir = path.join(tmpDir);
 const clientOutDir = path.join(clientDir, "./out");
@@ -59,7 +58,6 @@ async function main() {
   ensureDirExists(serverDir);
   ensureDirExists(serverOutDir);
   ensureDirExists(serverAntlrDir);
-  ensureDirExists(serverWorkerDir);
   // Client
   ensureDirExists(clientDir);
   ensureDirExists(clientOutDir);
@@ -120,10 +118,6 @@ async function main() {
       "./tmp/out/extension": "./src/extension.ts",
       "./tmp/server/out/index":
         "../node_modules/@nomicfoundation/solidity-language-server/src/index.ts",
-      "./tmp/server/out/worker/WorkerProcess":
-        "../node_modules/@nomicfoundation/solidity-language-server/src/frameworks/Hardhat/Hardhat2/worker/WorkerProcess.ts",
-      "./tmp/server/out/ConfigLoader":
-        "../node_modules/@nomicfoundation/solidity-language-server/src/frameworks/Truffle/ConfigLoader.ts",
     },
     bundle: true,
     minifyWhitespace: false,

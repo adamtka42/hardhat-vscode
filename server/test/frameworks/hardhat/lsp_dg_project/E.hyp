@@ -1,8 +1,0 @@
-// SPDX-License-Identifier: UNLICENSED
-pragma hyperion ^0.8.28;
-
-import "./G.hyp";
-
-contract E {
-    I i;
-}

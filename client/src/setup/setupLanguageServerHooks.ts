@@ -51,7 +51,6 @@ const startLanguageServer = async (
     synchronize: {
       fileEvents: [
         workspace.createFileSystemWatcher("**/hardhat.config.{ts,js}"),
-        workspace.createFileSystemWatcher("**/remappings.txt"),
         workspace.createFileSystemWatcher("**/*.hyp"),
       ],
     },

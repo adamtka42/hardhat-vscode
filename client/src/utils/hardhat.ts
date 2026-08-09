@@ -1,6 +1,6 @@
 export function isHardhatInstalled(configPath: string): boolean {
   try {
-    require.resolve("hardhat", { paths: [configPath] });
+    require.resolve("@theqrl/hardhat", { paths: [configPath] });
     return true;
   } catch (e) {
     return false;
@@ -9,7 +9,7 @@ export function isHardhatInstalled(configPath: string): boolean {
 
 export function getHardhatCLIPath(configPath: string): string {
   try {
-    return require.resolve("hardhat/internal/cli/cli", {
+    return require.resolve("@theqrl/hardhat/internal/cli/cli", {
       paths: [configPath],
     });
   } catch (e) {

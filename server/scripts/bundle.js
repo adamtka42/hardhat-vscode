@@ -59,9 +59,6 @@ async function main() {
   const { warnings, errors } = await esbuild.build({
     entryPoints: {
       "./out/index": "./src/index.ts",
-      "./out/worker/WorkerProcess":
-        "./src/frameworks/Hardhat/Hardhat2/worker/WorkerProcess.ts",
-      "./out/ConfigLoader": "./src/frameworks/Truffle/ConfigLoader.ts",
     },
     bundle: true,
     minifyWhitespace: false,
