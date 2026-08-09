@@ -47,5 +47,8 @@ export class OutputConverter {
 }
 
 export function normalizeSourceName(internalSourceName: string) {
-  return internalSourceName.replace("project/", "");
+  // Only strip the HH2 worker's leading "project/" prefix — projectless
+  // source names are absolute paths that may contain "project/" anywhere
+  // (e.g. /home/user/my-project/contracts/A.hyp) and must stay untouched
+  return internalSourceName.replace(/^project\//, "");
 }
