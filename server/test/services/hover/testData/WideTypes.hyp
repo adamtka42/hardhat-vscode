@@ -1,0 +1,14 @@
+// SPDX-License-Identifier: GPL-3.0
+pragma hyperion >=0.8.2 <0.9.0;
+
+contract WideTypesTest {
+  uint512 public wideUint;
+  bytes64 public wideBytes;
+
+  function useWide() public view returns (uint512) {
+    uint512 localWide = wideUint;
+    bytes64 localBlob = wideBytes;
+    bytes64 copyBlob = localBlob;
+    return localWide;
+  }
+}
