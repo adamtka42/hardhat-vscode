@@ -117,7 +117,7 @@ async function main() {
     entryPoints: {
       "./tmp/out/extension": "./src/extension.ts",
       "./tmp/server/out/index":
-        "../node_modules/@nomicfoundation/solidity-language-server/src/index.ts",
+        "../node_modules/@theqrl/hyperion-language-server/src/index.ts",
     },
     bundle: true,
     minifyWhitespace: false,

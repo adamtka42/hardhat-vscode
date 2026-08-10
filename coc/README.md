@@ -1,25 +1,29 @@
-# coc-solidity
+# coc-hyperion
 
-Solidity language server extension for coc.nvim, leveraging the language server used in the [Solidity by Nomic Foundation](https://marketplace.visualstudio.com/items?itemName=NomicFoundation.hardhat-solidity) VS Code extension.
-
-Built by the [Nomic Foundation](https://nomic.foundation/) for the Ethereum community.
-
-Join our [Hardhat Support Discord server](https://hardhat.org/discord) to stay up to date on new releases, plugins and tutorials.
+Hyperion language server extension for coc.nvim, leveraging the language server used in the Hyperion VS Code extension for [QRL](https://www.theqrl.org/) Zond smart contracts.
 
 ## Install
 
 In your vim/neovim, run this command:
 
 ```sh
-:CocInstall @nomicfoundation/coc-solidity
+:CocInstall @theqrl/coc-hyperion
+```
+
+## Filetype detection
+
+Vim does not know the `.hyp` extension out of the box. Add this to your `init.vim`/`.vimrc` so Hyperion files get the right filetype:
+
+```vim
+autocmd BufRead,BufNewFile *.hyp setfiletype hyperion
 ```
 
 ## Configure
 
 In your coc-settings.json, the following settings are supported:
 
-- `"@nomicfoundation/coc-solidity.telemetry": true|false`
-- `"@nomicfoundation/coc-solidity.formatter": "prettier"|"forge"|"none"`
+- `"@theqrl/coc-hyperion.telemetry": true|false`
+- `"@theqrl/coc-hyperion.formatter": "prettier"|"none"`
 
 ## Features
 
@@ -214,16 +218,8 @@ If you encounter an issue with the plugin, you can inspect the server logs by ru
 
 ## Restarting the server
 
-Sometimes, e.g. when installing node dependencies or switching branches, the language server may not pick up all the file system changes. If you are facing an issue, try running `:CocRestart`, which will in turn restart the solidity language server.
+Sometimes, e.g. when installing node dependencies or switching branches, the language server may not pick up all the file system changes. If you are facing an issue, try running `:CocRestart`, which will in turn restart the hyperion language server.
 
 ## Contributing
 
-Contributions are always welcome! Feel free to [open any issue](https://github.com/NomicFoundation/hardhat-vscode/issues) or send a pull request.
-
-Go to [CONTRIBUTING.md](https://github.com/nomicfoundation/hardhat-vscode/blob/main/CONTRIBUTING.md) to learn about how to set up a development environment.
-
-## Feedback, help and news
-
-[Hardhat Support Discord server](https://hardhat.org/discord): for questions and feedback.
-
-[Follow Hardhat on Twitter.](https://twitter.com/HardhatHQ)
+Contributions are always welcome! Feel free to [open any issue](https://github.com/theQRL/hardhat-vscode-qrl/issues) or send a pull request.

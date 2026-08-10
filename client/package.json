@@ -61,7 +61,7 @@
     "prettier": "2.5.1"
   },
   "dependencies": {
-    "@nomicfoundation/solidity-language-server": "0.8.29",
+    "@theqrl/hyperion-language-server": "0.8.29",
     "@sentry/node": "9.6.1",
     "vscode-languageclient": "9.0.1"
   },

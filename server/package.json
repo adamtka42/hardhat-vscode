@@ -1,17 +1,18 @@
 {
-  "name": "@nomicfoundation/solidity-language-server",
-  "description": "Solidity language server by Nomic Foundation",
+  "name": "@theqrl/hyperion-language-server",
+  "description": "Hyperion language server for QRL/Zond",
   "license": "MIT",
   "version": "0.8.29",
-  "author": "Nomic Foundation",
+  "author": "The QRL contributors",
   "repository": {
     "type": "git",
-    "url": "https://github.com/NomicFoundation/hardhat-vscode"
+    "url": "https://github.com/theQRL/hardhat-vscode-qrl"
   },
   "keywords": [
     "language server",
-    "solidity",
-    "ethereum",
+    "hyperion",
+    "qrl",
+    "zond",
     "hardhat"
   ],
   "type": "commonjs",
@@ -21,7 +22,7 @@
     "out/"
   ],
   "bin": {
-    "nomicfoundation-solidity-language-server": "./out/index.js"
+    "hyperion-language-server": "./out/index.js"
   },
   "engines": {
     "node": ">=20.9.0"
@@ -42,7 +43,6 @@
   },
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "1.0.2",
-    "@nomicfoundation/hardhat3-errors": "npm:@nomicfoundation/hardhat-errors@3.0.0-next.24",
     "@sentry/core": "9.6.1",
     "@sentry/node": "9.6.1",
     "@solidity-parser/parser": "^0.20.2",
