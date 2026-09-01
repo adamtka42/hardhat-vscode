@@ -83,7 +83,7 @@ export const onInitialize = (serverState: ServerState) => {
         hoverProvider: true,
         documentFormattingProvider: true,
         // semanticTokensProvider and documentSymbolProvider are not
-        // advertised: both are implemented on top of @nomicfoundation/slang,
+        // advertised: both are implemented on top of @theqrl/slang,
         // which only understands the Solidity grammar and version list, so
         // they are disabled until a hyperion-aware replacement exists.
         workspace: {

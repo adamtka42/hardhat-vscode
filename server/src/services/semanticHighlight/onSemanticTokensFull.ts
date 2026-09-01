@@ -77,7 +77,7 @@ export function onSemanticTokensFull(serverState: ServerState) {
 
         const resolvedVersion = await resolveVersion(logger, versionPragmas);
 
-        const { Parser } = await import("@nomicfoundation/slang/parser");
+        const { Parser } = await import("@theqrl/slang/parser");
         const parser = Parser.create(resolvedVersion);
         // Parse using slang
         const parseOutput = startSpan({ name: "slang-parsing" }, () =>

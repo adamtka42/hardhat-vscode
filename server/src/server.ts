@@ -99,7 +99,7 @@ function attachLanguageServerCommandHooks(serverState: ServerState) {
   connection.onHover(onHover(serverState));
   connection.onDocumentFormatting(onDocumentFormatting(serverState));
   // documentSymbol and semanticTokens handlers are not registered — they
-  // depend on @nomicfoundation/slang (Solidity-only grammar) and their
+  // depend on @theqrl/slang (Solidity-only grammar) and their
   // capabilities are not advertised in onInitialize.
 }
 

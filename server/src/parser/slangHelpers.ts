@@ -4,7 +4,7 @@ import semver from "semver";
 import type {
   TextIndex,
   TextRange,
-} from "@nomicfoundation/slang/cst" with { "resolution-mode": "import" };
+} from "@theqrl/slang/cst" with { "resolution-mode": "import" };
 import { Logger } from "../utils/Logger";
 
 export function slangToVSCodeRange(range: TextRange): Range {
@@ -25,7 +25,7 @@ export async function resolveVersion(
   logger: Logger,
   versionPragmas: string[]
 ): Promise<string> {
-  const { LanguageFacts } = await import("@nomicfoundation/slang/utils");
+  const { LanguageFacts } = await import("@theqrl/slang/utils");
   const versions = LanguageFacts.allVersions();
 
   const slangVersion = semver.maxSatisfying(versions, versionPragmas.join(" "));

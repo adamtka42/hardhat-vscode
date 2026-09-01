@@ -86,8 +86,8 @@
     "yaml": "^2.2.1"
   },
   "dependencies": {
-    "@nomicfoundation/slang": "1.0.0",
     "@theqrl/hypc": "file:./vendor/theqrl-hypc-0.2.0-64b.0.tgz",
+    "@theqrl/slang": "file:./vendor/theqrl-slang-1.3.8.tgz",
     "es-iterator-helpers": "^1.2.1"
   }
 }

@@ -63,8 +63,8 @@ export function onDocumentSymbol(serverState: ServerState) {
   return async (
     params: DocumentSymbolParams
   ): Promise<DocumentSymbol[] | SymbolInformation[] | null> => {
-    const { Parser } = await import("@nomicfoundation/slang/parser");
-    const { NonterminalKind } = await import("@nomicfoundation/slang/cst");
+    const { Parser } = await import("@theqrl/slang/parser");
+    const { NonterminalKind } = await import("@theqrl/slang/cst");
 
     const { telemetry, logger } = serverState;
     return telemetry.trackTiming("onDocumentSymbol", async () => {

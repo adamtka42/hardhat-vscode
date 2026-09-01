@@ -2,7 +2,7 @@ import { SemanticTokenTypes } from "vscode-languageserver-types";
 import type {
   Query,
   QueryMatch,
-} from "@nomicfoundation/slang/cst" with { "resolution-mode": "import" };
+} from "@theqrl/slang/cst" with { "resolution-mode": "import" };
 import { SemanticTokensBuilder } from "./SemanticTokensBuilder";
 
 // Abstraction for a visitor that wants to highlight tokens
