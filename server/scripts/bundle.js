@@ -65,7 +65,7 @@ async function main() {
     minifyIdentifiers: false,
     minifySyntax: false,
     external: [
-      "@nomicfoundation/slang",
+      "@theqrl/slang",
       "fsevents",
       "mocha",
     ],

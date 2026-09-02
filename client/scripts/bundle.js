@@ -125,8 +125,8 @@ async function main() {
     minifySyntax: false,
     external: [
       "vscode",
-      "@nomicfoundation/slang",
       "@theqrl/hypc",
+      "@theqrl/slang",
       "fsevents",
       "mocha",
     ],
@@ -166,27 +166,29 @@ async function main() {
     console.error("Error: Could not find server dependencies");
     process.exit(1);
   }
-  const slangVersion = serverDeps["@nomicfoundation/slang"];
-
-  // The bundled hypc compiler ships as a vendored tarball (see server/vendor)
-  // and is marked external for esbuild, so install it next to slang
-  const hypcSpec = serverDeps["@theqrl/hypc"];
-  const hypcTarballPath = path.resolve(
-    path.dirname(serverPackageFile),
-    hypcSpec.replace(/^file:/, "")
-  );
-  const hypcTarballName = path.basename(hypcTarballPath);
-  fs.copyFileSync(hypcTarballPath, path.join(serverDir, hypcTarballName));
+  // The bundled hypc compiler and the hyperion slang ship as vendored
+  // tarballs (see server/vendor) and are marked external for esbuild,
+  // so install them into the packaged server
+  const dependencies = {};
+  const tarballNames = [];
+  for (const depName of ["@theqrl/hypc", "@theqrl/slang"]) {
+    const spec = serverDeps[depName];
+    const tarballPath = path.resolve(
+      path.dirname(serverPackageFile),
+      spec.replace(/^file:/, "")
+    );
+    const tarballName = path.basename(tarballPath);
+    fs.copyFileSync(tarballPath, path.join(serverDir, tarballName));
+    dependencies[depName] = `file:./${tarballName}`;
+    tarballNames.push(tarballName);
+  }
 
   fs.writeFileSync(
     path.join(serverDir, "package.json"),
     JSON.stringify({
       name: "tmp",
       version: "0.0.1",
-      dependencies: {
-        "@nomicfoundation/slang": slangVersion,
-        "@theqrl/hypc": `file:./${hypcTarballName}`,
-      },
+      dependencies,
     })
   );
 
@@ -212,7 +214,9 @@ async function main() {
   });
 
   fs.unlinkSync(path.join(serverDir, "package.json"));
-  fs.unlinkSync(path.join(serverDir, hypcTarballName));
+  for (const tarballName of tarballNames) {
+    fs.unlinkSync(path.join(serverDir, tarballName));
+  }
 }
 
 main();
