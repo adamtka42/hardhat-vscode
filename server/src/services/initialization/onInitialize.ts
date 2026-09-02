@@ -4,6 +4,7 @@ import {
   InitializeResult,
   WorkspaceFolder,
 } from "vscode-languageserver/node";
+import { tokensTypes } from "../semanticHighlight/tokenTypes";
 import { ServerState } from "../../types";
 import { OK } from "../../telemetry/TelemetryStatus";
 import { indexWorkspaceFolders } from "./indexWorkspaceFolders";
@@ -82,10 +83,15 @@ export const onInitialize = (serverState: ServerState) => {
         codeActionProvider: true,
         hoverProvider: true,
         documentFormattingProvider: true,
-        // semanticTokensProvider and documentSymbolProvider are not
-        // advertised: both are implemented on top of @theqrl/slang,
-        // which only understands the Solidity grammar and version list, so
-        // they are disabled until a hyperion-aware replacement exists.
+        semanticTokensProvider: {
+          legend: {
+            tokenTypes: tokensTypes,
+            tokenModifiers: [],
+          },
+          range: false,
+          full: true,
+        },
+        documentSymbolProvider: true,
         workspace: {
           workspaceFolders: {
             supported: false,

@@ -29,7 +29,6 @@ import { ModifierDefinition } from "./finders/ModifierDefinition";
 import { ReceiveFunctionDefinition } from "./finders/ReceiveFunctionDefinition";
 import { UserDefinedValueTypeDefinition } from "./finders/UserDefinedValueTypeDefinition";
 import { YulFunctionDefinition } from "./finders/YulFunctionDefinition";
-import { UnnamedFunctionDefinition } from "./finders/UnnamedFunctionDefinition";
 import { VariableDeclarationStatement } from "./finders/VariableDeclarationStatement";
 
 export function createFinders(): SymbolFinder[] {
@@ -52,7 +51,8 @@ export function createFinders(): SymbolFinder[] {
     new ReceiveFunctionDefinition(),
     new UserDefinedValueTypeDefinition(),
     new YulFunctionDefinition(),
-    new UnnamedFunctionDefinition(),
+    // UnnamedFunctionDefinition is not registered: the pre-0.5 `function()`
+    // syntax was removed from the Hyperion grammar, so the kind does not exist
   ];
 }
 
