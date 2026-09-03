@@ -67,8 +67,8 @@ jobs:
 
       - name: Package the extension
         env:
-          SOLIDITY_GA_SECRET: "dummy-value"
-          SOLIDITY_GOOGLE_TRACKING_ID: "dummy-value"
-          SOLIDITY_SENTRY_DSN: "dummy-value"
+          HYPERION_GA_SECRET: "dummy-value"
+          HYPERION_GOOGLE_TRACKING_ID: "dummy-value"
+          HYPERION_SENTRY_DSN: "dummy-value"
         run: npm run package
 

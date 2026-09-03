@@ -24,9 +24,9 @@ async function main() {
   const definedConstants = {};
 
   for (const key of [
-    "SOLIDITY_GA_SECRET",
-    "SOLIDITY_GOOGLE_TRACKING_ID",
-    "SOLIDITY_SENTRY_DSN",
+    "HYPERION_GA_SECRET",
+    "HYPERION_GOOGLE_TRACKING_ID",
+    "HYPERION_SENTRY_DSN",
   ]) {
     const value = process.env[key];
     if (!value || value === "") {
