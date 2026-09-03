@@ -16,7 +16,7 @@ export function run(): Promise<void> {
         // Wait until extension is fully initialized (index + analysis + validation ready)
         while (
           vscode.extensions
-            .getExtension("nomicfoundation.hardhat-solidity")
+            .getExtension("theqrl.hardhat-hyperion")
             ?.exports.isReady() !== true
         ) {
           await sleep(100);
