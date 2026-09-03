@@ -23,7 +23,7 @@ export function onDocumentFormatting(serverState: ServerState) {
     return telemetry.trackTiming(
       "onDocumentFormatting",
       async (): Promise<TrackingResult<OnDocumentFormattingResult>> => {
-        const formatter = serverState.extensionConfig.formatter ?? "none";
+        const formatter = serverState.extensionConfig.formatter ?? "prettier";
         const uri = params.textDocument.uri;
         const document = serverState.documents.get(uri);
 

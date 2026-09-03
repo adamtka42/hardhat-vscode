@@ -91,7 +91,7 @@
         },
         "hyperion.formatter": {
           "type": "string",
-          "default": "none",
+          "default": "prettier",
           "enum": [
             "none",
             "prettier"
