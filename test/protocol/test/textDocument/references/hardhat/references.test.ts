@@ -24,10 +24,10 @@ describe('[hardhat] references', () => {
   before(async () => {
     client = await getInitializedClient()
 
-    testPath = getProjectPath('hardhat/contracts/references/Test.sol')
-    importedPath = getProjectPath('hardhat/contracts/references/Imported.sol')
-    modifierInvocationPath = getProjectPath('hardhat/contracts/references/ModifierInvocation.sol')
-    fooPath = getProjectPath('hardhat/contracts/references/Foo.sol')
+    testPath = getProjectPath('hardhat/contracts/references/Test.hyp')
+    importedPath = getProjectPath('hardhat/contracts/references/Imported.hyp')
+    modifierInvocationPath = getProjectPath('hardhat/contracts/references/ModifierInvocation.hyp')
+    fooPath = getProjectPath('hardhat/contracts/references/Foo.hyp')
 
     await client.openDocument(testPath)
     await client.openDocument(importedPath)
@@ -67,7 +67,7 @@ describe('[hardhat] references', () => {
         range: makeRange(11, 6, 11, 25),
       },
       {
-        uri: toUri(getProjectPath('hardhat/contracts/references/ImportTest.sol')),
+        uri: toUri(getProjectPath('hardhat/contracts/references/ImportTest.hyp')),
         range: makeRange(12, 19, 12, 38),
       },
       {
@@ -86,7 +86,7 @@ describe('[hardhat] references', () => {
         range: makeRange(11, 34, 11, 41),
       },
       {
-        uri: toUri(getProjectPath('hardhat/contracts/references/ImportTest.sol')),
+        uri: toUri(getProjectPath('hardhat/contracts/references/ImportTest.hyp')),
         range: makeRange(13, 16, 13, 23),
       },
       {
@@ -165,11 +165,11 @@ describe('[hardhat] references', () => {
         range: makeRange(6, 18, 6, 22),
       },
       {
-        uri: toUri(getProjectPath('hardhat/contracts/references/MultiImport.sol')),
+        uri: toUri(getProjectPath('hardhat/contracts/references/MultiImport.hyp')),
         range: makeRange(13, 19, 13, 23),
       },
       {
-        uri: toUri(getProjectPath('hardhat/contracts/references/MultiImport.sol')),
+        uri: toUri(getProjectPath('hardhat/contracts/references/MultiImport.hyp')),
         range: makeRange(17, 40, 17, 44),
       },
     ])

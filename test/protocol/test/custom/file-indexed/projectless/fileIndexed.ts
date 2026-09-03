@@ -11,7 +11,7 @@ describe('[projectless] custom/file-indexed', () => {
   })
 
   test('after initialization, a notification is received with the indexed file uri and project', async () => {
-    const contractPath = toUnixStyle(getProjectPath('projectless/src/codeAction/NoLicense.sol'))
+    const contractPath = toUnixStyle(getProjectPath('projectless/src/codeAction/NoLicense.hyp'))
 
     const expectedData = {
       uri: contractPath,

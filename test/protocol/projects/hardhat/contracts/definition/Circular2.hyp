@@ -1,0 +1,8 @@
+// SPDX-License-Identifier: GPL-3.0
+pragma hyperion >=0.1.0;
+
+import "./Circular1.hyp";
+
+contract Circular2 {
+  Circular1 c1;
+}

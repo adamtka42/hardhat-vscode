@@ -17,7 +17,7 @@ describe('[hardhat][codeAction]', () => {
   })
 
   test('add license identifier', async () => {
-    const documentPath = getProjectPath('hardhat/contracts/codeAction/NoLicense.sol')
+    const documentPath = getProjectPath('hardhat/contracts/codeAction/NoLicense.hyp')
     const documentUri = toUri(documentPath)
 
     await client.openDocument(documentPath)
@@ -33,7 +33,7 @@ describe('[hardhat][codeAction]', () => {
         isPreferred: false,
         edit: {
           changes: {
-            [toUri(getProjectPath('hardhat/contracts/codeAction/NoLicense.sol'))]: [
+            [toUri(getProjectPath('hardhat/contracts/codeAction/NoLicense.hyp'))]: [
               {
                 range: {
                   start: {
@@ -57,7 +57,7 @@ describe('[hardhat][codeAction]', () => {
         isPreferred: false,
         edit: {
           changes: {
-            [toUri(getProjectPath('hardhat/contracts/codeAction/NoLicense.sol'))]: [
+            [toUri(getProjectPath('hardhat/contracts/codeAction/NoLicense.hyp'))]: [
               {
                 range: {
                   start: {
@@ -81,7 +81,7 @@ describe('[hardhat][codeAction]', () => {
         isPreferred: false,
         edit: {
           changes: {
-            [toUri(getProjectPath('hardhat/contracts/codeAction/NoLicense.sol'))]: [
+            [toUri(getProjectPath('hardhat/contracts/codeAction/NoLicense.hyp'))]: [
               {
                 range: {
                   start: {
@@ -105,7 +105,7 @@ describe('[hardhat][codeAction]', () => {
         isPreferred: false,
         edit: {
           changes: {
-            [toUri(getProjectPath('hardhat/contracts/codeAction/NoLicense.sol'))]: [
+            [toUri(getProjectPath('hardhat/contracts/codeAction/NoLicense.hyp'))]: [
               {
                 range: {
                   start: {
@@ -129,7 +129,7 @@ describe('[hardhat][codeAction]', () => {
   })
 
   test('add multi override specifier', async () => {
-    const documentPath = getProjectPath('hardhat/contracts/codeAction/AddMultioverrideSpecifier.sol')
+    const documentPath = getProjectPath('hardhat/contracts/codeAction/AddMultioverrideSpecifier.hyp')
     const documentUri = toUri(documentPath)
 
     await client.openDocument(documentPath)
@@ -148,7 +148,7 @@ describe('[hardhat][codeAction]', () => {
         isPreferred: true,
         edit: {
           changes: {
-            [toUri(getProjectPath('hardhat/contracts/codeAction/AddMultioverrideSpecifier.sol'))]: [
+            [toUri(getProjectPath('hardhat/contracts/codeAction/AddMultioverrideSpecifier.hyp'))]: [
               {
                 newText: ' override(Alpha, Gamma)',
                 range: {
@@ -184,7 +184,7 @@ describe('[hardhat][codeAction]', () => {
         isPreferred: true,
         edit: {
           changes: {
-            [toUri(getProjectPath('hardhat/contracts/codeAction/AddMultioverrideSpecifier.sol'))]: [
+            [toUri(getProjectPath('hardhat/contracts/codeAction/AddMultioverrideSpecifier.hyp'))]: [
               {
                 range: {
                   start: {
@@ -208,7 +208,7 @@ describe('[hardhat][codeAction]', () => {
   })
 
   test('add override specifier', async () => {
-    const documentPath = getProjectPath('hardhat/contracts/codeAction/AddOverrideSpecifier.sol')
+    const documentPath = getProjectPath('hardhat/contracts/codeAction/AddOverrideSpecifier.hyp')
     const documentUri = toUri(documentPath)
 
     await client.openDocument(documentPath)
@@ -226,7 +226,7 @@ describe('[hardhat][codeAction]', () => {
         isPreferred: true,
         edit: {
           changes: {
-            [toUri(getProjectPath('hardhat/contracts/codeAction/AddOverrideSpecifier.sol'))]: [
+            [toUri(getProjectPath('hardhat/contracts/codeAction/AddOverrideSpecifier.hyp'))]: [
               {
                 newText: '    override\n',
                 range: {
@@ -249,50 +249,8 @@ describe('[hardhat][codeAction]', () => {
     expect(codeActions).to.have.deep.members(expected)
   })
 
-  test('add pragma version', async () => {
-    const documentPath = getProjectPath('hardhat/contracts/codeAction/NoPragma.sol')
-    const documentUri = toUri(documentPath)
-
-    await client.openDocument(documentPath)
-
-    const diagnostic = await client.getDiagnostic(documentPath, {
-      range: makeRange(0, 0, 0, 0),
-    })
-
-    const codeActions = await client.getCodeActions(documentUri, diagnostic)
-
-    const expected = [
-      {
-        title: 'Add version specification',
-        kind: 'quickfix',
-        isPreferred: true,
-        edit: {
-          changes: {
-            [toUri(getProjectPath('hardhat/contracts/codeAction/NoPragma.sol'))]: [
-              {
-                range: {
-                  start: {
-                    character: 0,
-                    line: 1,
-                  },
-                  end: {
-                    character: 0,
-                    line: 1,
-                  },
-                },
-                newText: 'pragma solidity ^0.8.8;\n',
-              },
-            ],
-          },
-        },
-      },
-    ]
-
-    expect(codeActions).to.have.deep.members(expected)
-  })
-
   test('add virtual specifier', async () => {
-    const documentPath = getProjectPath('hardhat/contracts/codeAction/AddVirtualSpecifier.sol')
+    const documentPath = getProjectPath('hardhat/contracts/codeAction/AddVirtualSpecifier.hyp')
     const documentUri = toUri(documentPath)
 
     await client.openDocument(documentPath)
@@ -310,7 +268,7 @@ describe('[hardhat][codeAction]', () => {
         isPreferred: true,
         edit: {
           changes: {
-            [toUri(getProjectPath('hardhat/contracts/codeAction/AddVirtualSpecifier.sol'))]: [
+            [toUri(getProjectPath('hardhat/contracts/codeAction/AddVirtualSpecifier.hyp'))]: [
               {
                 newText: ' virtual',
                 range: {
@@ -334,7 +292,7 @@ describe('[hardhat][codeAction]', () => {
   })
 
   test('constrain mutability - view', async () => {
-    const documentPath = getProjectPath('hardhat/contracts/codeAction/ConstrainMutabilityView.sol')
+    const documentPath = getProjectPath('hardhat/contracts/codeAction/ConstrainMutabilityView.hyp')
     const documentUri = toUri(documentPath)
 
     await client.openDocument(documentPath)
@@ -352,7 +310,7 @@ describe('[hardhat][codeAction]', () => {
         isPreferred: true,
         edit: {
           changes: {
-            [toUri(getProjectPath('hardhat/contracts/codeAction/ConstrainMutabilityView.sol'))]: [
+            [toUri(getProjectPath('hardhat/contracts/codeAction/ConstrainMutabilityView.hyp'))]: [
               {
                 range: {
                   start: {
@@ -376,7 +334,7 @@ describe('[hardhat][codeAction]', () => {
   })
 
   test('constrain mutability - pure', async () => {
-    const documentPath = getProjectPath('hardhat/contracts/codeAction/ConstrainMutabilityPure.sol')
+    const documentPath = getProjectPath('hardhat/contracts/codeAction/ConstrainMutabilityPure.hyp')
     const documentUri = toUri(documentPath)
 
     await client.openDocument(documentPath)
@@ -394,7 +352,7 @@ describe('[hardhat][codeAction]', () => {
         isPreferred: true,
         edit: {
           changes: {
-            [toUri(getProjectPath('hardhat/contracts/codeAction/ConstrainMutabilityPure.sol'))]: [
+            [toUri(getProjectPath('hardhat/contracts/codeAction/ConstrainMutabilityPure.hyp'))]: [
               {
                 range: {
                   start: {
@@ -418,7 +376,7 @@ describe('[hardhat][codeAction]', () => {
   })
 
   test('constrain mutability - modify to pure', async () => {
-    const documentPath = getProjectPath('hardhat/contracts/codeAction/ConstrainMutabilityModifyToPure.sol')
+    const documentPath = getProjectPath('hardhat/contracts/codeAction/ConstrainMutabilityModifyToPure.hyp')
     const documentUri = toUri(documentPath)
 
     await client.openDocument(documentPath)
@@ -436,7 +394,7 @@ describe('[hardhat][codeAction]', () => {
         isPreferred: true,
         edit: {
           changes: {
-            [toUri(getProjectPath('hardhat/contracts/codeAction/ConstrainMutabilityModifyToPure.sol'))]: [
+            [toUri(getProjectPath('hardhat/contracts/codeAction/ConstrainMutabilityModifyToPure.hyp'))]: [
               {
                 range: {
                   start: {
@@ -460,7 +418,7 @@ describe('[hardhat][codeAction]', () => {
   })
 
   test('mark contract as abstract or implement interface', async () => {
-    const documentPath = getProjectPath('hardhat/contracts/codeAction/MarkAbstract.sol')
+    const documentPath = getProjectPath('hardhat/contracts/codeAction/MarkAbstract.hyp')
     const documentUri = toUri(documentPath)
 
     await client.openDocument(documentPath)
@@ -478,7 +436,7 @@ describe('[hardhat][codeAction]', () => {
         isPreferred: false,
         edit: {
           changes: {
-            [toUri(getProjectPath('hardhat/contracts/codeAction/MarkAbstract.sol'))]: [
+            [toUri(getProjectPath('hardhat/contracts/codeAction/MarkAbstract.hyp'))]: [
               {
                 range: {
                   start: {
@@ -502,7 +460,7 @@ describe('[hardhat][codeAction]', () => {
         isPreferred: false,
         edit: {
           changes: {
-            [toUri(getProjectPath('hardhat/contracts/codeAction/MarkAbstract.sol'))]: [
+            [toUri(getProjectPath('hardhat/contracts/codeAction/MarkAbstract.hyp'))]: [
               {
                 range: {
                   start: {
@@ -526,7 +484,7 @@ describe('[hardhat][codeAction]', () => {
   })
 
   test('specify data location', async () => {
-    const documentPath = getProjectPath('hardhat/contracts/codeAction/SpecifyDataLocation.sol')
+    const documentPath = getProjectPath('hardhat/contracts/codeAction/SpecifyDataLocation.hyp')
     const documentUri = toUri(documentPath)
 
     await client.openDocument(documentPath)
@@ -544,7 +502,7 @@ describe('[hardhat][codeAction]', () => {
         isPreferred: false,
         edit: {
           changes: {
-            [toUri(getProjectPath('hardhat/contracts/codeAction/SpecifyDataLocation.sol'))]: [
+            [toUri(getProjectPath('hardhat/contracts/codeAction/SpecifyDataLocation.hyp'))]: [
               {
                 range: {
                   start: {
@@ -568,7 +526,7 @@ describe('[hardhat][codeAction]', () => {
         isPreferred: false,
         edit: {
           changes: {
-            [toUri(getProjectPath('hardhat/contracts/codeAction/SpecifyDataLocation.sol'))]: [
+            [toUri(getProjectPath('hardhat/contracts/codeAction/SpecifyDataLocation.hyp'))]: [
               {
                 range: {
                   start: {
@@ -603,7 +561,7 @@ describe('[hardhat][codeAction]', () => {
         isPreferred: false,
         edit: {
           changes: {
-            [toUri(getProjectPath('hardhat/contracts/codeAction/SpecifyDataLocation.sol'))]: [
+            [toUri(getProjectPath('hardhat/contracts/codeAction/SpecifyDataLocation.hyp'))]: [
               {
                 range: {
                   start: {
@@ -627,7 +585,7 @@ describe('[hardhat][codeAction]', () => {
         isPreferred: false,
         edit: {
           changes: {
-            [toUri(getProjectPath('hardhat/contracts/codeAction/SpecifyDataLocation.sol'))]: [
+            [toUri(getProjectPath('hardhat/contracts/codeAction/SpecifyDataLocation.hyp'))]: [
               {
                 range: {
                   start: {
@@ -662,7 +620,7 @@ describe('[hardhat][codeAction]', () => {
         isPreferred: false,
         edit: {
           changes: {
-            [toUri(getProjectPath('hardhat/contracts/codeAction/SpecifyDataLocation.sol'))]: [
+            [toUri(getProjectPath('hardhat/contracts/codeAction/SpecifyDataLocation.hyp'))]: [
               {
                 range: {
                   start: {
@@ -686,7 +644,7 @@ describe('[hardhat][codeAction]', () => {
         isPreferred: false,
         edit: {
           changes: {
-            [toUri(getProjectPath('hardhat/contracts/codeAction/SpecifyDataLocation.sol'))]: [
+            [toUri(getProjectPath('hardhat/contracts/codeAction/SpecifyDataLocation.hyp'))]: [
               {
                 range: {
                   start: {
@@ -721,7 +679,7 @@ describe('[hardhat][codeAction]', () => {
         isPreferred: false,
         edit: {
           changes: {
-            [toUri(getProjectPath('hardhat/contracts/codeAction/SpecifyDataLocation.sol'))]: [
+            [toUri(getProjectPath('hardhat/contracts/codeAction/SpecifyDataLocation.hyp'))]: [
               {
                 range: {
                   start: {
@@ -745,7 +703,7 @@ describe('[hardhat][codeAction]', () => {
         isPreferred: false,
         edit: {
           changes: {
-            [toUri(getProjectPath('hardhat/contracts/codeAction/SpecifyDataLocation.sol'))]: [
+            [toUri(getProjectPath('hardhat/contracts/codeAction/SpecifyDataLocation.hyp'))]: [
               {
                 range: {
                   start: {
@@ -780,7 +738,7 @@ describe('[hardhat][codeAction]', () => {
         isPreferred: false,
         edit: {
           changes: {
-            [toUri(getProjectPath('hardhat/contracts/codeAction/SpecifyDataLocation.sol'))]: [
+            [toUri(getProjectPath('hardhat/contracts/codeAction/SpecifyDataLocation.hyp'))]: [
               {
                 range: {
                   start: {
@@ -804,7 +762,7 @@ describe('[hardhat][codeAction]', () => {
         isPreferred: false,
         edit: {
           changes: {
-            [toUri(getProjectPath('hardhat/contracts/codeAction/SpecifyDataLocation.sol'))]: [
+            [toUri(getProjectPath('hardhat/contracts/codeAction/SpecifyDataLocation.hyp'))]: [
               {
                 range: {
                   start: {
@@ -839,7 +797,7 @@ describe('[hardhat][codeAction]', () => {
         isPreferred: false,
         edit: {
           changes: {
-            [toUri(getProjectPath('hardhat/contracts/codeAction/SpecifyDataLocation.sol'))]: [
+            [toUri(getProjectPath('hardhat/contracts/codeAction/SpecifyDataLocation.hyp'))]: [
               {
                 range: {
                   start: {
@@ -863,7 +821,7 @@ describe('[hardhat][codeAction]', () => {
         isPreferred: false,
         edit: {
           changes: {
-            [toUri(getProjectPath('hardhat/contracts/codeAction/SpecifyDataLocation.sol'))]: [
+            [toUri(getProjectPath('hardhat/contracts/codeAction/SpecifyDataLocation.hyp'))]: [
               {
                 range: {
                   start: {
@@ -898,7 +856,7 @@ describe('[hardhat][codeAction]', () => {
         isPreferred: false,
         edit: {
           changes: {
-            [toUri(getProjectPath('hardhat/contracts/codeAction/SpecifyDataLocation.sol'))]: [
+            [toUri(getProjectPath('hardhat/contracts/codeAction/SpecifyDataLocation.hyp'))]: [
               {
                 range: {
                   start: {
@@ -922,7 +880,7 @@ describe('[hardhat][codeAction]', () => {
   })
 
   test('specify visibility', async () => {
-    const documentPath = getProjectPath('hardhat/contracts/codeAction/SpecifyVisibility.sol')
+    const documentPath = getProjectPath('hardhat/contracts/codeAction/SpecifyVisibility.hyp')
     const documentUri = toUri(documentPath)
 
     await client.openDocument(documentPath)
@@ -940,7 +898,7 @@ describe('[hardhat][codeAction]', () => {
         isPreferred: false,
         edit: {
           changes: {
-            [toUri(getProjectPath('hardhat/contracts/codeAction/SpecifyVisibility.sol'))]: [
+            [toUri(getProjectPath('hardhat/contracts/codeAction/SpecifyVisibility.hyp'))]: [
               {
                 range: {
                   start: {
@@ -964,7 +922,7 @@ describe('[hardhat][codeAction]', () => {
         isPreferred: false,
         edit: {
           changes: {
-            [toUri(getProjectPath('hardhat/contracts/codeAction/SpecifyVisibility.sol'))]: [
+            [toUri(getProjectPath('hardhat/contracts/codeAction/SpecifyVisibility.hyp'))]: [
               {
                 range: {
                   start: {
@@ -987,50 +945,8 @@ describe('[hardhat][codeAction]', () => {
     expect(codeActions).to.have.deep.members(expected)
   })
 
-  test('invalid checksum addresses', async () => {
-    const documentPath = getProjectPath('hardhat/contracts/codeAction/InvalidChecksum.sol')
-    const documentUri = toUri(documentPath)
-
-    await client.openDocument(documentPath)
-
-    const diagnostic = await client.getDiagnostic(documentPath, {
-      range: makeRange(4, 14, 4, 56),
-    })
-
-    const codeActions = await client.getCodeActions(documentUri, diagnostic)
-
-    const expected = [
-      {
-        title: 'Convert to checksummed address',
-        kind: 'quickfix',
-        isPreferred: true,
-        edit: {
-          changes: {
-            [toUri(documentPath)]: [
-              {
-                range: {
-                  start: {
-                    line: 4,
-                    character: 14,
-                  },
-                  end: {
-                    line: 4,
-                    character: 56,
-                  },
-                },
-                newText: '0xc01c693cb0Cf2Ae645e83B27a3e166e87D26E071',
-              },
-            ],
-          },
-        },
-      },
-    ]
-
-    expect(codeActions).to.have.deep.members(expected)
-  })
-
-  test('auto import console.sol', async () => {
-    const documentPath = getProjectPath('hardhat/contracts/codeAction/ImportConsole.sol')
+  test('auto import console.hyp', async () => {
+    const documentPath = getProjectPath('hardhat/contracts/codeAction/ImportConsole.hyp')
     const documentUri = toUri(documentPath)
 
     await client.openDocument(documentPath)
@@ -1043,7 +959,7 @@ describe('[hardhat][codeAction]', () => {
 
     const expected = [
       {
-        title: "Add import from 'hardhat'",
+        title: "Add import from '@theqrl/hardhat'",
         kind: 'quickfix',
         isPreferred: true,
         edit: {
@@ -1060,7 +976,7 @@ describe('[hardhat][codeAction]', () => {
                     line: 3,
                   },
                 },
-                newText: 'import "hardhat/console.sol";\n\n',
+                newText: 'import "@theqrl/hardhat/console.hyp";\n\n',
               },
             ],
           },

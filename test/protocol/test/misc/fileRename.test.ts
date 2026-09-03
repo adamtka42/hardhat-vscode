@@ -9,8 +9,8 @@ import { getProjectPath } from '../helpers'
 let client!: TestLanguageClient
 
 describe('[misc] file rename', () => {
-  const originalPath = getProjectPath('hardhat/contracts/misc/FileRename.sol')
-  const renamedPath = getProjectPath('hardhat/contracts/misc/FileRename2.sol')
+  const originalPath = getProjectPath('hardhat/contracts/misc/FileRename.hyp')
+  const renamedPath = getProjectPath('hardhat/contracts/misc/FileRename2.hyp')
 
   beforeEach(async () => {
     client = await getInitializedClient()

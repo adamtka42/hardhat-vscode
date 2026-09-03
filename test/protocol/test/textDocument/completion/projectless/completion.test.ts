@@ -18,7 +18,7 @@ describe('[projectless][completion]', () => {
 
   describe('imports', function () {
     test('relative import', async () => {
-      const documentPath = getProjectPath('projectless/src/completion/A.sol')
+      const documentPath = getProjectPath('projectless/src/completion/A.hyp')
       const documentUri = toUri(documentPath)
       await client.openDocument(documentPath)
 
@@ -28,8 +28,8 @@ describe('[projectless][completion]', () => {
         isIncomplete: false,
         items: [
           {
-            label: './B.sol',
-            insertText: './B.sol',
+            label: './B.hyp',
+            insertText: './B.hyp',
             kind: 17,
             documentation: 'Imports the package',
           },

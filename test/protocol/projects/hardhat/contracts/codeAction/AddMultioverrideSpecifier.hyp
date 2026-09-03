@@ -1,0 +1,24 @@
+// SPDX-License-Identifier: GPL-3.0
+pragma hyperion >=0.1.0;
+
+contract Alpha {
+  function foo() public virtual {}
+
+  function baz() public virtual {}
+}
+
+contract Beta {
+  function baz() public virtual {}
+}
+
+contract Gamma {
+  function foo() public virtual {}
+
+  function baz() public virtual {}
+}
+
+contract Omega is Alpha, Beta, Gamma {
+  function foo() public {}
+
+  function baz() public virtual override(Alpha) {}
+}

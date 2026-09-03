@@ -17,7 +17,7 @@ describe('[projectless] rename', () => {
 
   describe('[single-file][identifier] - rename', function () {
     it('should rename', async () => {
-      const documentPath = getProjectPath('projectless/src/rename/Test.sol')
+      const documentPath = getProjectPath('projectless/src/rename/Test.hyp')
       const documentUri = toUri(documentPath)
 
       await client.openDocument(documentPath)

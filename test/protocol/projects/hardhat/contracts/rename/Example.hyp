@@ -1,0 +1,8 @@
+// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+pragma hyperion >=0.1.0;
+
+import "./Foo.hyp";
+
+contract Example {
+    Foo public foo = new Foo();
+}

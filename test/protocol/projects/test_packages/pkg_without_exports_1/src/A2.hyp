@@ -1,0 +1,5 @@
+// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+pragma hyperion >=0.1.0;
+
+contract A2 {
+}

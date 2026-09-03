@@ -17,7 +17,7 @@ describe('[projectless] type definition', () => {
 
   describe('[single-file] - go to type definition', function () {
     it('should go to type definition', async () => {
-      const documentPath = getProjectPath('projectless/src/typedefinition/Test.sol')
+      const documentPath = getProjectPath('projectless/src/typedefinition/Test.hyp')
       const documentUri = toUri(documentPath)
 
       await client.openDocument(documentPath)

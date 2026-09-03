@@ -1,3 +1,0 @@
-@lib/=lib
-@myLib/=lib/myLib
-@tmp=/tmp

@@ -1,7 +1,7 @@
 {
   "name": "pkg_with_exports_2",
   "exports": {
-    "./*.sol": "./src/*.sol"
+    "./*.hyp": "./src/*.hyp"
   },
   "version": "1.0.0"
 }

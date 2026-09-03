@@ -1,0 +1,10 @@
+// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+pragma hyperion >=0.1.0;
+
+contract Foo {
+  uint256 public name;
+
+  constructor() {
+    name = false;
+  }
+}

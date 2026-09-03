@@ -1,0 +1,5 @@
+{
+  "name": "@openzeppelin/contracts",
+  "version": "0.0.0-protocol-stub",
+  "description": "Local stub standing in for @openzeppelin/contracts in protocol tests (real packages ship .sol sources, Hyperion needs .hyp)"
+}

@@ -14,8 +14,8 @@ describe('[hardhat] type definition', () => {
   before(async () => {
     client = await getInitializedClient()
 
-    testPath = getProjectPath('hardhat/contracts/typedefinition/Test.sol')
-    importedPath = getProjectPath('hardhat/contracts/typedefinition/Imported.sol')
+    testPath = getProjectPath('hardhat/contracts/typedefinition/Test.hyp')
+    importedPath = getProjectPath('hardhat/contracts/typedefinition/Imported.hyp')
 
     await client.openDocument(testPath)
     await client.openDocument(importedPath)

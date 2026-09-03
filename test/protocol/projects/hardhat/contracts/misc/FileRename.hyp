@@ -1,0 +1,6 @@
+// SPDX-License-Identifier: MIT
+pragma hyperion >=0.1.0;
+
+import '@openzeppelin/contracts/access/Ownable.hyp';
+
+contract FileRename is Ownable {}

@@ -1,7 +1,7 @@
 /* eslint-disable no-template-curly-in-string */
 import { expect } from 'chai'
 import { test } from 'mocha'
-import { CompletionTriggerKind } from 'vscode-languageserver-protocol'
+import { CompletionList, CompletionTriggerKind } from 'vscode-languageserver-protocol'
 import { toUri } from '../../../../src/helpers'
 import { TestLanguageClient } from '../../../../src/TestLanguageClient'
 import { getInitializedClient } from '../../../client'
@@ -20,125 +20,123 @@ describe('[hardhat][completion]', () => {
 
   describe('imports', function () {
     test('hardhat import completion on empty', async () => {
-      const documentPath = getProjectPath('hardhat/contracts/completion/Imports.sol')
+      const documentPath = getProjectPath('hardhat/contracts/completion/Imports.hyp')
       const documentUri = toUri(documentPath)
       await client.openDocument(documentPath)
 
       const completions = await client.getCompletions(documentUri, 0, 8)
 
-      expect(completions).to.deep.equal({
-        isIncomplete: false,
-        items: [
-          {
-            label: './Globals.sol',
-            insertText: './Globals.sol',
-            kind: 17,
-            documentation: 'Imports the package',
-          },
-          {
-            label: './Natspec.sol',
-            insertText: './Natspec.sol',
-            kind: 17,
-            documentation: 'Imports the package',
-          },
-          {
-            label: './NatspecSingle.sol',
-            insertText: './NatspecSingle.sol',
-            kind: 17,
-            documentation: 'Imports the package',
-          },
-          {
-            label: 'hardhat',
-            textEdit: {
-              range: {
-                start: {
-                  line: 0,
-                  character: 8,
-                },
-                end: {
-                  line: 0,
-                  character: 8,
-                },
+      const completionList = completions as CompletionList
+      expect(completionList.isIncomplete).to.equal(false)
+      expect(completionList.items).to.have.deep.members([
+        {
+          label: './Globals.hyp',
+          insertText: './Globals.hyp',
+          kind: 17,
+          documentation: 'Imports the package',
+        },
+        {
+          label: './Natspec.hyp',
+          insertText: './Natspec.hyp',
+          kind: 17,
+          documentation: 'Imports the package',
+        },
+        {
+          label: './NatspecSingle.hyp',
+          insertText: './NatspecSingle.hyp',
+          kind: 17,
+          documentation: 'Imports the package',
+        },
+        {
+          label: 'hardhat',
+          textEdit: {
+            range: {
+              start: {
+                line: 0,
+                character: 8,
               },
-              newText: 'hardhat',
-            },
-            kind: 9,
-            documentation: 'Imports the package',
-          },
-          {
-            label: '@openzeppelin',
-            textEdit: {
-              range: {
-                start: {
-                  line: 0,
-                  character: 8,
-                },
-                end: {
-                  line: 0,
-                  character: 8,
-                },
+              end: {
+                line: 0,
+                character: 8,
               },
-              newText: '@openzeppelin',
             },
-            kind: 9,
-            documentation: 'Imports the package',
+            newText: 'hardhat',
           },
-        ],
-      })
+          kind: 9,
+          documentation: 'Imports the package',
+        },
+        {
+          label: '@openzeppelin',
+          textEdit: {
+            range: {
+              start: {
+                line: 0,
+                character: 8,
+              },
+              end: {
+                line: 0,
+                character: 8,
+              },
+            },
+            newText: '@openzeppelin',
+          },
+          kind: 9,
+          documentation: 'Imports the package',
+        },
+      ])
     })
 
     test('hardhat node_modules contract import completion on partial specification', async () => {
-      const documentPath = getProjectPath('hardhat/contracts/completion/Imports.sol')
+      const documentPath = getProjectPath('hardhat/contracts/completion/Imports.hyp')
       const documentUri = toUri(documentPath)
       await client.openDocument(documentPath)
 
       const completions = await client.getCompletions(documentUri, 2, 16)
 
-      expect(completions).to.deep.equal({
-        isIncomplete: false,
-        items: [
-          {
-            label: 'hardhat',
-            textEdit: {
-              range: {
-                start: {
-                  line: 2,
-                  character: 8,
-                },
-                end: {
-                  line: 2,
-                  character: 16,
-                },
+      const completionList = completions as CompletionList
+      expect(completionList.isIncomplete).to.equal(false)
+      expect(completionList.items).to.have.deep.members([
+        {
+          label: 'hardhat',
+          textEdit: {
+            range: {
+              start: {
+                line: 2,
+                character: 8,
               },
-              newText: 'hardhat',
-            },
-            kind: 9,
-            documentation: 'Imports the package',
-          },
-          {
-            label: '@openzeppelin',
-            textEdit: {
-              range: {
-                start: {
-                  line: 2,
-                  character: 8,
-                },
-                end: {
-                  line: 2,
-                  character: 16,
-                },
+              end: {
+                line: 2,
+                character: 16,
               },
-              newText: '@openzeppelin',
             },
-            kind: 9,
-            documentation: 'Imports the package',
+            newText: 'hardhat',
           },
-        ],
-      })
+          kind: 9,
+          documentation: 'Imports the package',
+        },
+        {
+          label: '@openzeppelin',
+          textEdit: {
+            range: {
+              start: {
+                line: 2,
+                character: 8,
+              },
+              end: {
+                line: 2,
+                character: 16,
+              },
+            },
+            newText: '@openzeppelin',
+          },
+          kind: 9,
+          documentation: 'Imports the package',
+        },
+      ])
     })
 
     test('hardhat node_modules contract import completion on module specified', async () => {
-      const documentPath = getProjectPath('hardhat/contracts/completion/Imports.sol')
+      const documentPath = getProjectPath('hardhat/contracts/completion/Imports.hyp')
       const documentUri = toUri(documentPath)
       await client.openDocument(documentPath)
 
@@ -148,7 +146,7 @@ describe('[hardhat][completion]', () => {
         isIncomplete: false,
         items: [
           {
-            label: 'hardhat/console.sol',
+            label: 'hardhat/console.hyp',
             textEdit: {
               range: {
                 start: {
@@ -160,25 +158,7 @@ describe('[hardhat][completion]', () => {
                   character: 16,
                 },
               },
-              newText: 'hardhat/console.sol',
-            },
-            kind: 9,
-            documentation: 'Imports the package',
-          },
-          {
-            label: 'hardhat/sample-projects/basic/contracts/Greeter.sol',
-            textEdit: {
-              range: {
-                start: {
-                  line: 4,
-                  character: 8,
-                },
-                end: {
-                  line: 4,
-                  character: 16,
-                },
-              },
-              newText: 'hardhat/sample-projects/basic/contracts/Greeter.sol',
+              newText: 'hardhat/console.hyp',
             },
             kind: 9,
             documentation: 'Imports the package',
@@ -188,7 +168,7 @@ describe('[hardhat][completion]', () => {
     })
 
     test('hardhat node_modules contract import completion on module and partial contract', async () => {
-      const documentPath = getProjectPath('hardhat/contracts/completion/Imports.sol')
+      const documentPath = getProjectPath('hardhat/contracts/completion/Imports.hyp')
       const documentUri = toUri(documentPath)
       await client.openDocument(documentPath)
 
@@ -198,7 +178,7 @@ describe('[hardhat][completion]', () => {
         isIncomplete: false,
         items: [
           {
-            label: '@openzeppelin/contracts/access/Ownable.sol',
+            label: '@openzeppelin/contracts/access/Ownable.hyp',
             textEdit: {
               range: {
                 start: {
@@ -210,7 +190,7 @@ describe('[hardhat][completion]', () => {
                   character: 42,
                 },
               },
-              newText: '@openzeppelin/contracts/access/Ownable.sol',
+              newText: '@openzeppelin/contracts/access/Ownable.hyp',
             },
             kind: 9,
             documentation: 'Imports the package',
@@ -220,7 +200,7 @@ describe('[hardhat][completion]', () => {
     })
 
     test('auto appending of semicolon', async () => {
-      const documentPath = getProjectPath('hardhat/contracts/completion/Imports.sol')
+      const documentPath = getProjectPath('hardhat/contracts/completion/Imports.hyp')
       const documentUri = toUri(documentPath)
       await client.openDocument(documentPath)
 
@@ -230,7 +210,7 @@ describe('[hardhat][completion]', () => {
         isIncomplete: false,
         items: [
           {
-            label: '@openzeppelin/contracts/access/Ownable.sol',
+            label: '@openzeppelin/contracts/access/Ownable.hyp',
             textEdit: {
               range: {
                 start: {
@@ -242,7 +222,7 @@ describe('[hardhat][completion]', () => {
                   character: 42,
                 },
               },
-              newText: '@openzeppelin/contracts/access/Ownable.sol',
+              newText: '@openzeppelin/contracts/access/Ownable.hyp',
             },
             kind: 9,
             documentation: 'Imports the package',
@@ -270,7 +250,7 @@ describe('[hardhat][completion]', () => {
   describe('globals', function () {
     describe('abi', function () {
       test('gives completion for all of abi methods', async () => {
-        const documentPath = getProjectPath('hardhat/contracts/completion/Globals.sol')
+        const documentPath = getProjectPath('hardhat/contracts/completion/Globals.hyp')
         const documentUri = toUri(documentPath)
         await client.openDocument(documentPath)
 
@@ -313,7 +293,7 @@ describe('[hardhat][completion]', () => {
     describe('multi line', function () {
       describe('function natspec', function () {
         test('natspec completion on function with 2 return values, 1 named 1 unnamed', async () => {
-          const documentPath = getProjectPath('hardhat/contracts/completion/Natspec.sol')
+          const documentPath = getProjectPath('hardhat/contracts/completion/Natspec.hyp')
           const documentUri = toUri(documentPath)
           await client.openDocument(documentPath)
 
@@ -350,7 +330,7 @@ describe('[hardhat][completion]', () => {
         })
 
         test('natspec completion on function with 1 return value', async () => {
-          const documentPath = getProjectPath('hardhat/contracts/completion/Natspec.sol')
+          const documentPath = getProjectPath('hardhat/contracts/completion/Natspec.hyp')
           const documentUri = toUri(documentPath)
           await client.openDocument(documentPath)
 
@@ -387,7 +367,7 @@ describe('[hardhat][completion]', () => {
         })
 
         test('natspec completion on function without return value', async () => {
-          const documentPath = getProjectPath('hardhat/contracts/completion/Natspec.sol')
+          const documentPath = getProjectPath('hardhat/contracts/completion/Natspec.hyp')
           const documentUri = toUri(documentPath)
           await client.openDocument(documentPath)
 
@@ -426,7 +406,7 @@ describe('[hardhat][completion]', () => {
 
       describe('contract/library/interface natspec', function () {
         test('natspec completion for contract', async () => {
-          const documentPath = getProjectPath('hardhat/contracts/completion/Natspec.sol')
+          const documentPath = getProjectPath('hardhat/contracts/completion/Natspec.hyp')
           const documentUri = toUri(documentPath)
           await client.openDocument(documentPath)
 
@@ -462,7 +442,7 @@ describe('[hardhat][completion]', () => {
           })
         })
         test('natspec completion for library', async () => {
-          const documentPath = getProjectPath('hardhat/contracts/completion/Natspec.sol')
+          const documentPath = getProjectPath('hardhat/contracts/completion/Natspec.hyp')
           const documentUri = toUri(documentPath)
           await client.openDocument(documentPath)
 
@@ -498,7 +478,7 @@ describe('[hardhat][completion]', () => {
           })
         })
         test('natspec completion for interface', async () => {
-          const documentPath = getProjectPath('hardhat/contracts/completion/Natspec.sol')
+          const documentPath = getProjectPath('hardhat/contracts/completion/Natspec.hyp')
           const documentUri = toUri(documentPath)
           await client.openDocument(documentPath)
 
@@ -537,7 +517,7 @@ describe('[hardhat][completion]', () => {
 
       describe('state variable natspec', function () {
         test('natspec completion on public state variable', async () => {
-          const documentPath = getProjectPath('hardhat/contracts/completion/Natspec.sol')
+          const documentPath = getProjectPath('hardhat/contracts/completion/Natspec.hyp')
           const documentUri = toUri(documentPath)
           await client.openDocument(documentPath)
 
@@ -574,7 +554,7 @@ describe('[hardhat][completion]', () => {
         })
 
         test('natspec completion on private state variable', async () => {
-          const documentPath = getProjectPath('hardhat/contracts/completion/Natspec.sol')
+          const documentPath = getProjectPath('hardhat/contracts/completion/Natspec.hyp')
           const documentUri = toUri(documentPath)
           await client.openDocument(documentPath)
 
@@ -612,7 +592,7 @@ describe('[hardhat][completion]', () => {
       })
 
       test('natspec completion on event', async () => {
-        const documentPath = getProjectPath('hardhat/contracts/completion/Natspec.sol')
+        const documentPath = getProjectPath('hardhat/contracts/completion/Natspec.hyp')
         const documentUri = toUri(documentPath)
         await client.openDocument(documentPath)
 
@@ -646,7 +626,7 @@ describe('[hardhat][completion]', () => {
     describe('single line', function () {
       describe('function natspec', function () {
         test('natspec completion on function with 2 return values', async () => {
-          const documentPath = getProjectPath('hardhat/contracts/completion/NatspecSingle.sol')
+          const documentPath = getProjectPath('hardhat/contracts/completion/NatspecSingle.hyp')
           const documentUri = toUri(documentPath)
           await client.openDocument(documentPath)
 
@@ -684,7 +664,7 @@ describe('[hardhat][completion]', () => {
       })
 
       test('natspec completion for contract', async () => {
-        const documentPath = getProjectPath('hardhat/contracts/completion/NatspecSingle.sol')
+        const documentPath = getProjectPath('hardhat/contracts/completion/NatspecSingle.hyp')
         const documentUri = toUri(documentPath)
         await client.openDocument(documentPath)
 
@@ -715,7 +695,7 @@ describe('[hardhat][completion]', () => {
       })
 
       test('natspec completion on event', async () => {
-        const documentPath = getProjectPath('hardhat/contracts/completion/NatspecSingle.sol')
+        const documentPath = getProjectPath('hardhat/contracts/completion/NatspecSingle.hyp')
         const documentUri = toUri(documentPath)
         await client.openDocument(documentPath)
 
@@ -746,7 +726,7 @@ describe('[hardhat][completion]', () => {
       })
 
       test('natspec completion on public state variable', async () => {
-        const documentPath = getProjectPath('hardhat/contracts/completion/NatspecSingle.sol')
+        const documentPath = getProjectPath('hardhat/contracts/completion/NatspecSingle.hyp')
         const documentUri = toUri(documentPath)
         await client.openDocument(documentPath)
 

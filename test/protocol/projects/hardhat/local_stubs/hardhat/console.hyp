@@ -1,0 +1,6 @@
+// SPDX-License-Identifier: MIT
+pragma hyperion >=0.1.0;
+
+library console {
+    function log(uint256 value) internal pure {}
+}

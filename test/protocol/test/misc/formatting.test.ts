@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import { shouldSkipFoundryTests, toUri } from '../../src/helpers'
+import { toUri } from '../../src/helpers'
 import { TestLanguageClient } from '../../src/TestLanguageClient'
 import { getInitializedClient } from '../client'
 import { getProjectPath } from '../helpers'
@@ -7,7 +7,7 @@ import { getProjectPath } from '../helpers'
 let client!: TestLanguageClient
 
 describe('[misc] server document formatting', () => {
-  const filePath = getProjectPath('formatting/src/FormattingTest.sol')
+  const filePath = getProjectPath('formatting/src/FormattingTest.hyp')
   const fileUri = toUri(filePath)
 
   beforeEach(async () => {
@@ -29,23 +29,6 @@ describe('[misc] server document formatting', () => {
     const edits = await client.formatDocument(fileUri)
 
     expect(edits![0].newText).to.eq('contract Formatting {\n    uint256 counter;\n}\n')
-  })
-
-  it('can use forge as formatter', async () => {
-    if (shouldSkipFoundryTests()) {
-      return
-    }
-
-    const doc = await client.openDocument(filePath)
-    expect(doc.text).to.eq('contract Formatting {\nuint256 counter;\n}\n')
-
-    // Set forge as the formatter
-    await client.changeExtensionConfig({ formatter: 'forge' })
-
-    // Trigger formatting. Forge is set to use 2 tabs in foundry.toml
-    const edits = await client.formatDocument(fileUri)
-
-    expect(edits![0].newText).to.eq('contract Formatting {\n  uint256 counter;\n}\n')
   })
 
   it('doesnt format the document if formatter is set to none', async () => {

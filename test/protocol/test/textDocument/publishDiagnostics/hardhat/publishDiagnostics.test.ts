@@ -19,11 +19,11 @@ describe('[hardhat] publishDiagnostics', () => {
   })
 
   test('missing semicolon', async function () {
-    const documentPath = getProjectPath('hardhat/contracts/diagnostics/MissingSemicolon.sol')
+    const documentPath = getProjectPath('hardhat/contracts/diagnostics/MissingSemicolon.hyp')
     await client.openDocument(documentPath)
 
     await client.getDiagnostic(documentPath, {
-      source: 'solidity',
+      source: 'hyperion',
       severity: DiagnosticSeverity.Error,
       message: "Expected ';' but got '}'",
       range: {
@@ -40,11 +40,11 @@ describe('[hardhat] publishDiagnostics', () => {
   })
 
   test('invalid assignment', async function () {
-    const documentPath = getProjectPath('hardhat/contracts/diagnostics/InvalidAssignment.sol')
+    const documentPath = getProjectPath('hardhat/contracts/diagnostics/InvalidAssignment.hyp')
     await client.openDocument(documentPath)
 
     await client.getDiagnostic(documentPath, {
-      source: 'solidity',
+      source: 'hyperion',
       severity: DiagnosticSeverity.Error,
       message: 'Type bool is not implicitly convertible to expected type uint256',
       range: {
@@ -61,10 +61,10 @@ describe('[hardhat] publishDiagnostics', () => {
   })
 
   test('mark as abstract', async function () {
-    const documentPath = getProjectPath('hardhat/contracts/diagnostics/MarkAbstract.sol')
+    const documentPath = getProjectPath('hardhat/contracts/diagnostics/MarkAbstract.hyp')
     await client.openDocument(documentPath)
     await client.getDiagnostic(documentPath, {
-      source: 'solidity',
+      source: 'hyperion',
       severity: DiagnosticSeverity.Error,
       message: 'Contract "Counter" should be marked as abstract',
       range: {
@@ -81,11 +81,11 @@ describe('[hardhat] publishDiagnostics', () => {
   })
 
   test('utf-8 character encodings', async function () {
-    const documentPath = getProjectPath('hardhat/contracts/diagnostics/UTF8Characters.sol')
+    const documentPath = getProjectPath('hardhat/contracts/diagnostics/UTF8Characters.hyp')
     await client.openDocument(documentPath)
 
     await client.getDiagnostic(documentPath, {
-      source: 'solidity',
+      source: 'hyperion',
       severity: DiagnosticSeverity.Error,
       message: 'Different number of arguments in return statement',
       range: {
@@ -102,11 +102,11 @@ describe('[hardhat] publishDiagnostics', () => {
   })
 
   test('file with whitespaces', async function () {
-    const documentPath = getProjectPath('hardhat/contracts/diagnostics/File With Whitespaces.sol')
+    const documentPath = getProjectPath('hardhat/contracts/diagnostics/File With Whitespaces.hyp')
     await client.openDocument(documentPath)
 
     await client.getDiagnostic(documentPath, {
-      source: 'solidity',
+      source: 'hyperion',
       severity: DiagnosticSeverity.Error,
       message: 'Expected pragma, import directive',
       range: {
@@ -123,28 +123,28 @@ describe('[hardhat] publishDiagnostics', () => {
   })
 
   test('hardhat build error - non existing import', async function () {
-    const documentPath = getProjectPath('hardhat/contracts/diagnostics/InvalidImport.sol')
+    const documentPath = getProjectPath('hardhat/contracts/diagnostics/InvalidImport.hyp')
     await client.openDocument(documentPath)
 
     await client.getDiagnostic(documentPath, {
-      source: 'hardhat',
+      source: 'hyperion',
       severity: DiagnosticSeverity.Error,
-      message: 'Imported file not found',
+      message: 'not found: File import callback not supported',
       range: {
         start: {
           line: 4,
-          character: 8,
+          character: 0,
         },
         end: {
           line: 4,
-          character: 25,
+          character: 27,
         },
       },
     })
   })
 
   test('clear diagnostics on valid compilation', async function () {
-    const documentPath = getProjectPath('hardhat/contracts/diagnostics/NoLicense.sol')
+    const documentPath = getProjectPath('hardhat/contracts/diagnostics/NoLicense.hyp')
     await client.openDocument(documentPath)
 
     // First assert the diagnostic is present

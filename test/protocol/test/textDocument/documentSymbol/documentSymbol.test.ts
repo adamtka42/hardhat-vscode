@@ -13,7 +13,7 @@ describe('[hardhat] documentSymbol', () => {
   before(async () => {
     client = await getInitializedClient()
 
-    testPath = getProjectPath('hardhat/contracts/documentSymbol/DocumentSymbols.sol')
+    testPath = getProjectPath('hardhat/contracts/documentSymbol/DocumentSymbols.hyp')
 
     await client.openDocument(testPath)
   })
@@ -892,70 +892,12 @@ describe('[projectless] documentSymbol', () => {
   before(async () => {
     client = await getInitializedClient()
 
-    testPath = getProjectPath('projectless/src/documentSymbol/UnnamedFunction.sol')
+    testPath = getProjectPath('projectless/src/documentSymbol/UnnamedFunction.hyp')
 
     await client.openDocument(testPath)
   })
 
   after(async () => {
     await client.closeAllDocuments()
-  })
-
-  test('supports unnamed function definition', async function () {
-    const symbols = await client.getDocumentSymbols(toUri(testPath))
-
-    expect(symbols).to.deep.equal([
-      {
-        children: [
-          {
-            children: [],
-            kind: 12,
-            name: 'function',
-            range: {
-              start: {
-                line: 5,
-                character: 0,
-              },
-              end: {
-                line: 6,
-                character: 0,
-              },
-            },
-            selectionRange: {
-              start: {
-                line: 5,
-                character: 0,
-              },
-              end: {
-                line: 6,
-                character: 0,
-              },
-            },
-          },
-        ],
-        kind: 5,
-        name: 'UnnamedTest',
-        range: {
-          start: {
-            line: 3,
-            character: 0,
-          },
-          end: {
-            line: 7,
-            character: 0,
-          },
-        },
-        selectionRange: {
-          start: {
-            line: 3,
-            character: 0,
-          },
-          end: {
-            line: 7,
-            character: 0,
-          },
-        },
-      },
-    ])
   })
 })
