@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## Unreleased
+
+### Changed
+
+- Ported the extension to the [Hyperion](https://github.com/theqrl/hyperion) language (`.hyp`) of the QRL/Zond ecosystem: validation now runs on a bundled `hypc` compiler, document symbols and semantic highlighting are powered by [`@theqrl/slang`](https://github.com/theqrl/slang), and Hardhat integration targets the [`@theqrl/hardhat`](https://github.com/theqrl/hardhat) fork. Support for Foundry, Truffle and Ape projects was removed.
+
+> **Note:** the entries below this point document the upstream
+> [hardhat-vscode](https://github.com/NomicFoundation/hardhat-vscode) releases
+> that this port is based on.
+
 ## 0.8.29 - 2026-03-19
 
 ### Changed
