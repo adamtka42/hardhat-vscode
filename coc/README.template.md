@@ -41,4 +41,4 @@ Sometimes, e.g. when installing node dependencies or switching branches, the lan
 
 ## Contributing
 
-Contributions are always welcome! Feel free to [open any issue](https://github.com/theQRL/hardhat-vscode-qrl/issues) or send a pull request.
+Contributions are always welcome! Feel free to [open any issue](https://github.com/theqrl/hardhat-vscode/issues) or send a pull request.

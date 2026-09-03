@@ -1,5 +1,7 @@
 # Codebase Overview
 
+> **Historical note:** this document describes the architecture of the upstream [hardhat-vscode](https://github.com/NomicFoundation/hardhat-vscode) that this port derives from. The overall structure (client/server split, indexing, validation) still applies, but Solidity/solc specifics, the Foundry/Truffle/Ape frameworks and compiler downloading no longer do — the port compiles Hyperion (`.hyp`) with a bundled `hypc` and supports Hardhat projects (the `@theqrl/hardhat` fork) plus standalone files.
+
 This document provides an overview of the codebase of the Solidity language server and its client components. This includes both the overall architecture and the details of each component and their processes.
 
 - [Codebase Overview](#codebase-overview)
