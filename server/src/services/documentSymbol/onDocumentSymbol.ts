@@ -51,8 +51,6 @@ export function createFinders(): SymbolFinder[] {
     new ReceiveFunctionDefinition(),
     new UserDefinedValueTypeDefinition(),
     new YulFunctionDefinition(),
-    // UnnamedFunctionDefinition is not registered: the pre-0.5 `function()`
-    // syntax was removed from the Hyperion grammar, so the kind does not exist
   ];
 }
 
