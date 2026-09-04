@@ -4,7 +4,7 @@ import { isHardhatInstalled } from "./hardhat";
 
 export const openNewDocument = async (text: string): Promise<TextEditor> => {
   const document = await vscode.workspace.openTextDocument({
-    language: "solidity",
+    language: "hyperion",
   });
   const editor = await vscode.window.showTextDocument(document);
   await editor.edit((edit) => edit.insert(new vscode.Position(0, 0), text));

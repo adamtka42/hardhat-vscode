@@ -6,7 +6,7 @@ import type {
   Query,
   QueryMatch,
   TextRange,
-} from "@nomicfoundation/slang/cst" with { "resolution-mode": "import" };
+} from "@theqrl/slang/cst" with { "resolution-mode": "import" };
 
 export interface SymbolData {
   range: TextRange;

@@ -9,7 +9,7 @@ describe("Code Actions", () => {
     const diagnostic = {
       code: "3420",
       message:
-        'Source file does not specify required compiler version! Consider adding "pragma solidity ^0.8.7;"',
+        'Source file does not specify required compiler version! Consider adding "pragma hyperion ^0.8.7;"',
       range: {
         start: { line: 0, character: 0 },
         end: { line: 0, character: 0 },
@@ -23,7 +23,7 @@ describe("Code Actions", () => {
     };
 
     describe("When first line is license identifier", () => {
-      it("adds pragma solidity statement on the second line", async () => {
+      it("adds pragma hyperion statement on the second line", async () => {
         testContractText = [
           "// SPDX-License-Identifier: GPL-3.0",
           "contract SpecifyCompilerVersion {",
@@ -36,7 +36,7 @@ describe("Code Actions", () => {
             isPreferred: true,
             edits: [
               {
-                newText: "pragma solidity ^0.8.7;\n",
+                newText: "pragma hyperion ^0.8.7;\n",
                 range: {
                   start: {
                     line: 1,
@@ -55,7 +55,7 @@ describe("Code Actions", () => {
     });
 
     describe("When first line is a regular comment", () => {
-      it("adds pragma solidity statement on the first line", async () => {
+      it("adds pragma hyperion statement on the first line", async () => {
         testContractText = [
           "// My contract",
           "contract SpecifyCompilerVersion {",
@@ -69,7 +69,7 @@ describe("Code Actions", () => {
             isPreferred: true,
             edits: [
               {
-                newText: "pragma solidity ^0.8.7;\n",
+                newText: "pragma hyperion ^0.8.7;\n",
                 range: {
                   start: {
                     line: 0,
@@ -88,7 +88,7 @@ describe("Code Actions", () => {
     });
 
     describe("When first line is something else", () => {
-      it("adds pragma solidity statement on the first line", async () => {
+      it("adds pragma hyperion statement on the first line", async () => {
         testContractText = ["contract SpecifyCompilerVersion {", "}"].join("");
 
         await assertCodeAction(codeAction, testContractText, diagnostic, [
@@ -98,7 +98,7 @@ describe("Code Actions", () => {
             isPreferred: true,
             edits: [
               {
-                newText: "pragma solidity ^0.8.7;\n",
+                newText: "pragma hyperion ^0.8.7;\n",
                 range: {
                   start: {
                     line: 0,

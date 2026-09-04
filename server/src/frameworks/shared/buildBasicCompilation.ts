@@ -1,5 +1,3 @@
-import _ from "lodash";
-import semver from "semver";
 import { OpenDocuments } from "../../types";
 import { isRelativeImport } from "../../utils";
 import { CompilationDetails } from "../base/CompilationDetails";
@@ -27,25 +25,11 @@ export async function buildBasicCompilation(
 
   // Get list of all dependencies (deep) and their pragma statements
   const dependencyDetails = await getDependenciesAndPragmas(project, sourceUri);
-  // console.log(JSON.stringify(dependencyDetails, null, 2));
 
-  const pragmas = _.flatten(_.map(dependencyDetails, "pragmas"));
-
-  // Use specified solc version or determine it based on available versions and pragma statements
-  let solcVersion = explicitSolcVersion;
-
-  if (solcVersion === undefined) {
-    const resolvedSolcVersion = semver.maxSatisfying(
-      project.serverState.solcVersions,
-      pragmas.join(" ")
-    );
-
-    if (resolvedSolcVersion === null) {
-      throw new Error(`No available solc version satisfying ${pragmas}`);
-    }
-
-    solcVersion = resolvedSolcVersion;
-  }
+  // A single hypc version is bundled with the extension — always compile with
+  // it and let the compiler report any pragma mismatch (error 5333).
+  const solcVersion =
+    explicitSolcVersion ?? project.serverState.solcVersions[0];
 
   // Build solc input
   const sources: { [uri: string]: { content: string } } = {};
@@ -70,7 +54,7 @@ export async function buildBasicCompilation(
 
   return {
     input: {
-      language: "Solidity",
+      language: "Hyperion",
       sources,
       settings: {
         outputSelection: {},

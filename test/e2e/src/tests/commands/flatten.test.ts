@@ -6,7 +6,7 @@ import { openFileInEditor, waitForUI } from "../../helpers/editor";
 
 suite("commands - flatten", function () {
   test("flatten via command palette", async () => {
-    const uri = getTestContractUri("main/contracts/commands/Importer.sol");
+    const uri = getTestContractUri("main/contracts/commands/Importer.hyp");
     await openFileInEditor(uri);
 
     await vscode.commands.executeCommand(

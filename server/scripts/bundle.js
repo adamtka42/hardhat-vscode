@@ -24,9 +24,9 @@ async function main() {
   const definedConstants = {};
 
   for (const key of [
-    "SOLIDITY_GA_SECRET",
-    "SOLIDITY_GOOGLE_TRACKING_ID",
-    "SOLIDITY_SENTRY_DSN",
+    "HYPERION_GA_SECRET",
+    "HYPERION_GOOGLE_TRACKING_ID",
+    "HYPERION_SENTRY_DSN",
   ]) {
     const value = process.env[key];
     if (!value || value === "") {
@@ -59,18 +59,13 @@ async function main() {
   const { warnings, errors } = await esbuild.build({
     entryPoints: {
       "./out/index": "./src/index.ts",
-      "./out/hardhat.config": "./src/hardhat.config.ts",
-      "./out/worker/WorkerProcess":
-        "./src/frameworks/Hardhat/Hardhat2/worker/WorkerProcess.ts",
-      "./out/ConfigLoader": "./src/frameworks/Truffle/ConfigLoader.ts",
     },
     bundle: true,
     minifyWhitespace: false,
     minifyIdentifiers: false,
     minifySyntax: false,
     external: [
-      "@nomicfoundation/solidity-analyzer",
-      "@nomicfoundation/slang",
+      "@theqrl/slang",
       "fsevents",
       "mocha",
     ],

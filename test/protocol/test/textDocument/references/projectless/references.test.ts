@@ -17,7 +17,7 @@ describe('[projectless] references', () => {
 
   describe('[single-file] - find all references', function () {
     it('should should find references', async () => {
-      const documentPath = getProjectPath('projectless/src/references/Test.sol')
+      const documentPath = getProjectPath('projectless/src/references/Test.hyp')
       const documentUri = toUri(documentPath)
 
       await client.openDocument(documentPath)

@@ -125,7 +125,7 @@ export class TestLanguageClient {
     const documentParams: DidOpenTextDocumentParams = {
       textDocument: {
         uri,
-        languageId: 'solidity',
+        languageId: 'hyperion',
         version: document.version,
         text,
       },

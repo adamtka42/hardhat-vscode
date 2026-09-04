@@ -33,7 +33,7 @@ export class SpecifyCompilerVersion implements CompilerDiagnostic {
     { uri, document }: ResolveActionsContext
   ): CodeAction[] {
     // Get the compiler specification code from hardhat warning
-    const regex = /pragma solidity .*;/;
+    const regex = /pragma hyperion .*;/;
     const match = _diagnostic.message.match(regex);
     const pragmaLine = match && match[0];
 

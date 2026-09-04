@@ -57,7 +57,7 @@ export default abstract class HardhatTaskCommand extends Command {
     if (exitStatus !== 0) {
       this.state.outputChannel.show();
       await vscode.window.showErrorMessage(
-        "Solidity command errored, please see output logs."
+        "Hyperion command errored, please see output logs."
       );
     }
   }

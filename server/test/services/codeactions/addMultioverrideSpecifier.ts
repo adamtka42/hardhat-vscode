@@ -11,7 +11,7 @@ describe("Code Actions", () => {
     before(async () => {
       addMultiOverrideSpecifierText = (
         await fs.promises.readFile(
-          path.join(__dirname, "testData", "AddMultioverrideSpecifier.sol")
+          path.join(__dirname, "testData", "AddMultioverrideSpecifier.hyp")
         )
       ).toString();
     });

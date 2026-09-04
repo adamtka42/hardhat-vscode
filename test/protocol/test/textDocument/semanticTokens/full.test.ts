@@ -13,7 +13,7 @@ describe('[hardhat] semanticTokens/full', () => {
   before(async () => {
     client = await getInitializedClient()
 
-    testPath = getProjectPath('hardhat/contracts/semanticTokens/full/SemanticTokens.sol')
+    testPath = getProjectPath('hardhat/contracts/semanticTokens/full/SemanticTokens.hyp')
 
     await client.openDocument(testPath)
   })

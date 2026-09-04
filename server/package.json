@@ -1,17 +1,18 @@
 {
-  "name": "@nomicfoundation/solidity-language-server",
-  "description": "Solidity language server by Nomic Foundation",
+  "name": "@theqrl/hyperion-language-server",
+  "description": "Hyperion language server for QRL/Zond",
   "license": "MIT",
   "version": "0.8.29",
-  "author": "Nomic Foundation",
+  "author": "The QRL contributors",
   "repository": {
     "type": "git",
-    "url": "https://github.com/NomicFoundation/hardhat-vscode"
+    "url": "https://github.com/theqrl/hardhat-vscode"
   },
   "keywords": [
     "language server",
-    "solidity",
-    "ethereum",
+    "hyperion",
+    "qrl",
+    "zond",
     "hardhat"
   ],
   "type": "commonjs",
@@ -21,7 +22,7 @@
     "out/"
   ],
   "bin": {
-    "nomicfoundation-solidity-language-server": "./out/index.js"
+    "hyperion-language-server": "./out/index.js"
   },
   "engines": {
     "node": ">=20.9.0"
@@ -42,7 +43,6 @@
   },
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "1.0.2",
-    "@nomicfoundation/hardhat3-errors": "npm:@nomicfoundation/hardhat-errors@3.0.0-next.24",
     "@sentry/core": "9.6.1",
     "@sentry/node": "9.6.1",
     "@solidity-parser/parser": "^0.20.2",
@@ -63,12 +63,10 @@
     "fast-glob": "3.2.11",
     "fs-extra": "^10.0.0",
     "got": "^11.8.2",
-    "hardhat": "2.22.3",
-    "hardhat3": "npm:hardhat@3.0.0-next.30",
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
     "mocha": "9.1.3",
-    "module-alias": "^2.2.2",
+    "module-alias": "2.2.2",
     "nyc": "15.1.0",
     "prettier": "2.5.1",
     "prettier-plugin-solidity": "1.1.2",
@@ -88,8 +86,8 @@
     "yaml": "^2.2.1"
   },
   "dependencies": {
-    "@nomicfoundation/slang": "1.0.0",
-    "@nomicfoundation/solidity-analyzer": "0.1.1",
+    "@theqrl/hypc": "file:./vendor/theqrl-hypc-0.2.0-64b.0.tgz",
+    "@theqrl/slang": "file:./vendor/theqrl-slang-1.3.8.tgz",
     "es-iterator-helpers": "^1.2.1"
   }
 }

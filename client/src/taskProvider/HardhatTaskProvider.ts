@@ -2,7 +2,7 @@ import path from "path";
 import * as vscode from "vscode";
 import { Task } from "vscode";
 import { ExtensionState } from "../types";
-import { isHardhatInstalled } from "../utils/hardhat";
+import { getHardhatCLIPath, isHardhatInstalled } from "../utils/hardhat";
 
 const TASKS = [
   {
@@ -83,12 +83,17 @@ export class HardhatTaskProvider implements vscode.TaskProvider {
             : ""
         );
 
+        // Run the fork's CLI directly with node — the @theqrl/hardhat bin may
+        // not be linked in node_modules/.bin, and npx would offer to install
+        // the upstream hardhat package instead.
+        const cliPath = getHardhatCLIPath(projectDir);
+
         const task = new Task(
           { type: TASK_TYPE, task: taskDef.name },
           workspaceFolder,
           taskName,
           SOURCE,
-          new vscode.ShellExecution("npx", ["hardhat", taskDef.command], {
+          new vscode.ShellExecution("node", [cliPath, taskDef.command], {
             cwd: projectDir,
           })
         );

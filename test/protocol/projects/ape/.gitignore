@@ -1,8 +1,0 @@
-# Ape stuff
-.build/
-
-# Python
-.env
-.venv
-.pytest_cache
-__pycache__

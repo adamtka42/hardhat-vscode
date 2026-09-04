@@ -13,7 +13,7 @@ describe("Code Actions", () => {
   before(async () => {
     testContractText = (
       await fs.promises.readFile(
-        path.join(__dirname, "testData", "AddLicenseIdentifier.sol")
+        path.join(__dirname, "testData", "AddLicenseIdentifier.hyp")
       )
     ).toString();
   });

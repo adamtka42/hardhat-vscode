@@ -65,7 +65,7 @@ function findOrCreateProjectStatusItem(
   }
 
   const statusItem = languages.createLanguageStatusItem(`project-${uri}`, {
-    language: "solidity",
+    language: "hyperion",
     pattern: uri,
   });
 
@@ -76,12 +76,12 @@ function findOrCreateProjectStatusItem(
 
 function setupIndexingLanguageStatusItem(): LanguageStatusItem {
   const statusItem = languages.createLanguageStatusItem(INDEXING_JOB_ID, {
-    language: "solidity",
+    language: "hyperion",
   });
 
   statusItem.severity = LanguageStatusSeverity.Information;
   statusItem.name = `Indexing`;
-  statusItem.text = `Scanning for sol files`;
+  statusItem.text = `Scanning for hyp files`;
   statusItem.detail = undefined;
   statusItem.busy = true;
 

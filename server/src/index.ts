@@ -15,9 +15,9 @@ import { createConnection, ProposedFeatures } from "vscode-languageserver/node";
 import { ConnectionLogger } from "@utils/Logger";
 import { WorkspaceFileRetriever } from "@utils/WorkspaceFileRetriever";
 import {
-  SOLIDITY_GA_SECRET,
-  SOLIDITY_GOOGLE_TRACKING_ID,
-  SOLIDITY_SENTRY_DSN,
+  HYPERION_GA_SECRET,
+  HYPERION_GOOGLE_TRACKING_ID,
+  HYPERION_SENTRY_DSN,
   HEARTBEAT_PERIOD,
 } from "./constants";
 import setupServer from "./server";
@@ -32,11 +32,11 @@ const connection = createConnection(ProposedFeatures.all);
 
 const workspaceFileRetriever = new WorkspaceFileRetriever();
 const analytics = new GoogleAnalytics(
-  SOLIDITY_GOOGLE_TRACKING_ID,
-  SOLIDITY_GA_SECRET
+  HYPERION_GOOGLE_TRACKING_ID,
+  HYPERION_GA_SECRET
 );
 const telemetry = new SentryServerTelemetry(
-  SOLIDITY_SENTRY_DSN,
+  HYPERION_SENTRY_DSN,
   HEARTBEAT_PERIOD,
   analytics
 );

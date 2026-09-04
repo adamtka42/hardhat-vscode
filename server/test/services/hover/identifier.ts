@@ -9,7 +9,7 @@ describe("Parser", () => {
   describe("Hover", () => {
     describe("Identifier", () => {
       const identifierUri = forceToUnixStyle(
-        path.join(__dirname, "testData", "Identifier.sol")
+        path.join(__dirname, "testData", "Identifier.hyp")
       );
 
       let assertHover: (
@@ -30,7 +30,7 @@ describe("Parser", () => {
         assertHover = (position: VSCodePosition, expectedHoverText: string) =>
           assertOnServerHover(hover, identifierUri, position, {
             kind: MarkupKind.Markdown,
-            value: ["```solidity", expectedHoverText, "```"].join("\n"),
+            value: ["```hyperion", expectedHoverText, "```"].join("\n"),
           });
       });
 

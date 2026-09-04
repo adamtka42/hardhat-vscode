@@ -1,0 +1,10 @@
+// SPDX-License-Identifier: GPL-3.0
+pragma hyperion >=0.1.0;
+
+contract ConstrainMutability {
+  string message;
+
+  function getMessage() private returns (string memory input) {
+    return message;
+  }
+}

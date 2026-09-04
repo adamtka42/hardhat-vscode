@@ -1,20 +1,17 @@
 import { DocumentFormattingParams } from "vscode-languageserver/node";
 import { TextEdit } from "vscode-languageserver-types";
 import { TextDocument } from "vscode-languageserver-textdocument";
-import { Logger } from "@utils/Logger";
 import { setTag, startSpan } from "@sentry/core";
 import { ServerState } from "../../types";
 import { TrackingResult } from "../../telemetry/types";
-import { ForgeResolveError, TimeoutError } from "../../utils/errors";
+import { TimeoutError } from "../../utils/errors";
 import {
   DEADLINE_EXCEEDED,
-  FAILED_PRECONDITION,
   INTERNAL_ERROR,
   INVALID_ARGUMENT,
   OK,
 } from "../../telemetry/TelemetryStatus";
 import { prettierFormat } from "./prettierFormat";
-import { forgeFormat } from "./forgeFormat";
 
 type OnDocumentFormattingResult = TextEdit[] | null;
 
@@ -42,9 +39,6 @@ export function onDocumentFormatting(serverState: ServerState) {
 
         try {
           switch (formatter) {
-            case "forge":
-              return await runForgeFormat(text, document, logger);
-
             case "prettier":
               return runPrettierFormat(text, document);
 
@@ -58,8 +52,6 @@ export function onDocumentFormatting(serverState: ServerState) {
 
           if (error instanceof TimeoutError) {
             return { status: DEADLINE_EXCEEDED, result: null };
-          } else if (error instanceof ForgeResolveError) {
-            return { status: FAILED_PRECONDITION, result: null };
           } else {
             return { status: INTERNAL_ERROR, result: null };
           }
@@ -67,19 +59,6 @@ export function onDocumentFormatting(serverState: ServerState) {
       }
     );
   };
-}
-
-async function runForgeFormat(
-  text: string,
-  document: TextDocument,
-  logger: Logger
-): Promise<TrackingResult<OnDocumentFormattingResult>> {
-  setTag("formatter", "forge");
-  const result = await startSpan({ name: "forge-format" }, () =>
-    forgeFormat(text, document, logger)
-  );
-
-  return { status: OK, result };
 }
 
 function runPrettierFormat(

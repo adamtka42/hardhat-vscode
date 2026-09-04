@@ -1,5 +1,5 @@
-import { analyze } from "@nomicfoundation/solidity-analyzer";
 import _ from "lodash";
+import { analyze } from "../../utils/analyzeHyp";
 import { analyzeSolFile } from "../../parser/analyzer/analyzeSolFile";
 import { getOrInitialiseSolFileEntry } from "../../utils/getOrInitialiseSolFileEntry";
 import { Project } from "../base/Project";

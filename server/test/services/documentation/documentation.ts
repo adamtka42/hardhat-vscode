@@ -11,7 +11,7 @@ import {
 describe("Parser", () => {
   describe("Documentation", () => {
     const basicUri = forceToUnixStyle(
-      path.join(__dirname, "testData", "Basic.sol")
+      path.join(__dirname, "testData", "Basic.hyp")
     );
     let signatureHelp: OnSignatureHelp;
 

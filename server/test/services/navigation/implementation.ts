@@ -11,7 +11,7 @@ describe("Parser", () => {
   describe("Navigation", () => {
     describe("Implementation", () => {
       const implementationUri = forceToUnixStyle(
-        path.join(__dirname, "testData", "Implementation.sol")
+        path.join(__dirname, "testData", "Implementation.hyp")
       );
       let implementation: OnImplementation;
 

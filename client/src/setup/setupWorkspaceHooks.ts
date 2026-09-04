@@ -22,7 +22,7 @@ function onDidOpenTextDocument(state: ExtensionState) {
 
     await vscode.commands.executeCommand(
       "setContext",
-      "solidity.inHardhatProject",
+      "hyperion.inHardhatProject",
       folder !== undefined
     );
   });

@@ -1,0 +1,12 @@
+// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+pragma hyperion >=0.1.0;
+
+import './A2.hyp';
+import 'this_src/A3.hyp'; // local import through remapping
+import 'foo1/B.hyp'; // to other npm package through remapping
+
+contract A {
+  A2 a2;
+  A3 a3;
+  B b;
+}

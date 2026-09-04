@@ -9,7 +9,7 @@ describe("Parser", () => {
   describe("Hover", () => {
     describe("Event", () => {
       const eventUri = forceToUnixStyle(
-        path.join(__dirname, "testData", "Event.sol")
+        path.join(__dirname, "testData", "Event.hyp")
       );
 
       let assertHover: (
@@ -30,7 +30,7 @@ describe("Parser", () => {
         assertHover = (position: VSCodePosition, expectedHoverText: string) =>
           assertOnServerHover(hover, eventUri, position, {
             kind: MarkupKind.Markdown,
-            value: ["```solidity", expectedHoverText, "```"].join("\n"),
+            value: ["```hyperion", expectedHoverText, "```"].join("\n"),
           });
       });
 

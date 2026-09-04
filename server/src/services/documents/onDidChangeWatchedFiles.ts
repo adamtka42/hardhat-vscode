@@ -8,10 +8,10 @@ import { clearDiagnostics } from "../validation/validate";
 
 export function onDidChangeWatchedFiles(serverState: ServerState) {
   return async (params: DidChangeWatchedFilesParams) => {
-    // Index new solidity files
+    // Index new hyperion files
     for (const change of params.changes) {
       if (
-        change.uri.endsWith(".sol") &&
+        change.uri.endsWith(".hyp") &&
         change.type === FileChangeType.Deleted
       ) {
         const unixStyleUri = toUnixStyle(change.uri);

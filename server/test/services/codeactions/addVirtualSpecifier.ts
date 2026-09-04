@@ -11,7 +11,7 @@ describe("Code Actions", () => {
     before(async () => {
       addVirtualSpecifierText = (
         await fs.promises.readFile(
-          path.join(__dirname, "testData", "AddVirtualSpecifier.sol")
+          path.join(__dirname, "testData", "AddVirtualSpecifier.hyp")
         )
       ).toString();
     });

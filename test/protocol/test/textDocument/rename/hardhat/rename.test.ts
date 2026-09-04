@@ -14,8 +14,8 @@ describe('[hardhat] rename', () => {
   before(async () => {
     client = await getInitializedClient()
 
-    testPath = getProjectPath('hardhat/contracts/rename/Test.sol')
-    multiImportPath = getProjectPath('hardhat/contracts/rename/MultiImport.sol')
+    testPath = getProjectPath('hardhat/contracts/rename/Test.hyp')
+    multiImportPath = getProjectPath('hardhat/contracts/rename/MultiImport.hyp')
 
     await client.openDocument(testPath)
     await client.openDocument(multiImportPath)
@@ -80,7 +80,7 @@ describe('[hardhat] rename', () => {
 
     expect(workspaceEdit).to.deep.equal({
       changes: {
-        [toUri(getProjectPath('hardhat/contracts/rename/Foo.sol'))]: [
+        [toUri(getProjectPath('hardhat/contracts/rename/Foo.hyp'))]: [
           {
             range: makeRange(6, 18, 6, 22),
             newText: 'name1',

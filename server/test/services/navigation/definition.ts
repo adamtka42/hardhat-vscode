@@ -12,11 +12,11 @@ describe("Parser", () => {
     describe("Definition", () => {
       describe("within single file", () => {
         const definitionUri = forceToUnixStyle(
-          path.join(__dirname, "testData", "Definition.sol")
+          path.join(__dirname, "testData", "Definition.hyp")
         );
 
         const twoContractUri = forceToUnixStyle(
-          path.join(__dirname, "testData", "TwoContracts.sol")
+          path.join(__dirname, "testData", "TwoContracts.hyp")
         );
 
         let definition: OnDefinition;
@@ -212,10 +212,10 @@ describe("Parser", () => {
 
       describe("across multiple files", () => {
         const parentUri = forceToUnixStyle(
-          path.join(__dirname, "testData", "multi-file", "Parent.sol")
+          path.join(__dirname, "testData", "multi-file", "Parent.hyp")
         );
         const childUri = forceToUnixStyle(
-          path.join(__dirname, "testData", "multi-file", "Child.sol")
+          path.join(__dirname, "testData", "multi-file", "Child.hyp")
         );
         let definition: OnDefinition;
 

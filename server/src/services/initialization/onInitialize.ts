@@ -4,8 +4,8 @@ import {
   InitializeResult,
   WorkspaceFolder,
 } from "vscode-languageserver/node";
-import { ServerState } from "../../types";
 import { tokensTypes } from "../semanticHighlight/tokenTypes";
+import { ServerState } from "../../types";
 import { OK } from "../../telemetry/TelemetryStatus";
 import { indexWorkspaceFolders } from "./indexWorkspaceFolders";
 import { updateAvailableSolcVersions } from "./updateAvailableSolcVersions";

@@ -11,7 +11,7 @@ describe('[hardhat] custom/file-indexed', () => {
   })
 
   test('after initialization, a notification is received with the indexed file uri and project', async () => {
-    const contractPath = getProjectPath('hardhat/contracts/codeAction/NoPragma.sol')
+    const contractPath = getProjectPath('hardhat/contracts/codeAction/NoPragma.hyp')
 
     const expectedData = {
       uri: toUnixStyle(contractPath),

@@ -6,9 +6,6 @@ export class TimeoutError extends Error {
   }
 }
 
-// When we can't find the forge binary
-export class ForgeResolveError extends Error {}
-
 export function isModuleNotFoundError(
   err: unknown
 ): err is Error & { code?: string } {

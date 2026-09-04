@@ -14,7 +14,7 @@ describe("Code Actions", () => {
   before(async () => {
     constrainMutabilityText = (
       await fs.promises.readFile(
-        path.join(__dirname, "testData", "ConstrainMutability.sol")
+        path.join(__dirname, "testData", "ConstrainMutability.hyp")
       )
     ).toString();
   });
@@ -265,7 +265,7 @@ describe("Code Actions", () => {
 
         const document = TextDocument.create(
           exampleUri,
-          "solidity",
+          "hyperion",
           0,
           fileText
         );

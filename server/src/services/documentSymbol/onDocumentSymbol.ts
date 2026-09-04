@@ -4,9 +4,9 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import { DocumentSymbolParams } from "vscode-languageserver/node";
 import { DocumentSymbol, SymbolInformation } from "vscode-languageserver-types";
-import { analyze } from "@nomicfoundation/solidity-analyzer";
 import _ from "lodash";
 import * as Sentry from "@sentry/node";
+import { analyze } from "../../utils/analyzeHyp";
 import { ServerState } from "../../types";
 import { resolveVersion, slangToVSCodeRange } from "../../parser/slangHelpers";
 import { INTERNAL_ERROR, OK } from "../../telemetry/TelemetryStatus";
@@ -29,7 +29,6 @@ import { ModifierDefinition } from "./finders/ModifierDefinition";
 import { ReceiveFunctionDefinition } from "./finders/ReceiveFunctionDefinition";
 import { UserDefinedValueTypeDefinition } from "./finders/UserDefinedValueTypeDefinition";
 import { YulFunctionDefinition } from "./finders/YulFunctionDefinition";
-import { UnnamedFunctionDefinition } from "./finders/UnnamedFunctionDefinition";
 import { VariableDeclarationStatement } from "./finders/VariableDeclarationStatement";
 
 export function createFinders(): SymbolFinder[] {
@@ -52,7 +51,6 @@ export function createFinders(): SymbolFinder[] {
     new ReceiveFunctionDefinition(),
     new UserDefinedValueTypeDefinition(),
     new YulFunctionDefinition(),
-    new UnnamedFunctionDefinition(),
   ];
 }
 
@@ -63,8 +61,8 @@ export function onDocumentSymbol(serverState: ServerState) {
   return async (
     params: DocumentSymbolParams
   ): Promise<DocumentSymbol[] | SymbolInformation[] | null> => {
-    const { Parser } = await import("@nomicfoundation/slang/parser");
-    const { NonterminalKind } = await import("@nomicfoundation/slang/cst");
+    const { Parser } = await import("@theqrl/slang/parser");
+    const { NonterminalKind } = await import("@theqrl/slang/cst");
 
     const { telemetry, logger } = serverState;
     return telemetry.trackTiming("onDocumentSymbol", async () => {
@@ -80,9 +78,8 @@ export function onDocumentSymbol(serverState: ServerState) {
       const text = document.getText();
 
       // Get the document's solidity version
-      const { versionPragmas } = Sentry.startSpan(
-        { name: "solidity-analyzer" },
-        () => analyze(text)
+      const { versionPragmas } = Sentry.startSpan({ name: "analyzeHyp" }, () =>
+        analyze(text)
       );
 
       const resolvedVersion = await resolveVersion(logger, versionPragmas);

@@ -24,7 +24,7 @@ export function setupMockWorkspaceFileRetriever(
       }
     }
 
-    if (globPattern === "**/*.sol") {
+    if (globPattern === "**/*.hyp") {
       if (simplifiedUri in solFiles) {
         return solFiles[simplifiedUri];
       } else {

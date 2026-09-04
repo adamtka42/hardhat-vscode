@@ -6,35 +6,31 @@ import * as packageJson from "../package.json";
 const { machineId } = require("./vendor/machineId");
 
 export async function activate(context: ExtensionContext): Promise<void> {
-  await showTelemetryPrompt(context);
+  // Fire-and-forget: awaiting the menu picker would hang activation past
+  // coc's 5s budget whenever the user doesn't answer immediately.
+  void showTelemetryPrompt(context);
 
   const telemetryEnabled =
     getExtensionConfig().get<boolean>("telemetry") ?? false;
 
   const languageClient = new LanguageClient(
-    "solidity",
-    "Solidity Language Server",
+    "hyperion",
+    "Hyperion Language Server",
     {
-      module: require.resolve("@nomicfoundation/solidity-language-server"),
+      module: require.resolve("@theqrl/hyperion-language-server"),
       transport: coc.TransportKind.ipc,
     },
     {
-      documentSelector: ["solidity"],
+      documentSelector: ["hyperion"],
       synchronize: {
-        configurationSection: "solidity",
+        configurationSection: "hyperion",
         fileEvents: [
           coc.workspace.createFileSystemWatcher("**/hardhat.config.{ts,js}"),
-          coc.workspace.createFileSystemWatcher("**/foundry.toml"),
-          coc.workspace.createFileSystemWatcher(
-            "**/{truffle-config,truffle}.js"
-          ),
-          coc.workspace.createFileSystemWatcher("**/ape-config.yaml"),
-          coc.workspace.createFileSystemWatcher("**/remappings.txt"),
-          coc.workspace.createFileSystemWatcher("**/*.sol"),
+          coc.workspace.createFileSystemWatcher("**/*.hyp"),
         ],
       },
       initializationOptions: {
-        extensionName: "@nomicfoundation/coc-solidity",
+        extensionName: "@theqrl/coc-hyperion",
         extensionVersion: packageJson.version,
         env: "production",
         telemetryEnabled,
@@ -52,7 +48,7 @@ async function showTelemetryPrompt(context: ExtensionContext) {
   if (!shownTelemetryPrompt) {
     const pick = await coc.window.showMenuPicker(
       ["Accept", "Decline"],
-      "Support coc-solidity with crash reports?"
+      "Support coc-hyperion with crash reports?"
     );
 
     switch (pick) {
@@ -69,5 +65,5 @@ async function showTelemetryPrompt(context: ExtensionContext) {
 }
 
 function getExtensionConfig() {
-  return coc.workspace.getConfiguration("@nomicfoundation/coc-solidity");
+  return coc.workspace.getConfiguration("@theqrl/coc-hyperion");
 }

@@ -17,7 +17,7 @@ describe('[projectless] implementation', () => {
 
   describe('[single-file] - find all implementations', function () {
     it('should should find implementations', async () => {
-      const documentPath = getProjectPath('projectless/src/implementation/Test.sol')
+      const documentPath = getProjectPath('projectless/src/implementation/Test.hyp')
       const documentUri = toUri(documentPath)
 
       await client.openDocument(documentPath)

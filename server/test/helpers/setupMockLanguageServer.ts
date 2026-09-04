@@ -122,7 +122,7 @@ export async function setupMockLanguageServer({
 
     const textDocument: TextDocumentItem = {
       uri: documentUri,
-      languageId: "solidity",
+      languageId: "hyperion",
       version: 0,
       text: fileContent.toString(),
     };

@@ -1,0 +1,10 @@
+// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+pragma hyperion >=0.1.0;
+
+import 'pkg_without_exports_1/src/A.hyp';
+import 'pkg_with_exports_2/D.hyp';
+
+contract C {
+  A a;
+  D d;
+}

@@ -20,7 +20,7 @@ describe("Code Actions", () => {
         before(async () => {
           markContractAbstractText = (
             await fs.promises.readFile(
-              path.join(__dirname, "testData", "MarkContractAbstract.sol")
+              path.join(__dirname, "testData", "MarkContractAbstract.hyp")
             )
           ).toString();
         });
@@ -132,7 +132,7 @@ describe("Code Actions", () => {
 
           const document = TextDocument.create(
             exampleUri,
-            "solidity",
+            "hyperion",
             0,
             fileText
           );
@@ -177,7 +177,7 @@ describe("Code Actions", () => {
         before(async () => {
           singleInterfaceInheritanceText = (
             await fs.promises.readFile(
-              path.join(__dirname, "testData", "InterfaceInheritanceSingle.sol")
+              path.join(__dirname, "testData", "InterfaceInheritanceSingle.hyp")
             )
           ).toString();
         });
@@ -237,7 +237,7 @@ describe("Code Actions", () => {
               path.join(
                 __dirname,
                 "testData",
-                "InterfaceInheritanceMultiple.sol"
+                "InterfaceInheritanceMultiple.hyp"
               )
             )
           ).toString();
@@ -298,7 +298,7 @@ describe("Code Actions", () => {
               path.join(
                 __dirname,
                 "testData",
-                "InterfaceInheritanceFlowing.sol"
+                "InterfaceInheritanceFlowing.hyp"
               )
             )
           ).toString();
@@ -361,7 +361,7 @@ describe("Code Actions", () => {
               path.join(
                 __dirname,
                 "testData",
-                "InterfaceInheritanceWithContractInheritance.sol"
+                "InterfaceInheritanceWithContractInheritance.hyp"
               )
             )
           ).toString();
@@ -424,7 +424,7 @@ describe("Code Actions", () => {
               path.join(
                 __dirname,
                 "testData",
-                "InterfaceInheritanceWithAbstractInheritance.sol"
+                "InterfaceInheritanceWithAbstractInheritance.hyp"
               )
             )
           ).toString();
@@ -487,7 +487,7 @@ describe("Code Actions", () => {
               path.join(
                 __dirname,
                 "testData",
-                "InterfaceInheritanceTwoDiamonds.sol"
+                "InterfaceInheritanceTwoDiamonds.hyp"
               )
             )
           ).toString();

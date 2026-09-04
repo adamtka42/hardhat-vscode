@@ -16,7 +16,6 @@ const tmpDir = "./tmp";
 const serverDir = path.join(tmpDir, "./server");
 const serverOutDir = path.join(tmpDir, "./server/out");
 const serverAntlrDir = path.join(serverOutDir, "antlr");
-const serverWorkerDir = path.join(serverOutDir, "worker");
 
 const clientDir = path.join(tmpDir);
 const clientOutDir = path.join(clientDir, "./out");
@@ -37,9 +36,9 @@ async function main() {
   const definedConstants = {};
 
   for (const key of [
-    "SOLIDITY_GA_SECRET",
-    "SOLIDITY_GOOGLE_TRACKING_ID",
-    "SOLIDITY_SENTRY_DSN",
+    "HYPERION_GA_SECRET",
+    "HYPERION_GOOGLE_TRACKING_ID",
+    "HYPERION_SENTRY_DSN",
   ]) {
     const value = process.env[key];
     if (!value || value === "") {
@@ -59,7 +58,6 @@ async function main() {
   ensureDirExists(serverDir);
   ensureDirExists(serverOutDir);
   ensureDirExists(serverAntlrDir);
-  ensureDirExists(serverWorkerDir);
   // Client
   ensureDirExists(clientDir);
   ensureDirExists(clientOutDir);
@@ -103,29 +101,23 @@ async function main() {
   );
 
   fs.copyFileSync(
-    path.join(".", "snippets", "solidity.json"),
-    path.join(snippets, "solidity.json")
+    path.join(".", "snippets", "hyperion.json"),
+    path.join(snippets, "hyperion.json")
   );
   fs.copyFileSync(
-    path.join(".", "syntaxes", "solidity.json"),
-    path.join(syntaxes, "solidity.json")
+    path.join(".", "syntaxes", "hyperion.json"),
+    path.join(syntaxes, "hyperion.json")
   );
   fs.copyFileSync(
-    path.join(".", "syntaxes", "solidity-markdown-injection.json"),
-    path.join(syntaxes, "solidity-markdown-injection.json")
+    path.join(".", "syntaxes", "hyperion-markdown-injection.json"),
+    path.join(syntaxes, "hyperion-markdown-injection.json")
   );
 
   const { warnings, errors } = await esbuild.build({
     entryPoints: {
       "./tmp/out/extension": "./src/extension.ts",
       "./tmp/server/out/index":
-        "../node_modules/@nomicfoundation/solidity-language-server/src/index.ts",
-      "./tmp/server/out/hardhat.config":
-        "../node_modules/@nomicfoundation/solidity-language-server/src/hardhat.config.ts",
-      "./tmp/server/out/worker/WorkerProcess":
-        "../node_modules/@nomicfoundation/solidity-language-server/src/frameworks/Hardhat/Hardhat2/worker/WorkerProcess.ts",
-      "./tmp/server/out/ConfigLoader":
-        "../node_modules/@nomicfoundation/solidity-language-server/src/frameworks/Truffle/ConfigLoader.ts",
+        "../node_modules/@theqrl/hyperion-language-server/src/index.ts",
     },
     bundle: true,
     minifyWhitespace: false,
@@ -133,8 +125,8 @@ async function main() {
     minifySyntax: false,
     external: [
       "vscode",
-      "@nomicfoundation/solidity-analyzer",
-      "@nomicfoundation/slang",
+      "@theqrl/hypc",
+      "@theqrl/slang",
       "fsevents",
       "mocha",
     ],
@@ -174,40 +166,29 @@ async function main() {
     console.error("Error: Could not find server dependencies");
     process.exit(1);
   }
-  const solidityAnalyzerVersion =
-    serverDeps["@nomicfoundation/solidity-analyzer"];
-  const slangVersion = serverDeps["@nomicfoundation/slang"];
+  // The bundled hypc compiler and the hyperion slang ship as vendored
+  // tarballs (see server/vendor) and are marked external for esbuild,
+  // so install them into the packaged server
+  const dependencies = {};
+  const tarballNames = [];
+  for (const depName of ["@theqrl/hypc", "@theqrl/slang"]) {
+    const spec = serverDeps[depName];
+    const tarballPath = path.resolve(
+      path.dirname(serverPackageFile),
+      spec.replace(/^file:/, "")
+    );
+    const tarballName = path.basename(tarballPath);
+    fs.copyFileSync(tarballPath, path.join(serverDir, tarballName));
+    dependencies[depName] = `file:./${tarballName}`;
+    tarballNames.push(tarballName);
+  }
 
   fs.writeFileSync(
     path.join(serverDir, "package.json"),
     JSON.stringify({
       name: "tmp",
       version: "0.0.1",
-      dependencies: {
-        "@nomicfoundation/solidity-analyzer": solidityAnalyzerVersion,
-        "@nomicfoundation/solidity-analyzer-darwin-arm64":
-          solidityAnalyzerVersion,
-        "@nomicfoundation/solidity-analyzer-win32-arm64-msvc":
-          solidityAnalyzerVersion,
-        "@nomicfoundation/solidity-analyzer-linux-arm64-gnu":
-          solidityAnalyzerVersion,
-        "@nomicfoundation/solidity-analyzer-linux-arm64-musl":
-          solidityAnalyzerVersion,
-        "@nomicfoundation/solidity-analyzer-win32-ia32-msvc":
-          solidityAnalyzerVersion,
-        "@nomicfoundation/solidity-analyzer-darwin-x64":
-          solidityAnalyzerVersion,
-        "@nomicfoundation/solidity-analyzer-win32-x64-msvc":
-          solidityAnalyzerVersion,
-        "@nomicfoundation/solidity-analyzer-linux-x64-gnu":
-          solidityAnalyzerVersion,
-        "@nomicfoundation/solidity-analyzer-linux-x64-musl":
-          solidityAnalyzerVersion,
-        "@nomicfoundation/solidity-analyzer-freebsd-x64":
-          solidityAnalyzerVersion,
-
-        "@nomicfoundation/slang": slangVersion,
-      },
+      dependencies,
     })
   );
 
@@ -233,6 +214,9 @@ async function main() {
   });
 
   fs.unlinkSync(path.join(serverDir, "package.json"));
+  for (const tarballName of tarballNames) {
+    fs.unlinkSync(path.join(serverDir, tarballName));
+  }
 }
 
 main();

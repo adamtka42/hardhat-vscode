@@ -10,8 +10,8 @@ describe("diagnostic converter", () => {
       const converter = new DiagnosticConverter(mockLogger);
 
       const textDocument = TextDocument.create(
-        "/example.sol",
-        "solidity",
+        "/example.hyp",
+        "hyperion",
         0,
         "// ignore"
       );

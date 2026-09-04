@@ -9,7 +9,7 @@ describe("anonymization", () => {
         const event: ErrorEvent = {
           type: undefined,
           message:
-            "file:///test/path/file.sol /absolute/path/file.sol C:\\absolute\\path\\file.sol contracts/MyContract.sol contracts\\MyContract.sol",
+            "file:///test/path/file.hyp /absolute/path/file.hyp C:\\absolute\\path\\file.hyp contracts/MyContract.hyp contracts\\MyContract.hyp",
         };
 
         const anonymizedEvent = anonymizeEvent(event);
@@ -39,7 +39,7 @@ describe("anonymization", () => {
         const event: ErrorEvent = {
           type: undefined,
           message:
-            "file:///user_path/nomicfoundation.hardhat-solidity-0.8.20/internal_path/file.js /user_path/nomicfoundation.hardhat-solidity-0.8.20/internal_path/file2.js C:\\user_path\\nomicfoundation.hardhat-solidity-0.8.20\\internal_path\\file3.js /c:/user_path/nomicfoundation.hardhat-solidity-0.8.20/internal_path/file4.js ",
+            "file:///user_path/theqrl.hardhat-hyperion-0.8.20/internal_path/file.js /user_path/theqrl.hardhat-hyperion-0.8.20/internal_path/file2.js C:\\user_path\\theqrl.hardhat-hyperion-0.8.20\\internal_path\\file3.js /c:/user_path/theqrl.hardhat-hyperion-0.8.20/internal_path/file4.js ",
         };
 
         const anonymizedEvent = anonymizeEvent(event);
@@ -57,16 +57,16 @@ describe("anonymization", () => {
           type: undefined,
           breadcrumbs: [
             {
-              message: "error in file /test/path/file.sol",
+              message: "error in file /test/path/file.hyp",
             },
             {
-              message: "error in file c:\\test\\path\\file.sol",
+              message: "error in file c:\\test\\path\\file.hyp",
             },
             {
-              message: "error in file file:///test/path/file.sol",
+              message: "error in file file:///test/path/file.hyp",
             },
             {
-              message: "error in file /c:/test/path/file.sol",
+              message: "error in file /c:/test/path/file.hyp",
             },
           ],
         };
@@ -89,20 +89,20 @@ describe("anonymization", () => {
           exception: {
             values: [
               {
-                value: "error in file /test/path/file.sol",
-                module: "file:///test/path/file.sol",
+                value: "error in file /test/path/file.hyp",
+                module: "file:///test/path/file.hyp",
               },
               {
-                value: "error in file c:\\test\\path\\file.sol",
-                module: "C:\\test\\path\\file.sol",
+                value: "error in file c:\\test\\path\\file.hyp",
+                module: "C:\\test\\path\\file.hyp",
               },
               {
-                value: "error in file file:///test/path/file.sol",
-                module: "file:///test/path/file.sol",
+                value: "error in file file:///test/path/file.hyp",
+                module: "file:///test/path/file.hyp",
               },
               {
-                value: "error in file /c:/test/path/file.sol",
-                module: "C:\\test\\path\\file.sol",
+                value: "error in file /c:/test/path/file.hyp",
+                module: "C:\\test\\path\\file.hyp",
               },
             ],
           },
@@ -140,29 +140,29 @@ describe("anonymization", () => {
           exception: {
             values: [
               {
-                value: "error in file /test/path/file.sol",
-                module: "file:///test/path/file.sol",
+                value: "error in file /test/path/file.hyp",
+                module: "file:///test/path/file.hyp",
                 stacktrace: {
                   frames: [
                     {
-                      filename: "file:///test/path/file.sol",
-                      abs_path: "/test/path/file.sol",
-                      module: "file:///test/path/file.sol",
+                      filename: "file:///test/path/file.hyp",
+                      abs_path: "/test/path/file.hyp",
+                      module: "file:///test/path/file.hyp",
                     },
                     {
-                      filename: "C:\\test\\path\\file.sol",
-                      abs_path: "C:\\test\\path\\file.sol",
-                      module: "C:\\test\\path\\file.sol",
+                      filename: "C:\\test\\path\\file.hyp",
+                      abs_path: "C:\\test\\path\\file.hyp",
+                      module: "C:\\test\\path\\file.hyp",
                     },
                     {
-                      filename: "file:///test/path/file.sol",
-                      abs_path: "/test/path/file.sol",
-                      module: "file:///test/path/file.sol",
+                      filename: "file:///test/path/file.hyp",
+                      abs_path: "/test/path/file.hyp",
+                      module: "file:///test/path/file.hyp",
                     },
                     {
-                      filename: "C:\\test\\path\\file.sol",
-                      abs_path: "C:\\test\\path\\file.sol",
-                      module: "C:\\test\\path\\file.sol",
+                      filename: "C:\\test\\path\\file.hyp",
+                      abs_path: "C:\\test\\path\\file.hyp",
+                      module: "C:\\test\\path\\file.hyp",
                     },
                   ],
                 },

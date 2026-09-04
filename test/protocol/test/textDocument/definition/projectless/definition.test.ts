@@ -17,7 +17,7 @@ describe('[projectless] definition', () => {
 
   describe('[single-file] - go to definition', function () {
     it('should go to definition', async () => {
-      const documentPath = getProjectPath('projectless/src/definition/Test.sol')
+      const documentPath = getProjectPath('projectless/src/definition/Test.hyp')
       const documentUri = toUri(documentPath)
 
       await client.openDocument(documentPath)

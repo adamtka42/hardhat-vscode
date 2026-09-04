@@ -9,7 +9,7 @@ describe("Parser", () => {
   describe("Hover", () => {
     describe("Type Identifier", () => {
       const typeIdentifierUri = forceToUnixStyle(
-        path.join(__dirname, "testData", "TypeIdentifier.sol")
+        path.join(__dirname, "testData", "TypeIdentifier.hyp")
       );
 
       let assertHover: (
@@ -30,7 +30,7 @@ describe("Parser", () => {
         assertHover = (position: VSCodePosition, expectedHoverText: string) =>
           assertOnServerHover(hover, typeIdentifierUri, position, {
             kind: MarkupKind.Markdown,
-            value: ["```solidity", expectedHoverText, "```"].join("\n"),
+            value: ["```hyperion", expectedHoverText, "```"].join("\n"),
           });
       });
 
@@ -58,10 +58,7 @@ describe("Parser", () => {
 
       describe("Contract Type", () => {
         it("should display contract definition when hovering over contract type name", () =>
-          assertHover(
-            { line: 32, character: 4 },
-            "contract BaseContract"
-          ));
+          assertHover({ line: 32, character: 4 }, "contract BaseContract"));
       });
 
       describe("Nested Struct Type", () => {

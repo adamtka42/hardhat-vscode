@@ -1,5 +1,5 @@
 {
-  "name": "solidity-language-server-monorepo",
+  "name": "hyperion-language-server-monorepo",
   "private": true,
   "workspaces": [
     "client",

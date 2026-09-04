@@ -1,112 +1,15 @@
 import { CompletionItemKind } from "@common/types";
 
 const elementaryTypeNames = ["address", "bool", "string", "var"];
-const ints = [
-  "int",
-  "int8",
-  "int16",
-  "int24",
-  "int32",
-  "int40",
-  "int48",
-  "int56",
-  "int64",
-  "int72",
-  "int80",
-  "int88",
-  "int96",
-  "int104",
-  "int112",
-  "int120",
-  "int128",
-  "int136",
-  "int144",
-  "int152",
-  "int160",
-  "int168",
-  "int176",
-  "int184",
-  "int192",
-  "int200",
-  "int208",
-  "int216",
-  "int224",
-  "int232",
-  "int240",
-  "int248",
-  "int256",
-];
-const uints = [
-  "uint",
-  "uint8",
-  "uint16",
-  "uint24",
-  "uint32",
-  "uint40",
-  "uint48",
-  "uint56",
-  "uint64",
-  "uint72",
-  "uint80",
-  "uint88",
-  "uint96",
-  "uint104",
-  "uint112",
-  "uint120",
-  "uint128",
-  "uint136",
-  "uint144",
-  "uint152",
-  "uint160",
-  "uint168",
-  "uint176",
-  "uint184",
-  "uint192",
-  "uint200",
-  "uint208",
-  "uint216",
-  "uint224",
-  "uint232",
-  "uint240",
-  "uint248",
-  "uint256",
-];
-const bytes = [
-  "byte",
-  "bytes",
-  "bytes1",
-  "bytes2",
-  "bytes3",
-  "bytes4",
-  "bytes5",
-  "bytes6",
-  "bytes7",
-  "bytes8",
-  "bytes9",
-  "bytes10",
-  "bytes11",
-  "bytes12",
-  "bytes13",
-  "bytes14",
-  "bytes15",
-  "bytes16",
-  "bytes17",
-  "bytes18",
-  "bytes19",
-  "bytes20",
-  "bytes21",
-  "bytes22",
-  "bytes23",
-  "bytes24",
-  "bytes25",
-  "bytes26",
-  "bytes27",
-  "bytes28",
-  "bytes29",
-  "bytes30",
-  "bytes31",
-  "bytes32",
-];
+
+// Hyperion's 512-bit VM word: intM/uintM go up to 512 (in steps of 8) and
+// bytesM up to 64 (liblangutil/Token.cpp in the hyperion compiler).
+const integerSizes = Array.from({ length: 64 }, (_, i) => (i + 1) * 8);
+const byteSizes = Array.from({ length: 64 }, (_, i) => i + 1);
+
+const ints = ["int", ...integerSizes.map((size) => `int${size}`)];
+const uints = ["uint", ...integerSizes.map((size) => `uint${size}`)];
+const bytes = ["byte", "bytes", ...byteSizes.map((size) => `bytes${size}`)];
 const fixed = "fixed";
 const ufixed = "ufixed";
 
@@ -163,16 +66,16 @@ const reservedKeywords = [
 ];
 const statements = ["assert", "revert", "require"];
 
+// Globals as defined by the hyperion compiler (GlobalContext.cpp): no
+// ecrecover/ripemd160/selfdestruct in QRL, depositroot added.
 const globalFunctions = [
   "gasleft",
   "blockhash",
   "keccak256",
   "sha256",
-  "ripemd160",
-  "ecrecover",
+  "depositroot",
   "addmod",
   "mulmod",
-  "selfdestruct",
 ];
 
 interface GlobalVariablesType {
@@ -189,11 +92,13 @@ export const globalVariables: GlobalVariablesType = {
   ],
   bytes: ["concat"],
   block: [
+    "basefee",
+    "blockhash",
     "chainid",
     "coinbase",
-    "difficulty",
     "gaslimit",
     "number",
+    "prevrandao",
     "timestamp",
   ],
   // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -205,7 +110,7 @@ export const globalVariables: GlobalVariablesType = {
     "delegatecall",
     "staticcall",
   ],
-  msg: ["data", "sender", "sig", "value"],
+  msg: ["data", "gas", "sender", "sig", "value"],
   tx: ["gasprice", "origin"],
 };
 

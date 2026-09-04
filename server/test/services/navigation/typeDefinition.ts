@@ -11,7 +11,7 @@ describe("Parser", () => {
   describe("Navigation", () => {
     describe("Type Definition", () => {
       const basicUri = forceToUnixStyle(
-        path.join(__dirname, "testData", "TypeDefinition.sol")
+        path.join(__dirname, "testData", "TypeDefinition.hyp")
       );
       let typeDefinition: OnTypeDefinition;
 

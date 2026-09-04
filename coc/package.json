@@ -1,17 +1,18 @@
 {
-  "name": "@nomicfoundation/coc-solidity",
-  "description": "Solidity and Hardhat support for coc.nvim",
+  "name": "@theqrl/coc-hyperion",
+  "description": "Hyperion and Hardhat support for coc.nvim",
   "license": "MIT",
   "version": "0.8.29",
-  "author": "Nomic Foundation",
+  "author": "The QRL contributors",
   "repository": {
     "type": "git",
-    "url": "https://github.com/NomicFoundation/hardhat-vscode"
+    "url": "https://github.com/theqrl/hardhat-vscode"
   },
   "keywords": [
     "coc.nvim",
-    "solidity",
-    "ethereum",
+    "hyperion",
+    "qrl",
+    "zond",
     "hardhat"
   ],
   "type": "commonjs",
@@ -21,7 +22,7 @@
   ],
   "scripts": {
     "prebundle": "npm run clean",
-    "bundle": "esbuild src/index.ts --platform=node --bundle --external:coc.nvim --external:@nomicfoundation/solidity-language-server --outdir=out",
+    "bundle": "esbuild src/index.ts --platform=node --bundle --external:coc.nvim --external:@theqrl/hyperion-language-server --outdir=out",
     "prepack": "npm run bundle",
     "lint": "npm run prettier -- --check && npm run eslint",
     "lint:fix": "npm run prettier --write && npm run eslint --fix",
@@ -30,7 +31,7 @@
     "clean": "rimraf out .nyc_output coverage *.tsbuildinfo *.log"
   },
   "dependencies": {
-    "@nomicfoundation/solidity-language-server": "0.8.29"
+    "@theqrl/hyperion-language-server": "0.8.29"
   },
   "devDependencies": {
     "coc.nvim": "^0.0.80"
@@ -40,41 +41,36 @@
     "node": ">=20.9.0"
   },
   "activationEvents": [
-    "onLanguage:solidity"
+    "onLanguage:hyperion"
   ],
   "contributes": {
     "rootPatterns": [
       {
-        "filetype": "solidity",
+        "filetype": "hyperion",
         "patterns": [
           ".git/",
           "hardhat.config.js",
-          "hardhat.config.ts",
-          "truffle-config.js",
-          "truffle.js",
-          "foundry.toml",
-          "ape-config.yaml"
+          "hardhat.config.ts"
         ]
       }
     ],
     "configuration": {
       "type": "object",
-      "title": "@nomicfoundation/coc-solidity configuration",
+      "title": "@theqrl/coc-hyperion configuration",
       "properties": {
-        "@nomicfoundation/coc-solidity.telemetry": {
+        "@theqrl/coc-hyperion.telemetry": {
           "type": "boolean",
           "default": false,
-          "description": "Allow this extension to send telemetry. This helps us understand how it is used and how it is performing. Read more in our [privacy policy](https://hardhat.org/privacy-policy.html)."
+          "description": "Allow this extension to send telemetry. This helps us understand how it is used and how it is performing."
         },
-        "@nomicfoundation/coc-solidity.formatter": {
+        "@theqrl/coc-hyperion.formatter": {
           "type": "string",
-          "default": "prettier",
+          "default": "none",
           "enum": [
             "none",
-            "prettier",
-            "forge"
+            "prettier"
           ],
-          "description": "Choose the formatter to use for Solidity files. 'none' disables formatting, 'prettier' uses Prettier, and 'forge' uses Forge's built-in formatter."
+          "description": "Choose the formatter to use for Hyperion files. 'none' disables formatting and 'prettier' uses Prettier."
         }
       }
     }

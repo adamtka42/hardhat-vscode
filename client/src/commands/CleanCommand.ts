@@ -3,7 +3,7 @@ import HardhatTaskCommand from "./HardhatTaskCommand";
 
 export default class CleanCommand extends HardhatTaskCommand {
   public name(): string {
-    return "solidity.hardhat.clean";
+    return "hyperion.hardhat.clean";
   }
 
   public hardhatArgs(): string[] {

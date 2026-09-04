@@ -17,7 +17,7 @@ describe('[projectless][codeAction]', () => {
   })
 
   test('add license identifier', async () => {
-    const documentPath = getProjectPath('projectless/src/codeAction/NoLicense.sol')
+    const documentPath = getProjectPath('projectless/src/codeAction/NoLicense.hyp')
     const documentUri = toUri(documentPath)
 
     await client.openDocument(documentPath)
@@ -33,7 +33,7 @@ describe('[projectless][codeAction]', () => {
         isPreferred: false,
         edit: {
           changes: {
-            [toUri(getProjectPath('projectless/src/codeAction/NoLicense.sol'))]: [
+            [toUri(getProjectPath('projectless/src/codeAction/NoLicense.hyp'))]: [
               {
                 range: {
                   start: {
@@ -57,7 +57,7 @@ describe('[projectless][codeAction]', () => {
         isPreferred: false,
         edit: {
           changes: {
-            [toUri(getProjectPath('projectless/src/codeAction/NoLicense.sol'))]: [
+            [toUri(getProjectPath('projectless/src/codeAction/NoLicense.hyp'))]: [
               {
                 range: {
                   start: {
@@ -81,7 +81,7 @@ describe('[projectless][codeAction]', () => {
         isPreferred: false,
         edit: {
           changes: {
-            [toUri(getProjectPath('projectless/src/codeAction/NoLicense.sol'))]: [
+            [toUri(getProjectPath('projectless/src/codeAction/NoLicense.hyp'))]: [
               {
                 range: {
                   start: {
@@ -105,7 +105,7 @@ describe('[projectless][codeAction]', () => {
         isPreferred: false,
         edit: {
           changes: {
-            [toUri(getProjectPath('projectless/src/codeAction/NoLicense.sol'))]: [
+            [toUri(getProjectPath('projectless/src/codeAction/NoLicense.hyp'))]: [
               {
                 range: {
                   start: {

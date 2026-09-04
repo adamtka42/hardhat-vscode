@@ -1,0 +1,20 @@
+// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+pragma hyperion >=0.1.0;
+
+import { Foo, Example as ExampleTest } from './Foo.hyp';
+
+contract ImportTest {
+    Foo public foo = new Foo();
+    ExampleTest private example = new ExampleTest();
+
+    mapping(address => ExampleTest) private exampleTests;
+
+    // Test Foo.hyp by getting it's name.
+    function getFooName() private view returns (string memory) {
+        return foo.name();
+    }
+
+    function getExampleTest(address addr) public view returns (string memory) {
+        return exampleTests[addr].foo().name();
+    }
+}

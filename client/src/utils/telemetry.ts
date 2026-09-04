@@ -6,7 +6,7 @@ export function isGlobalTelemetryEnabled() {
 
 export function isHardhatTelemetryEnabled() {
   return (
-    workspace.getConfiguration("solidity").get<boolean>("telemetry") ?? false
+    workspace.getConfiguration("hyperion").get<boolean>("telemetry") ?? false
   );
 }
 

@@ -7,33 +7,33 @@ describe("utils", () => {
     it("should strip the file prefix", () => {
       if (runningOnWindows()) {
         assertDecode(
-          "file:///c:/Users/example/somefile.sol",
-          "c:/Users/example/somefile.sol"
+          "file:///c:/Users/example/somefile.hyp",
+          "c:/Users/example/somefile.hyp"
         );
       } else {
         assertDecode(
-          "file:///Users/example/somefile.sol",
-          "/Users/example/somefile.sol"
+          "file:///Users/example/somefile.hyp",
+          "/Users/example/somefile.hyp"
         );
       }
     });
 
     it("should convert to unix separator", () => {
       assertDecode(
-        "c:\\Users\\example\\somefile.sol",
-        "c:/Users/example/somefile.sol"
+        "c:\\Users\\example\\somefile.hyp",
+        "c:/Users/example/somefile.hyp"
       );
     });
 
     it("should lowercase windows drive letters", () => {
       assertDecode(
-        "C:/Users/example/somefile.sol",
-        "c:/Users/example/somefile.sol"
+        "C:/Users/example/somefile.hyp",
+        "c:/Users/example/somefile.hyp"
       );
 
       assertDecode(
-        "/C:/Users/example/somefile.sol",
-        "/c:/Users/example/somefile.sol"
+        "/C:/Users/example/somefile.hyp",
+        "/c:/Users/example/somefile.hyp"
       );
     });
   });
