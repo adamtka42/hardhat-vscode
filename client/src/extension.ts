@@ -1,4 +1,5 @@
 import { ExtensionContext } from "vscode";
+import { warnOnOtherSolidityExtensions } from "./popups/warnOnOtherSolidityExtensions";
 import { indexHardhatProjects } from "./setup/indexHardhatProjects";
 import { setupCommands } from "./setup/setupCommands";
 import { setupExtensionState } from "./setup/setupExtensionState";
@@ -27,6 +28,9 @@ export async function activate(context: ExtensionContext) {
     setupTaskProvider(extensionState);
     await setupCommands(extensionState);
     setupWorkspaceHooks(extensionState);
+
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    warnOnOtherSolidityExtensions(extensionState);
 
     return {
       isReady: () => !!extensionState?.client?.initializeResult,
